@@ -9,23 +9,29 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-deep: #0f172a;
-    --bg-card: #1e293b;
-    --bg-input: #0f172a;
-    --border: #334155;
-    --text-primary: #f1f5f9;
-    --text-secondary: #94a3b8;
+    --bg-deep: #f1f5f9;
+    --bg-card: #ffffff;
+    --bg-input: #f8fafc;
+    --border: #e2e8f0;
+    --border-strong: #cbd5e1;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
     --text-muted: #64748b;
-    --text-dim: #475569;
+    --text-dim: #94a3b8;
     --accent-blue: #3b82f6;
     --accent-blue-dark: #2563eb;
-    --accent-green: #34d399;
+    --accent-blue-light: #eff6ff;
+    --accent-green: #10b981;
     --accent-green-dark: #059669;
-    --accent-yellow: #fbbf24;
+    --accent-green-light: #ecfdf5;
+    --accent-yellow: #d97706;
+    --accent-yellow-light: #fffbeb;
     --accent-red: #ef4444;
-    --accent-red-bg: #7f1d1d;
+    --accent-red-light: #fef2f2;
     --radius: 12px;
     --radius-sm: 8px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
     --font: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
   }
 
@@ -33,7 +39,7 @@
 
   body {
     font-family: var(--font);
-    background: linear-gradient(160deg, var(--bg-deep) 0%, var(--bg-card) 40%, var(--bg-deep) 100%);
+    background: var(--bg-deep);
     color: var(--text-primary);
     min-height: 100vh;
     padding: 24px 16px;
@@ -45,9 +51,21 @@
   .container { max-width: 780px; margin: 0 auto; }
 
   /* Header */
-  .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
-  .header-brand span { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: var(--text-muted); text-transform: uppercase; }
-  .header-brand h1 { font-size: 22px; font-weight: 900; color: var(--text-primary); letter-spacing: -0.02em; margin-top: 4px; }
+  .header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+    background: var(--bg-card); border-radius: var(--radius);
+    padding: 16px 20px; box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+  }
+  .header-brand span {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+    color: var(--accent-blue-dark); text-transform: uppercase;
+  }
+  .header-brand h1 {
+    font-size: 22px; font-weight: 900; color: var(--text-primary);
+    letter-spacing: -0.02em; margin-top: 4px;
+  }
   .header-actions { display: flex; gap: 8px; }
 
   /* Buttons */
@@ -56,39 +74,103 @@
     background: var(--bg-card); color: var(--text-secondary); font-size: 12px;
     font-weight: 600; cursor: pointer; font-family: var(--font); transition: all 0.2s;
   }
-  .btn-small:hover { background: var(--border); color: var(--text-primary); }
+  .btn-small:hover { background: var(--bg-deep); color: var(--text-primary); border-color: var(--border-strong); }
 
   .btn-nav {
     padding: 12px 28px; border-radius: 10px; font-size: 14px; font-weight: 700;
     cursor: pointer; font-family: var(--font); transition: all 0.2s; border: none;
   }
-  .btn-nav-next { background: var(--accent-blue-dark); color: #fff; }
+  .btn-nav-next { background: var(--accent-blue-dark); color: #fff; box-shadow: 0 2px 8px rgba(37,99,235,0.25); }
   .btn-nav-next:hover { background: var(--accent-blue); }
-  .btn-nav-prev { background: var(--border); color: var(--text-secondary); border: 1.5px solid var(--text-dim); }
-  .btn-nav-prev:hover { background: var(--text-dim); color: var(--text-primary); }
-  .btn-nav-print { background: var(--accent-green-dark); color: #fff; }
+  .btn-nav-prev { background: var(--bg-card); color: var(--text-secondary); border: 1.5px solid var(--border-strong); }
+  .btn-nav-prev:hover { background: var(--bg-deep); color: var(--text-primary); }
+  .btn-nav-print { background: var(--accent-green-dark); color: #fff; box-shadow: 0 2px 8px rgba(5,150,105,0.25); }
   .btn-nav-print:hover { background: var(--accent-green); }
 
   .btn-primary {
     padding: 14px 36px; border-radius: var(--radius); border: none;
     background: linear-gradient(135deg, var(--accent-blue-dark), var(--accent-blue));
     color: #fff; font-size: 16px; font-weight: 700; cursor: pointer;
-    box-shadow: 0 4px 20px rgba(37,99,235,0.3); font-family: var(--font); transition: transform 0.2s;
+    box-shadow: 0 4px 20px rgba(37,99,235,0.25); font-family: var(--font); transition: transform 0.2s;
   }
   .btn-primary:hover { transform: translateY(-1px); }
 
   .btn-ghost {
-    padding: 14px 24px; border-radius: var(--radius); border: 1.5px solid var(--border);
-    background: transparent; color: var(--text-secondary); font-size: 14px;
+    padding: 14px 24px; border-radius: var(--radius); border: 1.5px solid var(--border-strong);
+    background: var(--bg-card); color: var(--text-secondary); font-size: 14px;
     font-weight: 600; cursor: pointer; font-family: var(--font);
   }
-  .btn-ghost:hover { background: var(--bg-card); }
+  .btn-ghost:hover { background: var(--bg-deep); }
+
+  /* Submit button */
+  .btn-submit {
+    padding: 16px 40px; border-radius: var(--radius); border: none;
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: #fff; font-size: 17px; font-weight: 800; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(5,150,105,0.3); font-family: var(--font);
+    transition: all 0.2s; width: 100%; letter-spacing: 0.01em;
+  }
+  .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(5,150,105,0.35); }
+  .btn-submit:disabled {
+    background: var(--border-strong); color: var(--text-dim);
+    cursor: not-allowed; box-shadow: none; transform: none;
+  }
+
+  /* Loading spinner */
+  .spinner {
+    display: inline-block; width: 18px; height: 18px;
+    border: 2.5px solid rgba(255,255,255,0.3); border-top-color: #fff;
+    border-radius: 50%; animation: spin 0.7s linear infinite;
+    vertical-align: middle; margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Success screen */
+  .success-screen { text-align: center; padding: 40px 0; }
+  .success-icon { font-size: 64px; margin-bottom: 16px; animation: popIn 0.5s ease; }
+  @keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .success-screen h2 { font-size: 26px; font-weight: 900; margin-bottom: 8px; color: var(--accent-green-dark); }
+  .success-screen p { font-size: 15px; color: var(--text-secondary); max-width: 480px; margin: 0 auto 8px; line-height: 1.7; }
+  .success-screen .sub { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
+  .success-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .success-badge {
+    display: inline-block; margin-top: 16px; padding: 8px 20px;
+    background: var(--accent-green-light); border: 1px solid #a7f3d0;
+    border-radius: 20px; font-size: 13px; font-weight: 600; color: var(--accent-green-dark);
+  }
+
+  /* Submission status on review */
+  .submit-section {
+    margin-top: 24px; padding: 20px; background: var(--accent-green-light);
+    border: 1.5px solid #a7f3d0; border-radius: var(--radius); text-align: center;
+  }
+  .submit-section p { font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.6; }
+  .already-sent {
+    margin-top: 24px; padding: 16px; background: var(--accent-blue-light);
+    border: 1px solid #bfdbfe; border-radius: var(--radius); text-align: center;
+  }
+  .already-sent p { font-size: 13px; color: var(--accent-blue-dark); margin-bottom: 10px; }
+
+  /* Motivation messages */
+  .motivation {
+    text-align: center; padding: 8px 16px; margin-bottom: 16px;
+    font-size: 13px; font-weight: 600; color: var(--accent-blue-dark);
+    background: var(--accent-blue-light); border-radius: 20px;
+    border: 1px solid #bfdbfe;
+  }
 
   /* Progress */
-  .progress-bar { margin-bottom: 20px; }
+  .progress-bar {
+    margin-bottom: 20px; background: var(--bg-card); border-radius: var(--radius);
+    padding: 14px 18px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+  }
   .progress-info { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px; }
-  .progress-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-blue), var(--accent-green)); border-radius: 2px; transition: width 0.4s ease; }
+  .progress-track { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-blue), var(--accent-green)); border-radius: 3px; transition: width 0.4s ease; }
   .progress-dots { display: flex; gap: 3px; margin-top: 8px; justify-content: center; flex-wrap: wrap; }
   .progress-dot {
     height: 8px; border-radius: 4px; border: none; cursor: pointer;
@@ -96,13 +178,17 @@
   }
   .progress-dot-active { width: 24px; background: var(--accent-blue); }
   .progress-dot-done { width: 8px; background: var(--accent-green); }
-  .progress-dot-todo { width: 8px; background: var(--border); }
-  .progress-dot:hover { opacity: 0.8; }
+  .progress-dot-todo { width: 8px; background: var(--border-strong); }
+  .progress-dot:hover { opacity: 0.7; }
 
   /* Navigation */
   .nav-row { display: flex; justify-content: space-between; margin-top: 24px; gap: 12px; }
 
   /* Content area */
+  .step-card {
+    background: var(--bg-card); border-radius: var(--radius);
+    padding: 28px 24px; box-shadow: var(--shadow-md); border: 1px solid var(--border);
+  }
   .step-content { transition: opacity 0.2s ease, transform 0.2s ease; }
   .step-content.fading { opacity: 0; transform: translateY(12px); }
 
@@ -112,14 +198,18 @@
   .step-hint { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
 
   /* Examples */
-  .examples-label { font-size: 11px; font-weight: 700; color: var(--accent-yellow); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
-  .example-card {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
-    padding: 10px 14px; cursor: pointer; transition: all 0.2s; margin-bottom: 8px;
+  .examples-label {
+    font-size: 11px; font-weight: 700; color: var(--accent-yellow);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;
   }
-  .example-card:hover { border-color: var(--accent-blue); background: #1a2744; }
+  .example-card {
+    background: var(--accent-yellow-light); border: 1px solid #fde68a;
+    border-radius: 10px; padding: 10px 14px; cursor: pointer;
+    transition: all 0.2s; margin-bottom: 8px;
+  }
+  .example-card:hover { border-color: var(--accent-yellow); background: #fef3c7; }
   .example-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
-  .example-text { font-size: 13px; color: #cbd5e1; line-height: 1.55; }
+  .example-text { font-size: 13px; color: var(--text-secondary); line-height: 1.55; }
   .examples-hint { font-size: 11px; color: var(--text-dim); margin-top: 6px; font-style: italic; margin-bottom: 16px; }
 
   /* Inputs */
@@ -129,7 +219,7 @@
     color: var(--text-primary); line-height: 1.7; font-family: var(--font);
     resize: vertical; transition: border-color 0.2s; outline: none;
   }
-  textarea:focus, input[type="text"]:focus { border-color: var(--accent-blue); }
+  textarea:focus, input[type="text"]:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
   input[type="text"] { font-size: 16px; font-weight: 600; }
 
   textarea.small-textarea {
@@ -139,7 +229,7 @@
 
   /* Partes interessadas */
   .partes-block {
-    background: var(--bg-card); border-radius: var(--radius); padding: 16px;
+    background: var(--bg-input); border-radius: var(--radius); padding: 16px;
     border: 1px solid var(--border); margin-bottom: 12px;
   }
   .partes-label { font-size: 12px; font-weight: 700; color: var(--text-primary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
@@ -151,22 +241,31 @@
     padding: 16px; margin-bottom: 12px;
   }
   .entrega-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-  .entrega-badge { font-size: 12px; font-weight: 700; color: var(--accent-green); background: #052e16; padding: 3px 12px; border-radius: 20px; }
-  .entrega-remove { background: none; border: none; color: var(--accent-red); font-size: 11px; font-weight: 600; cursor: pointer; font-family: var(--font); }
+  .entrega-badge {
+    font-size: 12px; font-weight: 700; color: var(--accent-green-dark);
+    background: var(--accent-green-light); padding: 3px 12px; border-radius: 20px;
+    border: 1px solid #a7f3d0;
+  }
+  .entrega-remove {
+    background: var(--accent-red-light); border: 1px solid #fecaca; border-radius: 6px;
+    color: var(--accent-red); font-size: 11px; font-weight: 600; cursor: pointer;
+    font-family: var(--font); padding: 4px 10px; transition: all 0.2s;
+  }
+  .entrega-remove:hover { background: #fee2e2; }
   .entrega-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .entrega-field-label { font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
 
   .btn-add-entrega {
-    width: 100%; padding: 10px; border-radius: 10px; border: 1.5px dashed var(--border);
+    width: 100%; padding: 10px; border-radius: 10px; border: 1.5px dashed var(--border-strong);
     background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 600;
     cursor: pointer; font-family: var(--font); transition: all 0.2s;
   }
-  .btn-add-entrega:hover { background: var(--bg-card); color: var(--text-secondary); }
+  .btn-add-entrega:hover { background: var(--bg-input); color: var(--text-secondary); border-color: var(--accent-blue); }
 
   /* Example block in entregas */
   .entregas-example {
-    background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
-    padding: 14px; margin-bottom: 16px;
+    background: var(--accent-yellow-light); border: 1px solid #fde68a;
+    border-radius: 10px; padding: 14px; margin-bottom: 16px;
   }
 
   /* Welcome */
@@ -176,57 +275,91 @@
   .welcome p { font-size: 16px; color: var(--text-secondary); max-width: 520px; margin: 0 auto 8px; line-height: 1.7; }
   .welcome .sub { font-size: 14px; color: var(--text-muted); max-width: 480px; margin: 0 auto 32px; line-height: 1.6; }
   .welcome-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .welcome-features { display: flex; gap: 24px; justify-content: center; margin-top: 40px; flex-wrap: wrap; }
-  .welcome-feat { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); }
+  .welcome-features {
+    display: flex; gap: 24px; justify-content: center; margin-top: 40px; flex-wrap: wrap;
+  }
+  .welcome-feat {
+    display: flex; align-items: center; gap: 8px; font-size: 13px;
+    color: var(--text-muted); background: var(--bg-input);
+    padding: 8px 14px; border-radius: 20px; border: 1px solid var(--border);
+  }
   .welcome-feat span { font-size: 18px; }
+
+  /* Autosave indicator */
+  .autosave-indicator {
+    position: fixed; bottom: 16px; right: 16px; padding: 6px 14px;
+    background: var(--accent-green-light); color: var(--accent-green-dark);
+    border: 1px solid #a7f3d0; border-radius: 20px;
+    font-size: 11px; font-weight: 600; font-family: var(--font);
+    opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100;
+  }
+  .autosave-indicator.show { opacity: 1; }
 
   /* Review */
   .review-header { text-align: center; margin-bottom: 28px; }
   .review-header .icon { font-size: 48px; margin-bottom: 8px; }
   .review-header h2 { font-size: 26px; font-weight: 900; margin-bottom: 6px; }
   .review-header p { font-size: 14px; color: var(--text-secondary); }
-  .review-ra { display: inline-block; margin-top: 12px; padding: 6px 18px; background: #1e3a5f; border-radius: 20px; font-size: 14px; font-weight: 700; color: var(--accent-blue); }
+  .review-ra {
+    display: inline-block; margin-top: 12px; padding: 6px 18px;
+    background: var(--accent-blue-light); border: 1px solid #bfdbfe;
+    border-radius: 20px; font-size: 14px; font-weight: 700; color: var(--accent-blue-dark);
+  }
 
   .review-item {
     display: flex; align-items: flex-start; gap: 12px;
-    background: var(--bg-input); border: 1px solid var(--border); border-radius: 10px;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px;
     padding: 12px 16px; cursor: pointer; width: 100%; text-align: left;
     transition: all 0.2s; font-family: var(--font); margin-bottom: 8px;
+    box-shadow: var(--shadow-sm);
   }
-  .review-item:hover { border-color: var(--accent-blue); }
-  .review-item.pending { background: #1a0a0a; border-color: var(--accent-red-bg); }
+  .review-item:hover { border-color: var(--accent-blue); box-shadow: 0 2px 8px rgba(59,130,246,0.1); }
+  .review-item.pending { background: var(--accent-red-light); border-color: #fecaca; }
   .review-item-icon { font-size: 20px; flex-shrink: 0; }
   .review-item-body { flex: 1; min-width: 0; }
   .review-item-label { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
   .review-item-label.filled { color: var(--text-primary); }
-  .review-item-label.empty { color: #fca5a5; }
+  .review-item-label.empty { color: var(--accent-red); }
   .review-item-preview {
     font-size: 12px; color: var(--text-muted); overflow: hidden;
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
     white-space: pre-wrap; line-height: 1.5;
   }
   .review-edit { color: var(--text-dim); font-size: 16px; flex-shrink: 0; }
-  .review-actions { display: flex; gap: 10px; justify-content: center; margin-top: 28px; flex-wrap: wrap; }
+  .review-actions { display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+
+  /* Error message */
+  .error-msg {
+    margin-top: 12px; padding: 12px 16px; background: var(--accent-red-light);
+    border: 1px solid #fecaca; border-radius: var(--radius-sm);
+    font-size: 13px; color: #991b1b; text-align: center;
+  }
 
   /* Footer */
-  .footer { text-align: center; font-size: 10px; color: var(--text-dim); margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--bg-card); line-height: 1.6; }
+  .footer {
+    text-align: center; font-size: 10px; color: var(--text-dim);
+    margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); line-height: 1.6;
+  }
 
   /* Print styles */
   @media print {
     body { background: #fff !important; color: #000 !important; padding: 16px; }
     .no-print { display: none !important; }
     .container { max-width: 100%; }
-    textarea, input[type="text"] { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; min-height: 30px !important; font-size: 12px !important; }
+    .step-card { box-shadow: none !important; border: 1px solid #ddd !important; }
+    textarea, input[type="text"] { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; min-height: 30px !important; font-size: 12px !important; box-shadow: none !important; }
     .step-question { color: #000 !important; font-size: 16px !important; }
     .step-hint { color: #333 !important; font-size: 11px !important; }
     .step-icon { font-size: 20px !important; }
-    .review-item { background: #f9f9f9 !important; border-color: #ddd !important; }
+    .review-item { background: #f9f9f9 !important; border-color: #ddd !important; box-shadow: none !important; }
     .review-item-label { color: #000 !important; }
     .review-item-preview { color: #333 !important; }
     .footer { color: #999 !important; border-top-color: #ddd !important; }
+    .header { box-shadow: none !important; }
     .header-brand h1 { color: #000 !important; }
     .header-brand span { color: #666 !important; }
     .review-ra { background: #e0e7ff !important; color: #1e40af !important; }
+    .autosave-indicator { display: none !important; }
   }
 
   /* Responsive */
@@ -239,166 +372,201 @@
     .btn-nav { width: 100%; text-align: center; }
     .review-actions { flex-direction: column; }
     .review-actions button { width: 100%; text-align: center; }
+    .success-actions { flex-direction: column; }
+    .success-actions button { width: 100%; }
+    .step-card { padding: 20px 16px; }
   }
 </style>
 </head>
 <body>
 
 <div class="container" id="app"></div>
+<div class="autosave-indicator" id="autosave-indicator">Salvo automaticamente</div>
 
 <script>
-/* ═══════════════════════════════════════════════════
+/* ===================================================
+   CONFIGURACAO - COLE AQUI A URL DO SEU GOOGLE APPS SCRIPT
+   =================================================== */
+var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvLX37nFf9wZrSga5WzuXcG56ZLSgc1p7akVW4_52kZAUD-TjF69CsCEPbd_t-X05QEw/exec';
+
+/* ===================================================
    STEPS DATA
-   ═══════════════════════════════════════════════════ */
-const STEPS = [
+   =================================================== */
+var STEPS = [
   { id: "welcome", type: "welcome" },
   {
-    id: "ra", field: "ra", label: "Região Administrativa",
-    question: "Qual é a sua Região Administrativa?",
+    id: "ra", field: "ra", label: "Regiao Administrativa",
+    question: "Qual e a sua Regiao Administrativa?",
     dica: "Identifique sua RA para personalizar o canvas.",
-    placeholder: "Ex: RA-IX Ceilândia",
-    icon: "📍", color: "#3b82f6", inputType: "input", exemplos: []
+    placeholder: "Ex: RA-IX Ceilandia",
+    icon: "\uD83D\uDCCD", color: "#3b82f6", inputType: "input", exemplos: []
   },
   {
     id: "projeto", field: "projeto", label: "Nome do Projeto",
-    question: "Qual é o nome do seu projeto?",
-    dica: "Escolha um nome claro e direto. Inclua a sigla da RA para facilitar a identificação.",
+    question: "Qual e o nome do seu projeto?",
+    dica: "Escolha um nome claro e direto. Inclua a sigla da RA para facilitar a identificacao.",
     placeholder: "Digite o nome do projeto...",
-    icon: "🎯", color: "#3b82f6",
+    icon: "\uD83C\uDFAF", color: "#3b82f6",
     exemplos: [
-      { titulo: "Governança", texto: "Implantação do Comitê Interno de Governança (CIG) da RA-IX" },
-      { titulo: "Atendimento", texto: "Modernização do Atendimento ao Cidadão na RA-III Taguatinga" },
-      { titulo: "Gestão de Riscos", texto: "Programa de Gestão de Riscos Operacionais da RA-I Brasília" },
-      { titulo: "Transparência", texto: "Portal de Transparência e Prestação de Contas da RA-V Sobradinho" }
+      { titulo: "Governanca", texto: "Implantacao do Comite Interno de Governanca (CIG) da RA-IX" },
+      { titulo: "Atendimento", texto: "Modernizacao do Atendimento ao Cidadao na RA-III Taguatinga" },
+      { titulo: "Gestao de Riscos", texto: "Programa de Gestao de Riscos Operacionais da RA-I Brasilia" },
+      { titulo: "Transparencia", texto: "Portal de Transparencia e Prestacao de Contas da RA-V Sobradinho" }
     ]
   },
   {
     id: "objetivo", field: "objetivo", label: "Objetivo do Projeto",
-    question: "O que este projeto pretende alcançar?",
+    question: "O que este projeto pretende alcancar?",
     dica: "Descreva o resultado final desejado. Use verbos no infinitivo: estruturar, implantar, reduzir, melhorar...",
     placeholder: "Descreva o objetivo principal...",
-    icon: "🏆", color: "#dc2626",
+    icon: "\uD83C\uDFC6", color: "#dc2626",
     exemplos: [
-      { titulo: "Governança", texto: "Estruturar o CIG como instância deliberativa para qualificar decisões e dar segurança jurídica à gestão da RA" },
-      { titulo: "Atendimento", texto: "Reduzir em 50% o tempo de espera do cidadão e implantar sistema de agendamento online" },
-      { titulo: "Contratos", texto: "Garantir 100% de conformidade na fiscalização de contratos vigentes da RA" }
+      { titulo: "Governanca", texto: "Estruturar o CIG como instancia deliberativa para qualificar decisoes e dar seguranca juridica a gestao da RA" },
+      { titulo: "Atendimento", texto: "Reduzir em 50% o tempo de espera do cidadao e implantar sistema de agendamento online" },
+      { titulo: "Contratos", texto: "Garantir 100% de conformidade na fiscalizacao de contratos vigentes da RA" }
     ]
   },
   {
-    id: "descricao", field: "descricao", label: "Descrição do Projeto",
+    id: "descricao", field: "descricao", label: "Descricao do Projeto",
     question: "Descreva brevemente o projeto.",
-    dica: "Contextualize: o que será feito, qual a abrangência, e a quais diretrizes está vinculado.",
+    dica: "Contextualize: o que sera feito, qual a abrangencia, e a quais diretrizes esta vinculado.",
     placeholder: "Descreva o escopo e contexto...",
-    icon: "📋", color: "#2563eb",
+    icon: "\uD83D\uDCCB", color: "#2563eb",
     exemplos: [
-      { titulo: "Governança", texto: "Formalização do CIG por portaria, elaboração de regimento interno, capacitação dos membros e início das reuniões ordinárias mensais, alinhado às diretrizes SEGOV/CGDF" },
-      { titulo: "Capacitação", texto: "Programa de capacitação continuada para 45 servidores da RA em gestão pública, integridade e atendimento, com 6 módulos ao longo de 12 meses" }
+      { titulo: "Governanca", texto: "Formalizacao do CIG por portaria, elaboracao de regimento interno, capacitacao dos membros e inicio das reunioes ordinarias mensais, alinhado as diretrizes SEGOV/CGDF" },
+      { titulo: "Capacitacao", texto: "Programa de capacitacao continuada para 45 servidores da RA em gestao publica, integridade e atendimento, com 6 modulos ao longo de 12 meses" }
     ]
   },
   {
     id: "produto", field: "produto", label: "Produto Principal",
-    question: "Qual é o resultado concreto que será entregue?",
-    dica: "Pense em algo tangível — que se possa apontar e dizer: \"isto foi entregue\".",
+    question: "Qual e o resultado concreto que sera entregue?",
+    dica: "Pense em algo tangivel \u2014 que se possa apontar e dizer: \"isto foi entregue\".",
     placeholder: "O principal produto do projeto...",
-    icon: "📦", color: "#ea580c",
+    icon: "\uD83D\uDCE6", color: "#ea580c",
     exemplos: [
-      { titulo: "Governança", texto: "CIG formalmente instituído, com regimento aprovado e reuniões ordinárias em funcionamento" },
-      { titulo: "Atendimento", texto: "Central de atendimento reorganizada com sistema de senhas, agendamento e pesquisa de satisfação" },
-      { titulo: "Riscos", texto: "Matriz de riscos da RA elaborada com planos de tratamento para os 10 riscos prioritários" }
+      { titulo: "Governanca", texto: "CIG formalmente instituido, com regimento aprovado e reunioes ordinarias em funcionamento" },
+      { titulo: "Atendimento", texto: "Central de atendimento reorganizada com sistema de senhas, agendamento e pesquisa de satisfacao" },
+      { titulo: "Riscos", texto: "Matriz de riscos da RA elaborada com planos de tratamento para os 10 riscos prioritarios" }
     ]
   },
   {
-    id: "caracteristicas", field: "caracteristicas", label: "Características",
-    question: "Quais são as características essenciais desse produto?",
+    id: "caracteristicas", field: "caracteristicas", label: "Caracteristicas",
+    question: "Quais sao as caracteristicas essenciais desse produto?",
     dica: "Liste as qualidades que tornam o produto completo e funcional.",
-    placeholder: "Características do produto principal...",
-    icon: "⭐", color: "#7c3aed",
+    placeholder: "Caracteristicas do produto principal...",
+    icon: "\u2B50", color: "#7c3aed",
     exemplos: [
-      { titulo: "CIG", texto: "Composição multissetorial • Reuniões mensais com ata no SEI • Pauta estruturada • Deliberações registradas • Alinhamento SEGOV/CGDF" },
-      { titulo: "Atendimento", texto: "Acessível a PCD • Bilíngue (português/Libras) • Tempo máximo de espera: 15min • Pesquisa de satisfação digital" }
+      { titulo: "CIG", texto: "Composicao multissetorial \u2022 Reunioes mensais com ata no SEI \u2022 Pauta estruturada \u2022 Deliberacoes registradas \u2022 Alinhamento SEGOV/CGDF" },
+      { titulo: "Atendimento", texto: "Acessivel a PCD \u2022 Bilingue (portugues/Libras) \u2022 Tempo maximo de espera: 15min \u2022 Pesquisa de satisfacao digital" }
     ]
   },
   {
     id: "justificativa", field: "justificativa", label: "Justificativa",
-    question: "Por que este projeto é necessário?",
-    dica: "Responda: qual problema resolve? Que risco evita? Por que agora? Traga dados se possível.",
+    question: "Por que este projeto e necessario?",
+    dica: "Responda: qual problema resolve? Que risco evita? Por que agora? Traga dados se possivel.",
     placeholder: "O que motiva este projeto...",
-    icon: "✅", color: "#059669",
+    icon: "\u2705", color: "#059669",
     exemplos: [
-      { titulo: "Governança", texto: "A ausência de instância formal de governança expõe a gestão a riscos em auditorias do TCDF. As oficinas SEGOV/CGDF criaram a base técnica para implementação imediata." },
-      { titulo: "Atendimento", texto: "Pesquisa da Ouvidoria indica que 67% das reclamações referem-se a tempo de espera. A RA atende 12 mil cidadãos/mês sem sistema de organização." }
+      { titulo: "Governanca", texto: "A ausencia de instancia formal de governanca expoe a gestao a riscos em auditorias do TCDF. As oficinas SEGOV/CGDF criaram a base tecnica para implementacao imediata." },
+      { titulo: "Atendimento", texto: "Pesquisa da Ouvidoria indica que 67% das reclamacoes referem-se a tempo de espera. A RA atende 12 mil cidadaos/mes sem sistema de organizacao." }
     ]
   },
   {
     id: "indicador", field: "indicador", label: "Indicador de Resultado",
-    question: "Como você vai medir o sucesso?",
-    dica: "Defina métricas concretas: percentuais, quantidades, prazos. Se o projeto der certo, que número muda?",
+    question: "Como voce vai medir o sucesso?",
+    dica: "Defina metricas concretas: percentuais, quantidades, prazos. Se o projeto der certo, que numero muda?",
     placeholder: "Indicadores de sucesso...",
-    icon: "📊", color: "#059669",
+    icon: "\uD83D\uDCCA", color: "#059669",
     exemplos: [
-      { titulo: "Governança", texto: "% de reuniões realizadas vs. programadas (meta: 100%)\nNº de riscos identificados e tratados\nÍndice de conformidade no checklist CGDF" },
-      { titulo: "Atendimento", texto: "Tempo médio de espera (meta: < 15min)\nÍndice de satisfação do cidadão (meta: > 80%)\nNº de atendimentos/dia" }
+      { titulo: "Governanca", texto: "% de reunioes realizadas vs. programadas (meta: 100%)\nN\u00BA de riscos identificados e tratados\nIndice de conformidade no checklist CGDF" },
+      { titulo: "Atendimento", texto: "Tempo medio de espera (meta: < 15min)\nIndice de satisfacao do cidadao (meta: > 80%)\nN\u00BA de atendimentos/dia" }
     ]
   },
   {
     id: "partes", type: "partes", label: "Partes Interessadas",
-    question: "Quem está envolvido no projeto?",
-    icon: "👥", color: "#334155",
+    question: "Quem esta envolvido no projeto?",
+    icon: "\uD83D\uDC65", color: "#334155",
     dica: "Identifique quem patrocina, quem executa e quem se beneficia.",
     exemplos: {
       patrocinio: ["Administrador(a) Regional (patrocinador)", "Chefe de Gabinete (gestor do projeto)"],
-      equipe: ["Membros do CIG capacitados nas oficinas", "Representantes das coordenações", "Assessoria jurídica da RA"],
-      publico: ["Diretos: servidores e gestores da RA", "Indiretos: população da região administrativa", "Órgãos de controle: TCDF, CGDF"]
+      equipe: ["Membros do CIG capacitados nas oficinas", "Representantes das coordenacoes", "Assessoria juridica da RA"],
+      publico: ["Diretos: servidores e gestores da RA", "Indiretos: populacao da regiao administrativa", "Orgaos de controle: TCDF, CGDF"]
     }
   },
   {
-    id: "entregas", type: "entregas", label: "Entregas Intermediárias",
-    question: "Quebre o projeto em etapas — o que será entregue em cada uma?",
-    icon: "📅", color: "#059669",
-    dica: "Cada entrega deve ter: o que será entregue, as atividades necessárias, prazo e custo estimado. Comece com 2 a 4 entregas.",
+    id: "entregas", type: "entregas", label: "Entregas Intermediarias",
+    question: "Quebre o projeto em etapas \u2014 o que sera entregue em cada uma?",
+    icon: "\uD83D\uDCC5", color: "#059669",
+    dica: "Cada entrega deve ter: o que sera entregue, as atividades necessarias, prazo e custo estimado. Comece com 2 a 4 entregas.",
     exemplos: [
-      { entrega: "Ato normativo do CIG publicado", atividades: "Minutar portaria → Assessoria jurídica → Assinatura → DODF", prazo: "30 dias", investimento: "Sem custo direto" },
-      { entrega: "1ª reunião ordinária realizada", atividades: "Regimento aprovado → Pauta definida → Convocação → Ata no SEI", prazo: "60 dias", investimento: "Sem custo direto" }
+      { entrega: "Ato normativo do CIG publicado", atividades: "Minutar portaria \u2192 Assessoria juridica \u2192 Assinatura \u2192 DODF", prazo: "30 dias", investimento: "Sem custo direto" },
+      { entrega: "1\u00AA reuniao ordinaria realizada", atividades: "Regimento aprovado \u2192 Pauta definida \u2192 Convocacao \u2192 Ata no SEI", prazo: "60 dias", investimento: "Sem custo direto" }
     ]
   },
   {
     id: "premissas", field: "premissas", label: "Premissas",
     question: "O que precisa dar certo para o projeto funcionar?",
-    dica: "São condições que você assume como verdadeiras. Se alguma falhar, o projeto fica comprometido.",
-    placeholder: "Fatores críticos de sucesso...",
-    icon: "🏅", color: "#b45309",
+    dica: "Sao condicoes que voce assume como verdadeiras. Se alguma falhar, o projeto fica comprometido.",
+    placeholder: "Fatores criticos de sucesso...",
+    icon: "\uD83C\uDFC5", color: "#b45309",
     exemplos: [
-      { titulo: "Típicas", texto: "Apoio do(a) Administrador(a) Regional\nServidores capacitados com disponibilidade de tempo\nAcesso ao SEI funcionando\nSuporte técnico da SEGOV conforme comprometido" }
+      { titulo: "Tipicas", texto: "Apoio do(a) Administrador(a) Regional\nServidores capacitados com disponibilidade de tempo\nAcesso ao SEI funcionando\nSuporte tecnico da SEGOV conforme comprometido" }
     ]
   },
   {
     id: "barreiras", field: "barreiras", label: "Barreiras",
-    question: "Quais dificuldades já existem hoje?",
-    dica: "Diferente de riscos, barreiras são obstáculos conhecidos e atuais — coisas que já atrapalham.",
+    question: "Quais dificuldades ja existem hoje?",
+    dica: "Diferente de riscos, barreiras sao obstaculos conhecidos e atuais \u2014 coisas que ja atrapalham.",
     placeholder: "Dificuldades existentes...",
-    icon: "🚧", color: "#dc2626",
+    icon: "\uD83D\uDEA7", color: "#dc2626",
     exemplos: [
-      { titulo: "Comuns nas RAs", texto: "Acúmulo de funções dos servidores\nResistência cultural a mudanças\nRotatividade em cargos comissionados\nInfraestrutura limitada (salas, equipamentos)" }
+      { titulo: "Comuns nas RAs", texto: "Acumulo de funcoes dos servidores\nResistencia cultural a mudancas\nRotatividade em cargos comissionados\nInfraestrutura limitada (salas, equipamentos)" }
     ]
   },
   {
     id: "riscos", field: "riscos", label: "Riscos",
     question: "O que pode dar errado no futuro?",
-    dica: "Eventos incertos mas possíveis. Pense: \"e se acontecer X, como impacta o projeto?\"",
+    dica: "Eventos incertos mas possiveis. Pense: \"e se acontecer X, como impacta o projeto?\"",
     placeholder: "Eventos que podem impactar...",
-    icon: "⚠️", color: "#d97706",
+    icon: "\u26A0\uFE0F", color: "#d97706",
     exemplos: [
-      { titulo: "Frequentes", texto: "Troca de Administrador(a) com descontinuidade\nPerda de servidores capacitados por remoção\nSobrecarga de demandas urgentes\nCorte orçamentário inesperado" }
+      { titulo: "Frequentes", texto: "Troca de Administrador(a) com descontinuidade\nPerda de servidores capacitados por remocao\nSobrecarga de demandas urgentes\nCorte orcamentario inesperado" }
     ]
   },
   { id: "review", type: "review" }
 ];
 
-/* ═══════════════════════════════════════════════════
+/* ===================================================
+   MOTIVATION MESSAGES
+   =================================================== */
+var MOTIVATIONS = [
+  { min: 0, max: 10, msg: "Vamos la! O primeiro passo e o mais importante." },
+  { min: 11, max: 25, msg: "Otimo comeco! Continue preenchendo, esta ficando bom." },
+  { min: 26, max: 50, msg: "Quase na metade! Seu projeto ja esta tomando forma." },
+  { min: 51, max: 75, msg: "Mais da metade! O canvas esta ficando completo." },
+  { min: 76, max: 95, msg: "Falta pouco! Seu projeto esta quase pronto para enviar." },
+  { min: 96, max: 100, msg: "Excelente! Canvas 100% preenchido. Hora de enviar!" }
+];
+
+function getMotivation(pct) {
+  for (var i = 0; i < MOTIVATIONS.length; i++) {
+    if (pct >= MOTIVATIONS[i].min && pct <= MOTIVATIONS[i].max) return MOTIVATIONS[i].msg;
+  }
+  return '';
+}
+
+/* ===================================================
    STATE
-   ═══════════════════════════════════════════════════ */
-let currentStep = 0;
-let data = {
+   =================================================== */
+var STORAGE_KEY = 'canvas-projeto-data';
+var STORAGE_STEP_KEY = 'canvas-projeto-step';
+var STORAGE_SENT_KEY = 'canvas-projeto-sent';
+
+var currentStep = 0;
+var submitting = false;
+var showSuccess = false;
+
+var data = {
   ra: "", projeto: "", objetivo: "", descricao: "",
   produto: "", caracteristicas: "", justificativa: "",
   indicador: "", patrocinio: "", equipe: "", publico: "",
@@ -409,30 +577,107 @@ let data = {
   ]
 };
 
-/* ═══════════════════════════════════════════════════
+/* ===================================================
+   LOCALSTORAGE PERSISTENCE
+   =================================================== */
+function loadFromStorage() {
+  try {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      var parsed = JSON.parse(saved);
+      var exportDate = parsed.exportDate;
+      delete parsed.exportDate;
+      Object.keys(parsed).forEach(function(k) { data[k] = parsed[k]; });
+    }
+    var savedStep = localStorage.getItem(STORAGE_STEP_KEY);
+    if (savedStep) {
+      var step = parseInt(savedStep, 10);
+      if (!isNaN(step) && step >= 0 && step < STEPS.length) {
+        currentStep = step;
+      }
+    }
+  } catch (e) { /* ignore corrupt data */ }
+}
+
+function getSentInfo() {
+  try {
+    var s = localStorage.getItem(STORAGE_SENT_KEY);
+    return s ? JSON.parse(s) : null;
+  } catch (e) { return null; }
+}
+
+function markAsSent() {
+  try {
+    localStorage.setItem(STORAGE_SENT_KEY, JSON.stringify({
+      timestamp: new Date().toISOString(),
+      ra: data.ra,
+      projeto: data.projeto
+    }));
+  } catch (e) { /* ignore */ }
+}
+
+var autosaveTimeout = null;
+function saveToStorage() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    localStorage.setItem(STORAGE_STEP_KEY, String(currentStep));
+    showAutosaveIndicator();
+  } catch (e) { /* storage full or unavailable */ }
+}
+
+function showAutosaveIndicator() {
+  var el = document.getElementById('autosave-indicator');
+  if (!el) return;
+  el.classList.add('show');
+  clearTimeout(autosaveTimeout);
+  autosaveTimeout = setTimeout(function() { el.classList.remove('show'); }, 1500);
+}
+
+function scheduleAutosave() {
+  saveCurrentInputs();
+  saveToStorage();
+}
+
+/* ===================================================
    HELPERS
-   ═══════════════════════════════════════════════════ */
-function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+   =================================================== */
+function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
 function getProgress() {
-  const fields = [data.ra, data.projeto, data.objetivo, data.descricao, data.produto,
+  var fields = [data.ra, data.projeto, data.objetivo, data.descricao, data.produto,
     data.caracteristicas, data.justificativa, data.indicador,
     data.patrocinio, data.equipe, data.publico,
     data.premissas, data.barreiras, data.riscos];
-  const ef = data.entregas.flatMap(e => [e.entrega, e.atividades]);
-  const all = [...fields, ...ef];
-  const filled = all.filter(f => f && f.trim()).length;
+  var ef = [];
+  data.entregas.forEach(function(e) { ef.push(e.entrega, e.atividades, e.prazo, e.investimento); });
+  var all = fields.concat(ef);
+  var filled = all.filter(function(f) { return f && f.trim(); }).length;
   return Math.round((filled / all.length) * 100);
+}
+
+function getRequiredEmpty() {
+  var required = [
+    { field: 'ra', label: 'Regiao Administrativa' },
+    { field: 'projeto', label: 'Nome do Projeto' },
+    { field: 'objetivo', label: 'Objetivo' }
+  ];
+  var empty = [];
+  required.forEach(function(r) {
+    if (!data[r.field] || !data[r.field].trim()) empty.push(r.label);
+  });
+  return empty;
 }
 
 function goTo(idx) {
   saveCurrentInputs();
-  const content = document.querySelector('.step-content');
+  saveToStorage();
+  var content = document.querySelector('.step-content');
   if (content) {
     content.classList.add('fading');
-    setTimeout(() => { currentStep = idx; render(); }, 200);
+    setTimeout(function() { currentStep = idx; showSuccess = false; render(); }, 200);
   } else {
     currentStep = idx;
+    showSuccess = false;
     render();
   }
 }
@@ -441,21 +686,21 @@ function next() { if (currentStep < STEPS.length - 1) goTo(currentStep + 1); }
 function prev() { if (currentStep > 0) goTo(currentStep - 1); }
 
 function saveCurrentInputs() {
-  const step = STEPS[currentStep];
+  var step = STEPS[currentStep];
   if (step.field) {
-    const el = document.getElementById('field-' + step.field);
+    var el = document.getElementById('field-' + step.field);
     if (el) data[step.field] = el.value;
   }
   if (step.type === 'partes') {
-    ['patrocinio', 'equipe', 'publico'].forEach(k => {
-      const el = document.getElementById('field-' + k);
+    ['patrocinio', 'equipe', 'publico'].forEach(function(k) {
+      var el = document.getElementById('field-' + k);
       if (el) data[k] = el.value;
     });
   }
   if (step.type === 'entregas') {
-    data.entregas.forEach((_, i) => {
-      ['entrega', 'atividades', 'prazo', 'investimento'].forEach(k => {
-        const el = document.getElementById('ent-' + i + '-' + k);
+    data.entregas.forEach(function(_, i) {
+      ['entrega', 'atividades', 'prazo', 'investimento'].forEach(function(k) {
+        var el = document.getElementById('ent-' + i + '-' + k);
         if (el) data.entregas[i][k] = el.value;
       });
     });
@@ -464,9 +709,10 @@ function saveCurrentInputs() {
 
 function exportJSON() {
   saveCurrentInputs();
-  const blob = new Blob([JSON.stringify({ ...data, exportDate: new Date().toISOString() }, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  saveToStorage();
+  var blob = new Blob([JSON.stringify(Object.assign({}, data, { exportDate: new Date().toISOString() }), null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
   a.href = url;
   a.download = 'canvas-' + (data.ra || 'projeto').replace(/[^a-zA-Z0-9]/g, '-') + '-' + new Date().toISOString().slice(0,10) + '.json';
   a.click();
@@ -474,275 +720,464 @@ function exportJSON() {
 }
 
 function importJSON() {
-  const input = document.createElement('input');
+  var input = document.createElement('input');
   input.type = 'file';
   input.accept = '.json';
-  input.onchange = (e) => {
-    const file = e.target.files[0];
+  input.onchange = function(e) {
+    var file = e.target.files[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
+    var reader = new FileReader();
+    reader.onload = function(ev) {
       try {
-        const imp = JSON.parse(ev.target.result);
-        const { exportDate, ...rest } = imp;
-        Object.assign(data, rest);
+        var imp = JSON.parse(ev.target.result);
+        delete imp.exportDate;
+        Object.keys(imp).forEach(function(k) { data[k] = imp[k]; });
+        saveToStorage();
         if (currentStep === 0) currentStep = 1;
         render();
-      } catch { alert('Arquivo inválido.'); }
+      } catch (err) { alert('Arquivo invalido.'); }
     };
     reader.readAsText(file);
   };
   input.click();
 }
 
-function useExample(field, text) {
+function handleExampleClick(e) {
+  var card = e.currentTarget;
+  var field = card.dataset.field;
+  var text = card.dataset.text;
   if (!data[field] || !data[field].trim()) {
     data[field] = text;
-    const el = document.getElementById('field-' + field);
+    var el = document.getElementById('field-' + field);
     if (el) el.value = text;
+    scheduleAutosave();
   }
 }
 
 function addEntrega() {
   saveCurrentInputs();
   data.entregas.push({ entrega: '', atividades: '', prazo: '', investimento: '' });
+  saveToStorage();
   render();
 }
 
 function removeEntrega(idx) {
-  saveCurrentInputs();
-  if (data.entregas.length > 1) {
-    data.entregas.splice(idx, 1);
-    render();
+  if (data.entregas.length <= 1) return;
+  var entry = data.entregas[idx];
+  var hasContent = entry.entrega.trim() || entry.atividades.trim() || entry.prazo.trim() || entry.investimento.trim();
+  if (hasContent && !confirm('Tem certeza que deseja remover a Entrega ' + (idx + 1) + '? Os dados preenchidos serao perdidos.')) {
+    return;
   }
+  saveCurrentInputs();
+  data.entregas.splice(idx, 1);
+  saveToStorage();
+  render();
 }
 
-/* ═══════════════════════════════════════════════════
+function clearAllData() {
+  if (!confirm('Tem certeza que deseja limpar todos os dados? Esta acao nao pode ser desfeita.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem(STORAGE_STEP_KEY);
+  localStorage.removeItem(STORAGE_SENT_KEY);
+  data = {
+    ra: "", projeto: "", objetivo: "", descricao: "",
+    produto: "", caracteristicas: "", justificativa: "",
+    indicador: "", patrocinio: "", equipe: "", publico: "",
+    premissas: "", barreiras: "", riscos: "",
+    entregas: [
+      { entrega: "", atividades: "", prazo: "", investimento: "" },
+      { entrega: "", atividades: "", prazo: "", investimento: "" }
+    ]
+  };
+  currentStep = 0;
+  showSuccess = false;
+  render();
+}
+
+/* ===================================================
+   SUBMIT TO GOOGLE SHEETS
+   =================================================== */
+function submitToSEGOV() {
+  if (submitting) return;
+
+  saveCurrentInputs();
+  saveToStorage();
+
+  // Validate minimum fields
+  var empty = getRequiredEmpty();
+  if (empty.length > 0) {
+    alert('Por favor, preencha os campos obrigatorios antes de enviar:\n\n- ' + empty.join('\n- '));
+    return;
+  }
+
+  if (GOOGLE_SCRIPT_URL === 'COLE_SUA_URL_AQUI') {
+    alert('O envio ainda nao foi configurado.\n\nO administrador precisa configurar a URL do Google Apps Script.\nPor enquanto, use "Salvar arquivo" para exportar o JSON.');
+    return;
+  }
+
+  submitting = true;
+  render();
+
+  var payload = Object.assign({}, data, {
+    submittedAt: new Date().toISOString(),
+    userAgent: navigator.userAgent
+  });
+
+  fetch(GOOGLE_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function() {
+    submitting = false;
+    showSuccess = true;
+    markAsSent();
+    render();
+  })
+  .catch(function(err) {
+    submitting = false;
+    render();
+    var errorEl = document.getElementById('submit-error');
+    if (errorEl) {
+      errorEl.style.display = 'block';
+      errorEl.textContent = 'Erro ao enviar. Verifique sua conexao e tente novamente. Se persistir, use "Salvar arquivo" e envie por e-mail.';
+    }
+  });
+}
+
+/* ===================================================
+   INPUT EVENT LISTENERS (autosave on typing)
+   =================================================== */
+var inputDebounce = null;
+function attachInputListeners() {
+  document.querySelectorAll('#app textarea, #app input[type="text"]').forEach(function(el) {
+    el.addEventListener('input', function() {
+      clearTimeout(inputDebounce);
+      inputDebounce = setTimeout(scheduleAutosave, 800);
+    });
+  });
+}
+
+/* ===================================================
    RENDERERS
-   ═══════════════════════════════════════════════════ */
+   =================================================== */
 function renderWelcome() {
-  return `
-    <div class="welcome">
-      <div class="welcome-icon">🗺️</div>
-      <h2>Vamos construir o seu projeto!</h2>
-      <p>Este assistente vai guiar você, passo a passo, no preenchimento do Canvas de Projeto da sua Região Administrativa.</p>
-      <p class="sub">Em cada etapa você verá <strong style="color:var(--accent-yellow)">exemplos inspiradores</strong> de diferentes tipos de projeto para ajudar a pensar no seu. Leve o tempo que precisar — você pode salvar e continuar depois.</p>
-      <div class="welcome-btns">
-        <button class="btn-primary" onclick="next()">Começar ✨</button>
-        <button class="btn-ghost" onclick="importJSON()">📂 Continuar preenchimento salvo</button>
-      </div>
-      <div class="welcome-features">
-        <div class="welcome-feat"><span>💡</span> Exemplos em cada passo</div>
-        <div class="welcome-feat"><span>💾</span> Salve e continue depois</div>
-        <div class="welcome-feat"><span>🖨️</span> Exporte em PDF para o SEI</div>
-      </div>
-    </div>`;
+  var hasSaved = localStorage.getItem(STORAGE_KEY);
+  var resumeBtn = hasSaved
+    ? '<button class="btn-ghost" onclick="goTo(1)">Continuar de onde parou</button>'
+    : '';
+
+  return '<div class="welcome">' +
+    '<div class="welcome-icon">\uD83D\uDDFA\uFE0F</div>' +
+    '<h2>Vamos construir o seu projeto!</h2>' +
+    '<p>Este assistente vai guiar voce, passo a passo, no preenchimento do Canvas de Projeto da sua Regiao Administrativa.</p>' +
+    '<p class="sub">Em cada etapa voce vera <strong style="color:var(--accent-yellow)">exemplos inspiradores</strong> de diferentes tipos de projeto para ajudar a pensar no seu. Ao final, envie diretamente para a SEGOV.</p>' +
+    '<div class="welcome-btns">' +
+      '<button class="btn-primary" onclick="next()">Comecar</button>' +
+      resumeBtn +
+      '<button class="btn-ghost" onclick="importJSON()">\uD83D\uDCC2 Importar arquivo salvo</button>' +
+    '</div>' +
+    '<div class="welcome-features">' +
+      '<div class="welcome-feat"><span>\uD83D\uDCA1</span> Exemplos em cada passo</div>' +
+      '<div class="welcome-feat"><span>\uD83D\uDCBE</span> Salva automaticamente</div>' +
+      '<div class="welcome-feat"><span>\uD83D\uDCE8</span> Envio direto para SEGOV</div>' +
+    '</div>' +
+  '</div>';
 }
 
 function renderField(step) {
-  let exHTML = '';
+  var exHTML = '';
   if (step.exemplos && step.exemplos.length) {
-    exHTML = `
-      <div class="examples-label">💡 Exemplos para inspirar</div>
-      ${step.exemplos.map(ex => `
-        <div class="example-card" onclick="useExample('${step.field}', ${JSON.stringify(ex.texto).replace(/'/g, "\\'")})" title="Clique para usar como base (campo vazio)">
-          <div class="example-tag" style="color:${step.color}">${esc(ex.titulo)}</div>
-          <div class="example-text">${esc(ex.texto)}</div>
-        </div>
-      `).join('')}
-      <div class="examples-hint">Clique num exemplo para usá-lo como ponto de partida (campo vazio) ou escreva o seu abaixo</div>
-    `;
+    exHTML = '<div class="examples-label">\uD83D\uDCA1 Exemplos para inspirar</div>';
+    step.exemplos.forEach(function(ex) {
+      exHTML += '<div class="example-card" data-field="' + esc(step.field) + '" data-text="' + esc(ex.texto) + '" title="Clique para usar como base (campo vazio)">' +
+        '<div class="example-tag" style="color:' + step.color + '">' + esc(ex.titulo) + '</div>' +
+        '<div class="example-text">' + esc(ex.texto) + '</div>' +
+      '</div>';
+    });
+    exHTML += '<div class="examples-hint">Clique num exemplo para usa-lo como ponto de partida (campo vazio) ou escreva o seu abaixo</div>';
   }
 
-  const inputHTML = step.inputType === 'input'
-    ? `<input type="text" id="field-${step.field}" value="${esc(data[step.field])}" placeholder="${esc(step.placeholder)}">`
-    : `<textarea id="field-${step.field}" rows="5" placeholder="${esc(step.placeholder)}">${esc(data[step.field])}</textarea>`;
+  var isRequired = (step.field === 'ra' || step.field === 'projeto' || step.field === 'objetivo');
+  var reqLabel = isRequired ? ' <span style="color:var(--accent-red)">*</span>' : '';
 
-  return `
-    <span class="step-icon">${step.icon}</span>
-    <h2 class="step-question">${esc(step.question)}</h2>
-    <p class="step-hint">${esc(step.dica)}</p>
-    ${exHTML}
-    ${inputHTML}
-  `;
+  var inputHTML = step.inputType === 'input'
+    ? '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
+      '<input type="text" id="field-' + step.field + '" value="' + esc(data[step.field]) + '" placeholder="' + esc(step.placeholder) + '">'
+    : '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
+      '<textarea id="field-' + step.field + '" rows="5" placeholder="' + esc(step.placeholder) + '">' + esc(data[step.field]) + '</textarea>';
+
+  return '<span class="step-icon">' + step.icon + '</span>' +
+    '<h2 class="step-question">' + esc(step.question) + reqLabel + '</h2>' +
+    '<p class="step-hint">' + esc(step.dica) + '</p>' +
+    exHTML + inputHTML;
 }
 
 function renderPartes(step) {
-  const subs = [
-    { key: 'patrocinio', label: 'Patrocínio e Gestão', ph: 'Quem patrocina e gerencia?', exs: step.exemplos.patrocinio },
+  var subs = [
+    { key: 'patrocinio', label: 'Patrocinio e Gestao', ph: 'Quem patrocina e gerencia?', exs: step.exemplos.patrocinio },
     { key: 'equipe', label: 'Equipe Executora', ph: 'Quem vai executar?', exs: step.exemplos.equipe },
-    { key: 'publico', label: 'Público-alvo', ph: 'Quem se beneficia?', exs: step.exemplos.publico }
+    { key: 'publico', label: 'Publico-alvo', ph: 'Quem se beneficia?', exs: step.exemplos.publico }
   ];
 
-  return `
-    <span class="step-icon">${step.icon}</span>
-    <h2 class="step-question">${esc(step.question)}</h2>
-    <p class="step-hint">${esc(step.dica)}</p>
-    ${subs.map(s => `
-      <div class="partes-block">
-        <div class="partes-label">${esc(s.label)}</div>
-        <div class="partes-examples">💡 Ex: ${s.exs.map(e => esc(e)).join(' • ')}</div>
-        <textarea class="small-textarea" id="field-${s.key}" rows="3" placeholder="${esc(s.ph)}">${esc(data[s.key])}</textarea>
-      </div>
-    `).join('')}
-  `;
+  var html = '<span class="step-icon">' + step.icon + '</span>' +
+    '<h2 class="step-question">' + esc(step.question) + '</h2>' +
+    '<p class="step-hint">' + esc(step.dica) + '</p>';
+
+  subs.forEach(function(s) {
+    html += '<div class="partes-block">' +
+      '<label class="partes-label" for="field-' + s.key + '">' + esc(s.label) + '</label>' +
+      '<div class="partes-examples">\uD83D\uDCA1 Ex: ' + s.exs.map(function(e) { return esc(e); }).join(' \u2022 ') + '</div>' +
+      '<textarea class="small-textarea" id="field-' + s.key + '" rows="3" placeholder="' + esc(s.ph) + '">' + esc(data[s.key]) + '</textarea>' +
+    '</div>';
+  });
+
+  return html;
 }
 
 function renderEntregas(step) {
-  const exHTML = step.exemplos.map((ex, i) => `
-    <div style="font-size:12px;color:#cbd5e1;line-height:1.5;padding:6px 0;${i < step.exemplos.length - 1 ? 'border-bottom:1px solid var(--border);' : ''}">
-      <strong style="color:var(--accent-green)">Entrega ${i+1}:</strong> ${esc(ex.entrega)}
-      <span style="color:var(--text-muted)"> → ${esc(ex.atividades)}</span>
-      <span style="color:var(--text-secondary)"> (${esc(ex.prazo)})</span>
-    </div>
-  `).join('');
+  var exHTML = '';
+  step.exemplos.forEach(function(ex, i) {
+    exHTML += '<div style="font-size:12px;color:var(--text-secondary);line-height:1.5;padding:6px 0;' +
+      (i < step.exemplos.length - 1 ? 'border-bottom:1px solid var(--border);' : '') + '">' +
+      '<strong style="color:var(--accent-green-dark)">Entrega ' + (i+1) + ':</strong> ' + esc(ex.entrega) +
+      ' <span style="color:var(--text-muted)">\u2192 ' + esc(ex.atividades) + '</span>' +
+      ' <span style="color:var(--text-secondary)">(' + esc(ex.prazo) + ')</span>' +
+    '</div>';
+  });
 
-  const entregasHTML = data.entregas.map((ent, i) => `
-    <div class="entrega-card">
-      <div class="entrega-header">
-        <span class="entrega-badge">Entrega ${i + 1}</span>
-        ${data.entregas.length > 1 ? `<button class="entrega-remove" onclick="removeEntrega(${i})">✕ Remover</button>` : ''}
-      </div>
-      <div class="entrega-grid">
-        <div>
-          <div class="entrega-field-label">O que será entregue?</div>
-          <textarea class="small-textarea" id="ent-${i}-entrega" rows="2">${esc(ent.entrega)}</textarea>
-        </div>
-        <div>
-          <div class="entrega-field-label">Atividades necessárias</div>
-          <textarea class="small-textarea" id="ent-${i}-atividades" rows="3">${esc(ent.atividades)}</textarea>
-        </div>
-        <div>
-          <div class="entrega-field-label">Prazo estimado</div>
-          <textarea class="small-textarea" id="ent-${i}-prazo" rows="1">${esc(ent.prazo)}</textarea>
-        </div>
-        <div>
-          <div class="entrega-field-label">Investimento</div>
-          <textarea class="small-textarea" id="ent-${i}-investimento" rows="1">${esc(ent.investimento)}</textarea>
-        </div>
-      </div>
-    </div>
-  `).join('');
+  var entregasHTML = '';
+  data.entregas.forEach(function(ent, i) {
+    entregasHTML += '<div class="entrega-card">' +
+      '<div class="entrega-header">' +
+        '<span class="entrega-badge">Entrega ' + (i + 1) + '</span>' +
+        (data.entregas.length > 1 ? '<button class="entrega-remove" data-idx="' + i + '">Remover</button>' : '') +
+      '</div>' +
+      '<div class="entrega-grid">' +
+        '<div>' +
+          '<label class="entrega-field-label" for="ent-' + i + '-entrega">O que sera entregue?</label>' +
+          '<textarea class="small-textarea" id="ent-' + i + '-entrega" rows="2">' + esc(ent.entrega) + '</textarea>' +
+        '</div>' +
+        '<div>' +
+          '<label class="entrega-field-label" for="ent-' + i + '-atividades">Atividades necessarias</label>' +
+          '<textarea class="small-textarea" id="ent-' + i + '-atividades" rows="3">' + esc(ent.atividades) + '</textarea>' +
+        '</div>' +
+        '<div>' +
+          '<label class="entrega-field-label" for="ent-' + i + '-prazo">Prazo estimado</label>' +
+          '<textarea class="small-textarea" id="ent-' + i + '-prazo" rows="1">' + esc(ent.prazo) + '</textarea>' +
+        '</div>' +
+        '<div>' +
+          '<label class="entrega-field-label" for="ent-' + i + '-investimento">Investimento</label>' +
+          '<textarea class="small-textarea" id="ent-' + i + '-investimento" rows="1">' + esc(ent.investimento) + '</textarea>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  });
 
-  return `
-    <span class="step-icon">${step.icon}</span>
-    <h2 class="step-question">${esc(step.question)}</h2>
-    <p class="step-hint">${esc(step.dica)}</p>
-    <div class="entregas-example">
-      <div class="examples-label">💡 Exemplo de entregas (Projeto CIG)</div>
-      ${exHTML}
-    </div>
-    ${entregasHTML}
-    <button class="btn-add-entrega" onclick="addEntrega()">＋ Adicionar mais uma entrega</button>
-  `;
+  return '<span class="step-icon">' + step.icon + '</span>' +
+    '<h2 class="step-question">' + esc(step.question) + '</h2>' +
+    '<p class="step-hint">' + esc(step.dica) + '</p>' +
+    '<div class="entregas-example">' +
+      '<div class="examples-label">\uD83D\uDCA1 Exemplo de entregas (Projeto CIG)</div>' +
+      exHTML +
+    '</div>' +
+    entregasHTML +
+    '<button class="btn-add-entrega" onclick="addEntrega()">+ Adicionar mais uma entrega</button>';
+}
+
+function renderSuccessScreen() {
+  return '<div class="success-screen">' +
+    '<div class="success-icon">\uD83C\uDF89</div>' +
+    '<h2>Canvas enviado com sucesso!</h2>' +
+    '<p>O Canvas de Projeto da <strong>' + esc(data.ra || 'sua RA') + '</strong> foi recebido pela SEGOV/SEGEST.</p>' +
+    '<p class="sub">Projeto: ' + esc(data.projeto || '(sem nome)') + '</p>' +
+    '<div class="success-badge">\u2713 Enviado em ' + new Date().toLocaleDateString('pt-BR') + ' as ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</div>' +
+    '<div class="success-actions" style="margin-top:24px">' +
+      '<button class="btn-nav btn-nav-next" onclick="exportJSON()">\uD83D\uDCBE Salvar copia local</button>' +
+      '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir / PDF</button>' +
+      '<button class="btn-nav btn-nav-prev" onclick="showSuccess=false;render()">Voltar para revisao</button>' +
+    '</div>' +
+  '</div>';
 }
 
 function renderReview() {
-  const sections = STEPS.filter(s => s.field || s.type === 'partes' || s.type === 'entregas');
+  if (showSuccess) return renderSuccessScreen();
+
+  var sections = STEPS.filter(function(s) { return s.field || s.type === 'partes' || s.type === 'entregas'; });
 
   function getVal(s) {
     if (s.field) return data[s.field];
     if (s.type === 'partes') return [data.patrocinio, data.equipe, data.publico].filter(Boolean).join('\n');
-    if (s.type === 'entregas') return data.entregas.map((e, i) => (i+1) + '. ' + e.entrega).filter(e => e.length > 3).join('\n');
+    if (s.type === 'entregas') return data.entregas.map(function(e, i) { return (i+1) + '. ' + e.entrega; }).filter(function(e) { return e.length > 3; }).join('\n');
     return '';
   }
 
-  const items = sections.map(s => {
-    const val = getVal(s);
-    const filled = val && val.trim().length > 0;
-    const idx = STEPS.indexOf(s);
-    return `
-      <button class="review-item ${filled ? '' : 'pending'}" onclick="goTo(${idx})">
-        <span class="review-item-icon">${s.icon}</span>
-        <div class="review-item-body">
-          <div class="review-item-label ${filled ? 'filled' : 'empty'}">${esc(s.label)} ${filled ? '' : '⚠️ Pendente'}</div>
-          <div class="review-item-preview">${esc(val || 'Clique para preencher...')}</div>
-        </div>
-        <span class="review-edit">✏️</span>
-      </button>
-    `;
-  }).join('');
+  var items = '';
+  sections.forEach(function(s) {
+    var val = getVal(s);
+    var filled = val && val.trim().length > 0;
+    var idx = STEPS.indexOf(s);
+    items += '<button class="review-item ' + (filled ? '' : 'pending') + '" data-goto="' + idx + '">' +
+      '<span class="review-item-icon">' + s.icon + '</span>' +
+      '<div class="review-item-body">' +
+        '<div class="review-item-label ' + (filled ? 'filled' : 'empty') + '">' + esc(s.label) + (filled ? '' : ' \u26A0\uFE0F Pendente') + '</div>' +
+        '<div class="review-item-preview">' + esc(val || 'Clique para preencher...') + '</div>' +
+      '</div>' +
+      '<span class="review-edit">\u270F\uFE0F</span>' +
+    '</button>';
+  });
 
-  return `
-    <div class="review-header">
-      <div class="icon">🎉</div>
-      <h2>Canvas completo!</h2>
-      <p>Revise as informações abaixo. Clique em qualquer seção para editar.</p>
-      ${data.ra ? `<div class="review-ra">📍 ${esc(data.ra)}</div>` : ''}
-    </div>
-    ${items}
-    <div class="review-actions">
-      <button class="btn-nav btn-nav-next" onclick="exportJSON()">💾 Salvar arquivo</button>
-      <button class="btn-nav btn-nav-print" onclick="window.print()">🖨️ Imprimir / PDF para o SEI</button>
-    </div>
-  `;
+  // Submit section
+  var sentInfo = getSentInfo();
+  var submitHTML = '';
+
+  if (sentInfo) {
+    var sentDate = new Date(sentInfo.timestamp);
+    submitHTML = '<div class="already-sent">' +
+      '<p>\u2713 Canvas ja enviado em <strong>' + sentDate.toLocaleDateString('pt-BR') + '</strong> as ' + sentDate.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</p>' +
+      '<button class="btn-submit" onclick="submitToSEGOV()"' + (submitting ? ' disabled' : '') + '>' +
+        (submitting ? '<span class="spinner"></span>Enviando...' : '\uD83D\uDD04 Reenviar versao atualizada') +
+      '</button>' +
+    '</div>';
+  } else {
+    submitHTML = '<div class="submit-section">' +
+      '<p>Revisou tudo? Quando estiver pronto, envie o canvas diretamente para a equipe SEGOV/SEGEST.</p>' +
+      '<button class="btn-submit" onclick="submitToSEGOV()"' + (submitting ? ' disabled' : '') + '>' +
+        (submitting ? '<span class="spinner"></span>Enviando para SEGOV...' : '\uD83D\uDCE8 Enviar Canvas para SEGOV') +
+      '</button>' +
+      '<div id="submit-error" class="error-msg" style="display:none"></div>' +
+    '</div>';
+  }
+
+  return '<div class="review-header">' +
+      '<div class="icon">\uD83D\uDCCB</div>' +
+      '<h2>Revisao do Canvas</h2>' +
+      '<p>Revise as informacoes abaixo. Clique em qualquer secao para editar.</p>' +
+      (data.ra ? '<div class="review-ra">\uD83D\uDCCD ' + esc(data.ra) + '</div>' : '') +
+    '</div>' +
+    items +
+    submitHTML +
+    '<div class="review-actions">' +
+      '<button class="btn-nav btn-nav-next" onclick="exportJSON()">\uD83D\uDCBE Salvar arquivo</button>' +
+      '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir / PDF</button>' +
+      '<button class="btn-nav btn-nav-prev" onclick="clearAllData()">Limpar tudo</button>' +
+    '</div>';
 }
 
-/* ═══════════════════════════════════════════════════
+/* ===================================================
    MAIN RENDER
-   ═══════════════════════════════════════════════════ */
+   =================================================== */
 function render() {
-  const step = STEPS[currentStep];
-  const pct = getProgress();
-  const isFirst = currentStep === 0;
-  const isLast = currentStep === STEPS.length - 1;
+  var step = STEPS[currentStep];
+  var pct = getProgress();
+  var isFirst = currentStep === 0;
+  var isLast = currentStep === STEPS.length - 1;
 
-  let contentHTML = '';
+  var contentHTML = '';
   if (step.type === 'welcome') contentHTML = renderWelcome();
   else if (step.type === 'review') contentHTML = renderReview();
   else if (step.type === 'partes') contentHTML = renderPartes(step);
   else if (step.type === 'entregas') contentHTML = renderEntregas(step);
   else if (step.field) contentHTML = renderField(step);
 
-  const dots = STEPS.map((s, i) => {
-    let cls = 'progress-dot ';
+  var dots = '';
+  STEPS.forEach(function(s, i) {
+    var cls = 'progress-dot ';
     if (i === currentStep) cls += 'progress-dot-active';
     else if (i < currentStep) cls += 'progress-dot-done';
     else cls += 'progress-dot-todo';
-    return `<button class="${cls}" onclick="goTo(${i})" title="${s.label || (s.type === 'welcome' ? 'Início' : 'Revisão')}"></button>`;
-  }).join('');
+    var title = s.label || (s.type === 'welcome' ? 'Inicio' : 'Revisao');
+    dots += '<button class="' + cls + '" data-goto="' + i + '" title="' + title + '" aria-label="Ir para: ' + title + '"></button>';
+  });
 
-  let navHTML = '';
+  // Motivation message (only on form steps, not welcome/review)
+  var motivHTML = '';
+  if (!isFirst && !isLast) {
+    motivHTML = '<div class="motivation no-print">' + getMotivation(pct) + '</div>';
+  }
+
+  var navHTML = '';
   if (!isFirst || !step.type) {
-    navHTML = `<div class="nav-row no-print">`;
-    navHTML += isFirst ? '<div></div>' : `<button class="btn-nav btn-nav-prev" onclick="prev()">← Anterior</button>`;
+    navHTML = '<div class="nav-row no-print">';
+    navHTML += isFirst ? '<div></div>' : '<button class="btn-nav btn-nav-prev" onclick="prev()">\u2190 Anterior</button>';
     if (isLast) {
-      navHTML += `<button class="btn-nav btn-nav-print" onclick="window.print()">🖨️ Imprimir / Gerar PDF</button>`;
+      navHTML += '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir / Gerar PDF</button>';
     } else {
-      navHTML += `<button class="btn-nav btn-nav-next" onclick="next()">Próximo →</button>`;
+      navHTML += '<button class="btn-nav btn-nav-next" onclick="next()">Proximo \u2192</button>';
     }
     navHTML += '</div>';
   }
 
-  document.getElementById('app').innerHTML = `
-    <div class="header no-print">
-      <div class="header-brand">
-        <span>SEGOV/SEGEST • Governança nas Administrações Regionais</span>
-        <h1>Canvas de Projeto</h1>
-      </div>
-      <div class="header-actions">
-        <button class="btn-small" onclick="importJSON()">📂 Importar</button>
-        <button class="btn-small" onclick="exportJSON()">💾 Salvar</button>
-      </div>
-    </div>
-    <div class="progress-bar no-print">
-      <div class="progress-info">
-        <span style="color:var(--text-secondary)">Passo ${Math.min(currentStep + 1, STEPS.length)} de ${STEPS.length}</span>
-        <span style="font-weight:700;color:${pct === 100 ? 'var(--accent-green)' : 'var(--accent-blue)'}">${pct}% preenchido</span>
-      </div>
-      <div class="progress-track"><div class="progress-fill" style="width:${(currentStep / (STEPS.length - 1)) * 100}%"></div></div>
-      <div class="progress-dots">${dots}</div>
-    </div>
-    <div class="step-content">${contentHTML}</div>
-    ${navHTML}
-    <div class="footer">
-      Canvas de Projeto • SEGOV/SEGEST — Assessoria de Planejamento Estratégico<br>
-      Adaptado da Rede Conexão Inovação Pública (CC BY-NC-SA 4.0)
-    </div>
-  `;
+  document.getElementById('app').innerHTML =
+    '<div class="header no-print">' +
+      '<div class="header-brand">' +
+        '<span>SEGOV/SEGEST \u2022 Governanca nas Administracoes Regionais</span>' +
+        '<h1>Canvas de Projeto</h1>' +
+      '</div>' +
+      '<div class="header-actions">' +
+        '<button class="btn-small" onclick="importJSON()">\uD83D\uDCC2 Importar</button>' +
+        '<button class="btn-small" onclick="exportJSON()">\uD83D\uDCBE Salvar</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="progress-bar no-print">' +
+      '<div class="progress-info">' +
+        '<span style="color:var(--text-secondary)">Passo ' + Math.min(currentStep + 1, STEPS.length) + ' de ' + STEPS.length + '</span>' +
+        '<span style="font-weight:700;color:' + (pct === 100 ? 'var(--accent-green-dark)' : 'var(--accent-blue-dark)') + '">' + pct + '% preenchido</span>' +
+      '</div>' +
+      '<div class="progress-track"><div class="progress-fill" style="width:' + ((currentStep / (STEPS.length - 1)) * 100) + '%"></div></div>' +
+      '<div class="progress-dots">' + dots + '</div>' +
+    '</div>' +
+    motivHTML +
+    '<div class="step-card">' +
+      '<div class="step-content">' + contentHTML + '</div>' +
+    '</div>' +
+    navHTML +
+    '<div class="footer">' +
+      'Canvas de Projeto \u2022 SEGOV/SEGEST \u2014 Assessoria de Planejamento Estrategico<br>' +
+      'Adaptado da Rede Conexao Inovacao Publica (CC BY-NC-SA 4.0)' +
+    '</div>';
+
+  // Attach event listeners
+  attachInputListeners();
+  attachClickListeners();
 }
 
+function attachClickListeners() {
+  // Example cards
+  document.querySelectorAll('.example-card[data-field]').forEach(function(card) {
+    card.addEventListener('click', handleExampleClick);
+  });
+
+  // Navigation dots and review items
+  document.querySelectorAll('[data-goto]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      goTo(parseInt(el.dataset.goto, 10));
+    });
+  });
+
+  // Entrega remove buttons
+  document.querySelectorAll('.entrega-remove[data-idx]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      removeEntrega(parseInt(btn.dataset.idx, 10));
+    });
+  });
+
+  // Enter key on single-line input advances to next step
+  document.querySelectorAll('#app input[type="text"]').forEach(function(el) {
+    el.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { e.preventDefault(); next(); }
+    });
+  });
+}
+
+// Screen-reader only class
+var styleEl = document.createElement('style');
+styleEl.textContent = '.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}';
+document.head.appendChild(styleEl);
+
 // Init
+loadFromStorage();
 render();
 </script>
 </body>
