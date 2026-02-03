@@ -1003,10 +1003,9 @@ function toggleCanvasInfo() {
   }
 }
 
-/* Melhoria #7: Toggle tooltip de ajuda */
 function toggleAjuda(btn) {
-  var content = btn.nextElementSibling;
-  if (!content) return;
+  var content = btn.parentElement.nextElementSibling;
+  if (!content || !content.classList.contains('ajuda-content')) return;
   if (content.style.display === 'none') {
     content.style.display = 'block';
     btn.textContent = 'Fechar';
@@ -1142,13 +1141,10 @@ function renderField(step) {
   var reqLabel = ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span>';
   var optLabel = '';
 
-  /* Melhoria #7: Tooltip de ajuda */
-  var ajudaHTML = step.ajuda
-    ? '<button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' +
-      '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>'
-    : '';
+  var ajudaBtnHTML = step.ajuda ? ' <button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' : '';
+  var ajudaBlockHTML = step.ajuda ? '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>' : '';
 
-  /* Melhoria #1: Select para RA */
+  /* Select para RA */
   var inputHTML = '';
   if (step.inputType === 'select') {
     inputHTML = '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
@@ -1169,17 +1165,15 @@ function renderField(step) {
   return contextoHTML +
     '<span class="step-icon">' + step.icon + '</span>' +
     '<h2 class="step-question">' + esc(step.question) + reqLabel + '</h2>' +
-    '<p class="step-hint">' + esc(step.dica) + ajudaHTML + '</p>' +
+    '<p class="step-hint">' + esc(step.dica) + ajudaBtnHTML + '</p>' +
+    ajudaBlockHTML +
     exHTML + inputHTML;
 }
 
-/* Melhoria #5: Contexto e #7: Tooltip em Partes */
 function renderPartes(step) {
   var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
-  var ajudaHTML = step.ajuda
-    ? '<button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' +
-      '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>'
-    : '';
+  var ajudaBtnHTML = step.ajuda ? ' <button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' : '';
+  var ajudaBlockHTML = step.ajuda ? '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>' : '';
 
   var subs = [
     { key: 'patrocinio', label: 'Patrocínio e Gestão', ph: 'Quem patrocina e gerencia?', exs: step.exemplos.patrocinio },
@@ -1190,7 +1184,8 @@ function renderPartes(step) {
   var html = contextoHTML +
     '<span class="step-icon">' + step.icon + '</span>' +
     '<h2 class="step-question">' + esc(step.question) + ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span></h2>' +
-    '<p class="step-hint">' + esc(step.dica) + ajudaHTML + '</p>';
+    '<p class="step-hint">' + esc(step.dica) + ajudaBtnHTML + '</p>' +
+    ajudaBlockHTML;
 
   subs.forEach(function(s) {
     html += '<div class="partes-block">' +
@@ -1203,13 +1198,10 @@ function renderPartes(step) {
   return html;
 }
 
-/* Melhoria #5: Contexto e #7: Tooltip em Entregas */
 function renderEntregas(step) {
   var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
-  var ajudaHTML = step.ajuda
-    ? '<button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' +
-      '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>'
-    : '';
+  var ajudaBtnHTML = step.ajuda ? ' <button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' : '';
+  var ajudaBlockHTML = step.ajuda ? '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>' : '';
 
   var exHTML = '';
   step.exemplos.forEach(function(ex, i) {
@@ -1252,7 +1244,8 @@ function renderEntregas(step) {
   return contextoHTML +
     '<span class="step-icon">' + step.icon + '</span>' +
     '<h2 class="step-question">' + esc(step.question) + ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span></h2>' +
-    '<p class="step-hint">' + esc(step.dica) + ajudaHTML + '</p>' +
+    '<p class="step-hint">' + esc(step.dica) + ajudaBtnHTML + '</p>' +
+    ajudaBlockHTML +
     '<div class="entregas-example">' +
       '<div class="examples-label">\uD83D\uDCA1 Exemplo de entregas (Projeto CIG)</div>' +
       exHTML +
