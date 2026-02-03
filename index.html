@@ -385,7 +385,7 @@
 
 <script>
 /* ===================================================
-   CONFIGURACAO - COLE AQUI A URL DO SEU GOOGLE APPS SCRIPT
+   CONFIGURAÇÃO - COLE AQUI A URL DO SEU GOOGLE APPS SCRIPT
    =================================================== */
 var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvLX37nFf9wZrSga5WzuXcG56ZLSgc1p7akVW4_52kZAUD-TjF69CsCEPbd_t-X05QEw/exec';
 
@@ -395,142 +395,142 @@ var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvLX37nFf9wZrS
 var STEPS = [
   { id: "welcome", type: "welcome" },
   {
-    id: "ra", field: "ra", label: "Regiao Administrativa",
-    question: "Qual e a sua Regiao Administrativa?",
+    id: "ra", field: "ra", label: "Região Administrativa",
+    question: "Qual é a sua Região Administrativa?",
     dica: "Identifique sua RA para personalizar o canvas.",
-    placeholder: "Ex: RA-IX Ceilandia",
+    placeholder: "Ex: RA-IX Ceilândia",
     icon: "\uD83D\uDCCD", color: "#3b82f6", inputType: "input", exemplos: []
   },
   {
     id: "projeto", field: "projeto", label: "Nome do Projeto",
-    question: "Qual e o nome do seu projeto?",
-    dica: "Escolha um nome claro e direto. Inclua a sigla da RA para facilitar a identificacao.",
+    question: "Qual é o nome do seu projeto?",
+    dica: "Escolha um nome claro e direto. Inclua a sigla da RA para facilitar a identificação.",
     placeholder: "Digite o nome do projeto...",
     icon: "\uD83C\uDFAF", color: "#3b82f6",
     exemplos: [
-      { titulo: "Governanca", texto: "Implantacao do Comite Interno de Governanca (CIG) da RA-IX" },
-      { titulo: "Atendimento", texto: "Modernizacao do Atendimento ao Cidadao na RA-III Taguatinga" },
-      { titulo: "Gestao de Riscos", texto: "Programa de Gestao de Riscos Operacionais da RA-I Brasilia" },
-      { titulo: "Transparencia", texto: "Portal de Transparencia e Prestacao de Contas da RA-V Sobradinho" }
+      { titulo: "Governança", texto: "Implantação do Comitê Interno de Governança (CIG) da RA-IX" },
+      { titulo: "Atendimento", texto: "Modernização do Atendimento ao Cidadão na RA-III Taguatinga" },
+      { titulo: "Gestão de Riscos", texto: "Programa de Gestão de Riscos Operacionais da RA-I Brasília" },
+      { titulo: "Transparência", texto: "Portal de Transparência e Prestação de Contas da RA-V Sobradinho" }
     ]
   },
   {
     id: "objetivo", field: "objetivo", label: "Objetivo do Projeto",
-    question: "O que este projeto pretende alcancar?",
+    question: "O que este projeto pretende alcançar?",
     dica: "Descreva o resultado final desejado. Use verbos no infinitivo: estruturar, implantar, reduzir, melhorar...",
     placeholder: "Descreva o objetivo principal...",
     icon: "\uD83C\uDFC6", color: "#dc2626",
     exemplos: [
-      { titulo: "Governanca", texto: "Estruturar o CIG como instancia deliberativa para qualificar decisoes e dar seguranca juridica a gestao da RA" },
-      { titulo: "Atendimento", texto: "Reduzir em 50% o tempo de espera do cidadao e implantar sistema de agendamento online" },
-      { titulo: "Contratos", texto: "Garantir 100% de conformidade na fiscalizacao de contratos vigentes da RA" }
+      { titulo: "Governança", texto: "Estruturar o CIG como instância deliberativa para qualificar decisões e dar segurança jurídica à gestão da RA" },
+      { titulo: "Atendimento", texto: "Reduzir em 50% o tempo de espera do cidadão e implantar sistema de agendamento online" },
+      { titulo: "Contratos", texto: "Garantir 100% de conformidade na fiscalização de contratos vigentes da RA" }
     ]
   },
   {
-    id: "descricao", field: "descricao", label: "Descricao do Projeto",
+    id: "descricao", field: "descricao", label: "Descrição do Projeto",
     question: "Descreva brevemente o projeto.",
-    dica: "Contextualize: o que sera feito, qual a abrangencia, e a quais diretrizes esta vinculado.",
+    dica: "Contextualize: o que será feito, qual a abrangência, e a quais diretrizes está vinculado.",
     placeholder: "Descreva o escopo e contexto...",
     icon: "\uD83D\uDCCB", color: "#2563eb",
     exemplos: [
-      { titulo: "Governanca", texto: "Formalizacao do CIG por portaria, elaboracao de regimento interno, capacitacao dos membros e inicio das reunioes ordinarias mensais, alinhado as diretrizes SEGOV/CGDF" },
-      { titulo: "Capacitacao", texto: "Programa de capacitacao continuada para 45 servidores da RA em gestao publica, integridade e atendimento, com 6 modulos ao longo de 12 meses" }
+      { titulo: "Governança", texto: "Formalização do CIG por portaria, elaboração de regimento interno, capacitação dos membros e início das reuniões ordinárias mensais, alinhado às diretrizes SEGOV/CGDF" },
+      { titulo: "Capacitação", texto: "Programa de capacitação continuada para 45 servidores da RA em gestão pública, integridade e atendimento, com 6 módulos ao longo de 12 meses" }
     ]
   },
   {
     id: "produto", field: "produto", label: "Produto Principal",
-    question: "Qual e o resultado concreto que sera entregue?",
-    dica: "Pense em algo tangivel \u2014 que se possa apontar e dizer: \"isto foi entregue\".",
+    question: "Qual é o resultado concreto que será entregue?",
+    dica: "Pense em algo tangível \u2014 que se possa apontar e dizer: \"isto foi entregue\".",
     placeholder: "O principal produto do projeto...",
     icon: "\uD83D\uDCE6", color: "#ea580c",
     exemplos: [
-      { titulo: "Governanca", texto: "CIG formalmente instituido, com regimento aprovado e reunioes ordinarias em funcionamento" },
-      { titulo: "Atendimento", texto: "Central de atendimento reorganizada com sistema de senhas, agendamento e pesquisa de satisfacao" },
-      { titulo: "Riscos", texto: "Matriz de riscos da RA elaborada com planos de tratamento para os 10 riscos prioritarios" }
+      { titulo: "Governança", texto: "CIG formalmente instituído, com regimento aprovado e reuniões ordinárias em funcionamento" },
+      { titulo: "Atendimento", texto: "Central de atendimento reorganizada com sistema de senhas, agendamento e pesquisa de satisfação" },
+      { titulo: "Riscos", texto: "Matriz de riscos da RA elaborada com planos de tratamento para os 10 riscos prioritários" }
     ]
   },
   {
-    id: "caracteristicas", field: "caracteristicas", label: "Caracteristicas",
-    question: "Quais sao as caracteristicas essenciais desse produto?",
+    id: "caracteristicas", field: "caracteristicas", label: "Características",
+    question: "Quais são as características essenciais desse produto?",
     dica: "Liste as qualidades que tornam o produto completo e funcional.",
-    placeholder: "Caracteristicas do produto principal...",
+    placeholder: "Características do produto principal...",
     icon: "\u2B50", color: "#7c3aed",
     exemplos: [
-      { titulo: "CIG", texto: "Composicao multissetorial \u2022 Reunioes mensais com ata no SEI \u2022 Pauta estruturada \u2022 Deliberacoes registradas \u2022 Alinhamento SEGOV/CGDF" },
-      { titulo: "Atendimento", texto: "Acessivel a PCD \u2022 Bilingue (portugues/Libras) \u2022 Tempo maximo de espera: 15min \u2022 Pesquisa de satisfacao digital" }
+      { titulo: "CIG", texto: "Composição multissetorial \u2022 Reuniões mensais com ata no SEI \u2022 Pauta estruturada \u2022 Deliberações registradas \u2022 Alinhamento SEGOV/CGDF" },
+      { titulo: "Atendimento", texto: "Acessível a PCD \u2022 Bilíngue (português/Libras) \u2022 Tempo máximo de espera: 15min \u2022 Pesquisa de satisfação digital" }
     ]
   },
   {
     id: "justificativa", field: "justificativa", label: "Justificativa",
-    question: "Por que este projeto e necessario?",
-    dica: "Responda: qual problema resolve? Que risco evita? Por que agora? Traga dados se possivel.",
+    question: "Por que este projeto é necessário?",
+    dica: "Responda: qual problema resolve? Que risco evita? Por que agora? Traga dados se possível.",
     placeholder: "O que motiva este projeto...",
     icon: "\u2705", color: "#059669",
     exemplos: [
-      { titulo: "Governanca", texto: "A ausencia de instancia formal de governanca expoe a gestao a riscos em auditorias do TCDF. As oficinas SEGOV/CGDF criaram a base tecnica para implementacao imediata." },
-      { titulo: "Atendimento", texto: "Pesquisa da Ouvidoria indica que 67% das reclamacoes referem-se a tempo de espera. A RA atende 12 mil cidadaos/mes sem sistema de organizacao." }
+      { titulo: "Governança", texto: "A ausência de instância formal de governança expõe a gestão a riscos em auditorias do TCDF. As oficinas SEGOV/CGDF criaram a base técnica para implementação imediata." },
+      { titulo: "Atendimento", texto: "Pesquisa da Ouvidoria indica que 67% das reclamações referem-se a tempo de espera. A RA atende 12 mil cidadãos/mês sem sistema de organização." }
     ]
   },
   {
     id: "indicador", field: "indicador", label: "Indicador de Resultado",
-    question: "Como voce vai medir o sucesso?",
-    dica: "Defina metricas concretas: percentuais, quantidades, prazos. Se o projeto der certo, que numero muda?",
+    question: "Como você vai medir o sucesso?",
+    dica: "Defina métricas concretas: percentuais, quantidades, prazos. Se o projeto der certo, que número muda?",
     placeholder: "Indicadores de sucesso...",
     icon: "\uD83D\uDCCA", color: "#059669",
     exemplos: [
-      { titulo: "Governanca", texto: "% de reunioes realizadas vs. programadas (meta: 100%)\nN\u00BA de riscos identificados e tratados\nIndice de conformidade no checklist CGDF" },
-      { titulo: "Atendimento", texto: "Tempo medio de espera (meta: < 15min)\nIndice de satisfacao do cidadao (meta: > 80%)\nN\u00BA de atendimentos/dia" }
+      { titulo: "Governança", texto: "% de reuniões realizadas vs. programadas (meta: 100%)\nN\u00BA de riscos identificados e tratados\nÍndice de conformidade no checklist CGDF" },
+      { titulo: "Atendimento", texto: "Tempo médio de espera (meta: < 15min)\nÍndice de satisfação do cidadão (meta: > 80%)\nN\u00BA de atendimentos/dia" }
     ]
   },
   {
     id: "partes", type: "partes", label: "Partes Interessadas",
-    question: "Quem esta envolvido no projeto?",
+    question: "Quem está envolvido no projeto?",
     icon: "\uD83D\uDC65", color: "#334155",
     dica: "Identifique quem patrocina, quem executa e quem se beneficia.",
     exemplos: {
       patrocinio: ["Administrador(a) Regional (patrocinador)", "Chefe de Gabinete (gestor do projeto)"],
-      equipe: ["Membros do CIG capacitados nas oficinas", "Representantes das coordenacoes", "Assessoria juridica da RA"],
-      publico: ["Diretos: servidores e gestores da RA", "Indiretos: populacao da regiao administrativa", "Orgaos de controle: TCDF, CGDF"]
+      equipe: ["Membros do CIG capacitados nas oficinas", "Representantes das coordenações", "Assessoria jurídica da RA"],
+      publico: ["Diretos: servidores e gestores da RA", "Indiretos: população da região administrativa", "Órgãos de controle: TCDF, CGDF"]
     }
   },
   {
-    id: "entregas", type: "entregas", label: "Entregas Intermediarias",
-    question: "Quebre o projeto em etapas \u2014 o que sera entregue em cada uma?",
+    id: "entregas", type: "entregas", label: "Entregas Intermediárias",
+    question: "Quebre o projeto em etapas \u2014 o que será entregue em cada uma?",
     icon: "\uD83D\uDCC5", color: "#059669",
-    dica: "Cada entrega deve ter: o que sera entregue, as atividades necessarias, prazo e custo estimado. Comece com 2 a 4 entregas.",
+    dica: "Cada entrega deve ter: o que será entregue, as atividades necessárias, prazo e custo estimado. Comece com 2 a 4 entregas.",
     exemplos: [
-      { entrega: "Ato normativo do CIG publicado", atividades: "Minutar portaria \u2192 Assessoria juridica \u2192 Assinatura \u2192 DODF", prazo: "30 dias", investimento: "Sem custo direto" },
-      { entrega: "1\u00AA reuniao ordinaria realizada", atividades: "Regimento aprovado \u2192 Pauta definida \u2192 Convocacao \u2192 Ata no SEI", prazo: "60 dias", investimento: "Sem custo direto" }
+      { entrega: "Ato normativo do CIG publicado", atividades: "Minutar portaria \u2192 Assessoria jurídica \u2192 Assinatura \u2192 DODF", prazo: "30 dias", investimento: "Sem custo direto" },
+      { entrega: "1\u00AA reunião ordinária realizada", atividades: "Regimento aprovado \u2192 Pauta definida \u2192 Convocação \u2192 Ata no SEI", prazo: "60 dias", investimento: "Sem custo direto" }
     ]
   },
   {
     id: "premissas", field: "premissas", label: "Premissas",
     question: "O que precisa dar certo para o projeto funcionar?",
-    dica: "Sao condicoes que voce assume como verdadeiras. Se alguma falhar, o projeto fica comprometido.",
-    placeholder: "Fatores criticos de sucesso...",
+    dica: "São condições que você assume como verdadeiras. Se alguma falhar, o projeto fica comprometido.",
+    placeholder: "Fatores críticos de sucesso...",
     icon: "\uD83C\uDFC5", color: "#b45309",
     exemplos: [
-      { titulo: "Tipicas", texto: "Apoio do(a) Administrador(a) Regional\nServidores capacitados com disponibilidade de tempo\nAcesso ao SEI funcionando\nSuporte tecnico da SEGOV conforme comprometido" }
+      { titulo: "Típicas", texto: "Apoio do(a) Administrador(a) Regional\nServidores capacitados com disponibilidade de tempo\nAcesso ao SEI funcionando\nSuporte técnico da SEGOV conforme comprometido" }
     ]
   },
   {
     id: "barreiras", field: "barreiras", label: "Barreiras",
-    question: "Quais dificuldades ja existem hoje?",
-    dica: "Diferente de riscos, barreiras sao obstaculos conhecidos e atuais \u2014 coisas que ja atrapalham.",
+    question: "Quais dificuldades já existem hoje?",
+    dica: "Diferente de riscos, barreiras são obstáculos conhecidos e atuais \u2014 coisas que já atrapalham.",
     placeholder: "Dificuldades existentes...",
     icon: "\uD83D\uDEA7", color: "#dc2626",
     exemplos: [
-      { titulo: "Comuns nas RAs", texto: "Acumulo de funcoes dos servidores\nResistencia cultural a mudancas\nRotatividade em cargos comissionados\nInfraestrutura limitada (salas, equipamentos)" }
+      { titulo: "Comuns nas RAs", texto: "Acúmulo de funções dos servidores\nResistência cultural a mudanças\nRotatividade em cargos comissionados\nInfraestrutura limitada (salas, equipamentos)" }
     ]
   },
   {
     id: "riscos", field: "riscos", label: "Riscos",
     question: "O que pode dar errado no futuro?",
-    dica: "Eventos incertos mas possiveis. Pense: \"e se acontecer X, como impacta o projeto?\"",
+    dica: "Eventos incertos mas possíveis. Pense: \"e se acontecer X, como impacta o projeto?\"",
     placeholder: "Eventos que podem impactar...",
     icon: "\u26A0\uFE0F", color: "#d97706",
     exemplos: [
-      { titulo: "Frequentes", texto: "Troca de Administrador(a) com descontinuidade\nPerda de servidores capacitados por remocao\nSobrecarga de demandas urgentes\nCorte orcamentario inesperado" }
+      { titulo: "Frequentes", texto: "Troca de Administrador(a) com descontinuidade\nPerda de servidores capacitados por remoção\nSobrecarga de demandas urgentes\nCorte orçamentário inesperado" }
     ]
   },
   { id: "review", type: "review" }
@@ -540,11 +540,11 @@ var STEPS = [
    MOTIVATION MESSAGES
    =================================================== */
 var MOTIVATIONS = [
-  { min: 0, max: 10, msg: "Vamos la! O primeiro passo e o mais importante." },
-  { min: 11, max: 25, msg: "Otimo comeco! Continue preenchendo, esta ficando bom." },
-  { min: 26, max: 50, msg: "Quase na metade! Seu projeto ja esta tomando forma." },
-  { min: 51, max: 75, msg: "Mais da metade! O canvas esta ficando completo." },
-  { min: 76, max: 95, msg: "Falta pouco! Seu projeto esta quase pronto para enviar." },
+  { min: 0, max: 10, msg: "Vamos lá! O primeiro passo é o mais importante." },
+  { min: 11, max: 25, msg: "Ótimo começo! Continue preenchendo, está ficando bom." },
+  { min: 26, max: 50, msg: "Quase na metade! Seu projeto já está tomando forma." },
+  { min: 51, max: 75, msg: "Mais da metade! O canvas está ficando completo." },
+  { min: 76, max: 95, msg: "Falta pouco! Seu projeto está quase pronto para enviar." },
   { min: 96, max: 100, msg: "Excelente! Canvas 100% preenchido. Hora de enviar!" }
 ];
 
@@ -657,7 +657,7 @@ function getProgress() {
 
 function getRequiredEmpty() {
   var required = [
-    { field: 'ra', label: 'Regiao Administrativa' },
+    { field: 'ra', label: 'Região Administrativa' },
     { field: 'projeto', label: 'Nome do Projeto' },
     { field: 'objetivo', label: 'Objetivo' }
   ];
@@ -735,7 +735,7 @@ function importJSON() {
         saveToStorage();
         if (currentStep === 0) currentStep = 1;
         render();
-      } catch (err) { alert('Arquivo invalido.'); }
+      } catch (err) { alert('Arquivo inválido.'); }
     };
     reader.readAsText(file);
   };
@@ -765,7 +765,7 @@ function removeEntrega(idx) {
   if (data.entregas.length <= 1) return;
   var entry = data.entregas[idx];
   var hasContent = entry.entrega.trim() || entry.atividades.trim() || entry.prazo.trim() || entry.investimento.trim();
-  if (hasContent && !confirm('Tem certeza que deseja remover a Entrega ' + (idx + 1) + '? Os dados preenchidos serao perdidos.')) {
+  if (hasContent && !confirm('Tem certeza que deseja remover a Entrega ' + (idx + 1) + '? Os dados preenchidos serão perdidos.')) {
     return;
   }
   saveCurrentInputs();
@@ -775,7 +775,7 @@ function removeEntrega(idx) {
 }
 
 function clearAllData() {
-  if (!confirm('Tem certeza que deseja limpar todos os dados? Esta acao nao pode ser desfeita.')) return;
+  if (!confirm('Tem certeza que deseja limpar todos os dados? Esta ação não pode ser desfeita.')) return;
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem(STORAGE_STEP_KEY);
   localStorage.removeItem(STORAGE_SENT_KEY);
@@ -806,12 +806,12 @@ function submitToSEGOV() {
   // Validate minimum fields
   var empty = getRequiredEmpty();
   if (empty.length > 0) {
-    alert('Por favor, preencha os campos obrigatorios antes de enviar:\n\n- ' + empty.join('\n- '));
+    alert('Por favor, preencha os campos obrigatórios antes de enviar:\n\n- ' + empty.join('\n- '));
     return;
   }
 
   if (GOOGLE_SCRIPT_URL === 'COLE_SUA_URL_AQUI') {
-    alert('O envio ainda nao foi configurado.\n\nO administrador precisa configurar a URL do Google Apps Script.\nPor enquanto, use "Salvar arquivo" para exportar o JSON.');
+    alert('O envio ainda não foi configurado.\n\nO administrador precisa configurar a URL do Google Apps Script.\nPor enquanto, use "Salvar arquivo" para exportar o JSON.');
     return;
   }
 
@@ -841,7 +841,7 @@ function submitToSEGOV() {
     var errorEl = document.getElementById('submit-error');
     if (errorEl) {
       errorEl.style.display = 'block';
-      errorEl.textContent = 'Erro ao enviar. Verifique sua conexao e tente novamente. Se persistir, use "Salvar arquivo" e envie por e-mail.';
+      errorEl.textContent = 'Erro ao enviar. Verifique sua conexão e tente novamente. Se persistir, use "Salvar arquivo" e envie por e-mail.';
     }
   });
 }
@@ -871,10 +871,10 @@ function renderWelcome() {
   return '<div class="welcome">' +
     '<div class="welcome-icon">\uD83D\uDDFA\uFE0F</div>' +
     '<h2>Vamos construir o seu projeto!</h2>' +
-    '<p>Este assistente vai guiar voce, passo a passo, no preenchimento do Canvas de Projeto da sua Regiao Administrativa.</p>' +
-    '<p class="sub">Em cada etapa voce vera <strong style="color:var(--accent-yellow)">exemplos inspiradores</strong> de diferentes tipos de projeto para ajudar a pensar no seu. Ao final, envie diretamente para a SEGOV.</p>' +
+    '<p>Este assistente vai guiar você, passo a passo, no preenchimento do Canvas de Projeto da sua Região Administrativa.</p>' +
+    '<p class="sub">Em cada etapa você verá <strong style="color:var(--accent-yellow)">exemplos inspiradores</strong> de diferentes tipos de projeto para ajudar a pensar no seu. Ao final, envie diretamente para a SEGOV.</p>' +
     '<div class="welcome-btns">' +
-      '<button class="btn-primary" onclick="next()">Comecar</button>' +
+      '<button class="btn-primary" onclick="next()">Começar</button>' +
       resumeBtn +
       '<button class="btn-ghost" onclick="importJSON()">\uD83D\uDCC2 Importar arquivo salvo</button>' +
     '</div>' +
@@ -896,7 +896,7 @@ function renderField(step) {
         '<div class="example-text">' + esc(ex.texto) + '</div>' +
       '</div>';
     });
-    exHTML += '<div class="examples-hint">Clique num exemplo para usa-lo como ponto de partida (campo vazio) ou escreva o seu abaixo</div>';
+    exHTML += '<div class="examples-hint">Clique num exemplo para usá-lo como ponto de partida (campo vazio) ou escreva o seu abaixo</div>';
   }
 
   var isRequired = (step.field === 'ra' || step.field === 'projeto' || step.field === 'objetivo');
@@ -916,9 +916,9 @@ function renderField(step) {
 
 function renderPartes(step) {
   var subs = [
-    { key: 'patrocinio', label: 'Patrocinio e Gestao', ph: 'Quem patrocina e gerencia?', exs: step.exemplos.patrocinio },
+    { key: 'patrocinio', label: 'Patrocínio e Gestão', ph: 'Quem patrocina e gerencia?', exs: step.exemplos.patrocinio },
     { key: 'equipe', label: 'Equipe Executora', ph: 'Quem vai executar?', exs: step.exemplos.equipe },
-    { key: 'publico', label: 'Publico-alvo', ph: 'Quem se beneficia?', exs: step.exemplos.publico }
+    { key: 'publico', label: 'Público-alvo', ph: 'Quem se beneficia?', exs: step.exemplos.publico }
   ];
 
   var html = '<span class="step-icon">' + step.icon + '</span>' +
@@ -956,11 +956,11 @@ function renderEntregas(step) {
       '</div>' +
       '<div class="entrega-grid">' +
         '<div>' +
-          '<label class="entrega-field-label" for="ent-' + i + '-entrega">O que sera entregue?</label>' +
+          '<label class="entrega-field-label" for="ent-' + i + '-entrega">O que será entregue?</label>' +
           '<textarea class="small-textarea" id="ent-' + i + '-entrega" rows="2">' + esc(ent.entrega) + '</textarea>' +
         '</div>' +
         '<div>' +
-          '<label class="entrega-field-label" for="ent-' + i + '-atividades">Atividades necessarias</label>' +
+          '<label class="entrega-field-label" for="ent-' + i + '-atividades">Atividades necessárias</label>' +
           '<textarea class="small-textarea" id="ent-' + i + '-atividades" rows="3">' + esc(ent.atividades) + '</textarea>' +
         '</div>' +
         '<div>' +
@@ -992,11 +992,11 @@ function renderSuccessScreen() {
     '<h2>Canvas enviado com sucesso!</h2>' +
     '<p>O Canvas de Projeto da <strong>' + esc(data.ra || 'sua RA') + '</strong> foi recebido pela SEGOV/SEGEST.</p>' +
     '<p class="sub">Projeto: ' + esc(data.projeto || '(sem nome)') + '</p>' +
-    '<div class="success-badge">\u2713 Enviado em ' + new Date().toLocaleDateString('pt-BR') + ' as ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</div>' +
+    '<div class="success-badge">\u2713 Enviado em ' + new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</div>' +
     '<div class="success-actions" style="margin-top:24px">' +
-      '<button class="btn-nav btn-nav-next" onclick="exportJSON()">\uD83D\uDCBE Salvar copia local</button>' +
+      '<button class="btn-nav btn-nav-next" onclick="exportJSON()">\uD83D\uDCBE Salvar cópia local</button>' +
       '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir / PDF</button>' +
-      '<button class="btn-nav btn-nav-prev" onclick="showSuccess=false;render()">Voltar para revisao</button>' +
+      '<button class="btn-nav btn-nav-prev" onclick="showSuccess=false;render()">Voltar para revisão</button>' +
     '</div>' +
   '</div>';
 }
@@ -1035,9 +1035,9 @@ function renderReview() {
   if (sentInfo) {
     var sentDate = new Date(sentInfo.timestamp);
     submitHTML = '<div class="already-sent">' +
-      '<p>\u2713 Canvas ja enviado em <strong>' + sentDate.toLocaleDateString('pt-BR') + '</strong> as ' + sentDate.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</p>' +
+      '<p>\u2713 Canvas já enviado em <strong>' + sentDate.toLocaleDateString('pt-BR') + '</strong> às ' + sentDate.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</p>' +
       '<button class="btn-submit" onclick="submitToSEGOV()"' + (submitting ? ' disabled' : '') + '>' +
-        (submitting ? '<span class="spinner"></span>Enviando...' : '\uD83D\uDD04 Reenviar versao atualizada') +
+        (submitting ? '<span class="spinner"></span>Enviando...' : '\uD83D\uDD04 Reenviar versão atualizada') +
       '</button>' +
     '</div>';
   } else {
@@ -1052,8 +1052,8 @@ function renderReview() {
 
   return '<div class="review-header">' +
       '<div class="icon">\uD83D\uDCCB</div>' +
-      '<h2>Revisao do Canvas</h2>' +
-      '<p>Revise as informacoes abaixo. Clique em qualquer secao para editar.</p>' +
+      '<h2>Revisão do Canvas</h2>' +
+      '<p>Revise as informações abaixo. Clique em qualquer seção para editar.</p>' +
       (data.ra ? '<div class="review-ra">\uD83D\uDCCD ' + esc(data.ra) + '</div>' : '') +
     '</div>' +
     items +
@@ -1087,7 +1087,7 @@ function render() {
     if (i === currentStep) cls += 'progress-dot-active';
     else if (i < currentStep) cls += 'progress-dot-done';
     else cls += 'progress-dot-todo';
-    var title = s.label || (s.type === 'welcome' ? 'Inicio' : 'Revisao');
+    var title = s.label || (s.type === 'welcome' ? 'Início' : 'Revisão');
     dots += '<button class="' + cls + '" data-goto="' + i + '" title="' + title + '" aria-label="Ir para: ' + title + '"></button>';
   });
 
@@ -1104,7 +1104,7 @@ function render() {
     if (isLast) {
       navHTML += '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir / Gerar PDF</button>';
     } else {
-      navHTML += '<button class="btn-nav btn-nav-next" onclick="next()">Proximo \u2192</button>';
+      navHTML += '<button class="btn-nav btn-nav-next" onclick="next()">Próximo \u2192</button>';
     }
     navHTML += '</div>';
   }
@@ -1112,7 +1112,7 @@ function render() {
   document.getElementById('app').innerHTML =
     '<div class="header no-print">' +
       '<div class="header-brand">' +
-        '<span>SEGOV/SEGEST \u2022 Governanca nas Administracoes Regionais</span>' +
+        '<span>SEGOV/SEGEST \u2022 Governança nas Administrações Regionais</span>' +
         '<h1>Canvas de Projeto</h1>' +
       '</div>' +
       '<div class="header-actions">' +
@@ -1134,8 +1134,8 @@ function render() {
     '</div>' +
     navHTML +
     '<div class="footer">' +
-      'Canvas de Projeto \u2022 SEGOV/SEGEST \u2014 Assessoria de Planejamento Estrategico<br>' +
-      'Adaptado da Rede Conexao Inovacao Publica (CC BY-NC-SA 4.0)' +
+      'Canvas de Projeto \u2022 SEGOV/SEGEST \u2014 Assessoria de Planejamento Estratégico<br>' +
+      'Adaptado da Rede Conexão Inovação Pública (CC BY-NC-SA 4.0)' +
     '</div>';
 
   // Attach event listeners
