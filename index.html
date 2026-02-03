@@ -18,6 +18,12 @@
     --text-secondary: #475569;
     --text-muted: #64748b;
     --text-dim: #94a3b8;
+    /* GDF institutional colors (from official logo) */
+    --gdf-blue: #1565C0;
+    --gdf-blue-dark: #0D4F8C;
+    --gdf-blue-light: #E8F1FA;
+    --gdf-blue-bg: #F0F6FC;
+    --gdf-yellow: #FFD600;
     --accent-blue: #3b82f6;
     --accent-blue-dark: #2563eb;
     --accent-blue-light: #eff6ff;
@@ -46,25 +52,35 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  ::selection { background: var(--accent-blue); color: #fff; }
+  ::selection { background: var(--gdf-blue); color: #fff; }
 
   .container { max-width: 780px; margin: 0 auto; }
 
-  /* Header */
+  /* Header - GDF institutional */
   .header {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
     background: var(--bg-card); border-radius: var(--radius);
-    padding: 16px 20px; box-shadow: var(--shadow-sm);
+    padding: 14px 20px; box-shadow: var(--shadow-sm);
     border: 1px solid var(--border);
+    border-top: 3px solid var(--gdf-blue);
   }
-  .header-brand span {
-    font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
-    color: var(--accent-blue-dark); text-transform: uppercase;
+  .header-brand { display: flex; align-items: center; gap: 14px; }
+  .gdf-badge {
+    display: flex; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 8px;
+    background: var(--gdf-blue); color: #fff;
+    font-size: 13px; font-weight: 900; letter-spacing: 0.05em;
+    flex-shrink: 0; line-height: 1;
   }
-  .header-brand h1 {
-    font-size: 22px; font-weight: 900; color: var(--text-primary);
-    letter-spacing: -0.02em; margin-top: 4px;
+  .header-brand-text span {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+    color: var(--gdf-blue); text-transform: uppercase;
+    display: block;
+  }
+  .header-brand-text h1 {
+    font-size: 20px; font-weight: 900; color: var(--text-primary);
+    letter-spacing: -0.02em; margin-top: 2px;
   }
   .header-actions { display: flex; gap: 8px; }
 
@@ -80,24 +96,18 @@
     padding: 12px 28px; border-radius: 10px; font-size: 14px; font-weight: 700;
     cursor: pointer; font-family: var(--font); transition: all 0.2s; border: none;
   }
-  .btn-nav-next { background: var(--accent-blue-dark); color: #fff; box-shadow: 0 2px 8px rgba(37,99,235,0.25); }
-  .btn-nav-next:hover { background: var(--accent-blue); }
+  .btn-nav-next { background: var(--gdf-blue); color: #fff; box-shadow: 0 2px 8px rgba(21,101,192,0.25); }
+  .btn-nav-next:hover { background: var(--gdf-blue-dark); }
   .btn-nav-prev { background: var(--bg-card); color: var(--text-secondary); border: 1.5px solid var(--border-strong); }
   .btn-nav-prev:hover { background: var(--bg-deep); color: var(--text-primary); }
-  .btn-nav-print { background: var(--accent-green-dark); color: #fff; box-shadow: 0 2px 8px rgba(5,150,105,0.25); }
-  .btn-nav-print:hover { background: var(--accent-green); }
-  .btn-nav-skip {
-    padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 600;
-    cursor: pointer; font-family: var(--font); transition: all 0.2s;
-    background: transparent; color: var(--text-muted); border: 1.5px dashed var(--border-strong);
-  }
-  .btn-nav-skip:hover { color: var(--text-secondary); background: var(--bg-input); border-color: var(--accent-blue); }
+  .btn-nav-print { background: var(--gdf-blue); color: #fff; box-shadow: 0 2px 8px rgba(21,101,192,0.25); }
+  .btn-nav-print:hover { background: var(--gdf-blue-dark); }
 
   .btn-primary {
     padding: 14px 36px; border-radius: var(--radius); border: none;
-    background: linear-gradient(135deg, var(--accent-blue-dark), var(--accent-blue));
+    background: linear-gradient(135deg, var(--gdf-blue-dark), var(--gdf-blue));
     color: #fff; font-size: 16px; font-weight: 700; cursor: pointer;
-    box-shadow: 0 4px 20px rgba(37,99,235,0.25); font-family: var(--font); transition: transform 0.2s;
+    box-shadow: 0 4px 20px rgba(21,101,192,0.25); font-family: var(--font); transition: transform 0.2s;
   }
   .btn-primary:hover { transform: translateY(-1px); }
 
@@ -111,12 +121,12 @@
   /* Submit button */
   .btn-submit {
     padding: 16px 40px; border-radius: var(--radius); border: none;
-    background: linear-gradient(135deg, #059669, #10b981);
+    background: linear-gradient(135deg, var(--gdf-blue-dark), var(--gdf-blue));
     color: #fff; font-size: 17px; font-weight: 800; cursor: pointer;
-    box-shadow: 0 4px 20px rgba(5,150,105,0.3); font-family: var(--font);
+    box-shadow: 0 4px 20px rgba(21,101,192,0.3); font-family: var(--font);
     transition: all 0.2s; width: 100%; letter-spacing: 0.01em;
   }
-  .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(5,150,105,0.35); }
+  .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(21,101,192,0.35); }
   .btn-submit:disabled {
     background: var(--border-strong); color: var(--text-dim);
     cursor: not-allowed; box-shadow: none; transform: none;
@@ -164,32 +174,63 @@
   /* Motivation messages */
   .motivation {
     text-align: center; padding: 8px 16px; margin-bottom: 16px;
-    font-size: 13px; font-weight: 600; color: var(--accent-blue-dark);
-    background: var(--accent-blue-light); border-radius: 20px;
-    border: 1px solid #bfdbfe;
+    font-size: 13px; font-weight: 600; color: var(--gdf-blue);
+    background: var(--gdf-blue-light); border-radius: 20px;
+    border: 1px solid #93C5FD;
   }
 
-  /* Progress */
-  .progress-bar {
+  /* Phase Stepper */
+  .phase-stepper {
     margin-bottom: 20px; background: var(--bg-card); border-radius: var(--radius);
-    padding: 14px 18px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+    padding: 16px 18px; box-shadow: var(--shadow-sm); border: 1px solid var(--border);
   }
-  .progress-info { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 12px; }
-  .progress-track { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent-blue), var(--accent-green)); border-radius: 3px; transition: width 0.4s ease; }
-  .progress-dots { display: flex; gap: 3px; margin-top: 8px; justify-content: center; flex-wrap: wrap; }
-  .progress-dot {
-    height: 8px; border-radius: 4px; border: none; cursor: pointer;
-    transition: all 0.3s ease; padding: 0;
+  .phase-stepper-bar {
+    display: flex; align-items: center; gap: 0; margin-bottom: 10px;
   }
-  .progress-dot-active { width: 24px; background: var(--accent-blue); }
-  .progress-dot-done { width: 8px; background: var(--accent-green); }
-  .progress-dot-todo { width: 8px; background: var(--border-strong); }
-  .progress-dot:hover { opacity: 0.7; }
-  .phase-label {
-    text-align: center; margin-top: 6px; font-size: 11px; font-weight: 700;
-    color: var(--accent-blue-dark); letter-spacing: 0.06em; text-transform: uppercase;
+  .phase-step-item {
+    flex: 1; text-align: center; cursor: pointer; position: relative;
+    padding: 6px 4px; transition: all 0.2s;
   }
+  .phase-step-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 26px; height: 26px; border-radius: 50%;
+    font-size: 12px; font-weight: 700; margin-bottom: 4px;
+    transition: all 0.3s;
+  }
+  .phase-step-item.completed .phase-step-num {
+    background: var(--gdf-blue); color: #fff;
+  }
+  .phase-step-item.active .phase-step-num {
+    background: var(--gdf-blue); color: #fff;
+    box-shadow: 0 0 0 3px var(--gdf-blue-light);
+  }
+  .phase-step-item.future .phase-step-num {
+    background: var(--border); color: var(--text-dim);
+  }
+  .phase-step-name {
+    display: block; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.02em; line-height: 1.3;
+    color: var(--text-dim); transition: color 0.2s;
+  }
+  .phase-step-item.completed .phase-step-name { color: var(--gdf-blue); }
+  .phase-step-item.active .phase-step-name { color: var(--gdf-blue); font-weight: 700; }
+  .phase-connector {
+    width: 100%; height: 2px; background: var(--border);
+    flex: 0.5; margin-top: -14px; transition: background 0.3s;
+  }
+  .phase-connector.done { background: var(--gdf-blue); }
+  .phase-stepper-info {
+    display: flex; justify-content: space-between; font-size: 12px;
+    padding-top: 8px; border-top: 1px solid var(--border);
+  }
+  .phase-stepper-mobile {
+    display: none; text-align: center; font-size: 12px;
+    font-weight: 600; color: var(--gdf-blue);
+  }
+
+  /* Progress bar (kept for percentage) */
+  .progress-track { height: 4px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--gdf-blue), var(--accent-green)); border-radius: 3px; transition: width 0.4s ease; }
 
   /* Navigation */
   .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; gap: 12px; }
@@ -208,12 +249,27 @@
   .step-question { font-size: 24px; font-weight: 800; color: var(--text-primary); margin-bottom: 6px; letter-spacing: -0.01em; }
   .step-hint { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
 
-  /* Context note (connects steps) */
+  /* Context note */
   .step-contexto {
-    font-size: 13px; color: var(--accent-blue-dark); background: var(--accent-blue-light);
-    border: 1px solid #bfdbfe; border-radius: 8px; padding: 8px 14px;
+    font-size: 13px; color: var(--gdf-blue); background: var(--gdf-blue-light);
+    border: 1px solid #93C5FD; border-radius: 8px; padding: 8px 14px;
     margin-bottom: 12px; line-height: 1.5;
   }
+
+  /* Group field separator */
+  .group-field {
+    margin-top: 28px; padding-top: 24px;
+    border-top: 1.5px dashed var(--border);
+  }
+  .group-field:first-of-type {
+    margin-top: 0; padding-top: 0; border-top: none;
+  }
+  .group-field-header {
+    display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+  }
+  .group-field-icon { font-size: 22px; }
+  .group-field-label { font-size: 17px; font-weight: 700; color: var(--text-primary); }
+  .group-field-hint { font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px; }
 
   /* Help tooltip */
   .ajuda-btn {
@@ -222,10 +278,10 @@
     color: var(--text-muted); font-family: var(--font); font-weight: 600;
     transition: all 0.2s; margin-left: 8px;
   }
-  .ajuda-btn:hover { background: var(--accent-blue-light); color: var(--accent-blue-dark); border-color: #bfdbfe; }
+  .ajuda-btn:hover { background: var(--gdf-blue-light); color: var(--gdf-blue); border-color: #93C5FD; }
   .ajuda-content {
-    font-size: 13px; color: var(--text-secondary); background: #f0f9ff;
-    border: 1px solid #bae6fd; border-radius: 8px; padding: 10px 14px;
+    font-size: 13px; color: var(--text-secondary); background: var(--gdf-blue-bg);
+    border: 1px solid #93C5FD; border-radius: 8px; padding: 10px 14px;
     margin-top: 8px; margin-bottom: 12px; line-height: 1.6;
   }
 
@@ -233,9 +289,6 @@
   .optional-tag {
     font-size: 12px; font-weight: 400; color: var(--text-dim);
     font-style: italic; margin-left: 4px;
-  }
-  .required-legend {
-    font-size: 11px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;
   }
 
   /* Examples */
@@ -254,14 +307,14 @@
   .examples-hint { font-size: 11px; color: var(--text-dim); margin-top: 6px; font-style: italic; margin-bottom: 16px; }
 
   /* Inputs */
-  textarea, input[type="text"] {
+  textarea, input[type="text"], input[type="email"] {
     width: 100%; background: var(--bg-input); border: 2px solid var(--border);
     border-radius: var(--radius); padding: 14px 18px; font-size: 15px;
     color: var(--text-primary); line-height: 1.7; font-family: var(--font);
     resize: vertical; transition: border-color 0.2s; outline: none;
   }
-  textarea:focus, input[type="text"]:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
-  input[type="text"] { font-size: 16px; font-weight: 600; }
+  textarea:focus, input[type="text"]:focus, input[type="email"]:focus { border-color: var(--gdf-blue); box-shadow: 0 0 0 3px rgba(21,101,192,0.1); }
+  input[type="text"], input[type="email"] { font-size: 16px; font-weight: 600; }
 
   select {
     width: 100%; background: var(--bg-input); border: 2px solid var(--border);
@@ -272,11 +325,15 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='2' fill='none'/%3E%3C/svg%3E");
     background-repeat: no-repeat; background-position: right 16px center;
   }
-  select:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
+  select:focus { border-color: var(--gdf-blue); box-shadow: 0 0 0 3px rgba(21,101,192,0.1); }
 
   textarea.small-textarea {
     font-size: 13.5px; padding: 10px 14px; border-radius: var(--radius-sm);
     border-width: 1.5px;
+  }
+  select.small-select {
+    font-size: 13.5px; padding: 10px 14px; border-radius: var(--radius-sm);
+    border-width: 1.5px; font-weight: 600;
   }
 
   /* Partes interessadas */
@@ -294,9 +351,9 @@
   }
   .entrega-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
   .entrega-badge {
-    font-size: 12px; font-weight: 700; color: var(--accent-green-dark);
-    background: var(--accent-green-light); padding: 3px 12px; border-radius: 20px;
-    border: 1px solid #a7f3d0;
+    font-size: 12px; font-weight: 700; color: var(--gdf-blue);
+    background: var(--gdf-blue-light); padding: 3px 12px; border-radius: 20px;
+    border: 1px solid #93C5FD;
   }
   .entrega-remove {
     background: var(--accent-red-light); border: 1px solid #fecaca; border-radius: 6px;
@@ -312,7 +369,7 @@
     background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 600;
     cursor: pointer; font-family: var(--font); transition: all 0.2s;
   }
-  .btn-add-entrega:hover { background: var(--bg-input); color: var(--text-secondary); border-color: var(--accent-blue); }
+  .btn-add-entrega:hover { background: var(--bg-input); color: var(--text-secondary); border-color: var(--gdf-blue); }
 
   /* Example block in entregas */
   .entregas-example {
@@ -322,13 +379,36 @@
 
   /* Welcome */
   .welcome { text-align: center; padding: 40px 0; }
-  .welcome-icon { font-size: 56px; margin-bottom: 16px; }
+  .welcome-logo {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 20px; padding: 10px 20px;
+    background: var(--gdf-blue-light); border: 1px solid #93C5FD;
+    border-radius: 12px;
+  }
+  .welcome-logo-badge {
+    display: flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 10px;
+    background: var(--gdf-blue); color: #fff;
+    font-size: 15px; font-weight: 900; letter-spacing: 0.05em;
+  }
+  .welcome-logo-text {
+    text-align: left; font-size: 13px; color: var(--gdf-blue);
+    font-weight: 600; line-height: 1.4;
+  }
+  .welcome-logo-text strong { display: block; font-size: 15px; font-weight: 800; }
   .welcome h2 { font-size: 28px; font-weight: 900; margin-bottom: 12px; letter-spacing: -0.02em; }
   .welcome p { font-size: 16px; color: var(--text-secondary); max-width: 520px; margin: 0 auto 8px; line-height: 1.7; }
-  .welcome .sub { font-size: 14px; color: var(--text-muted); max-width: 480px; margin: 0 auto 32px; line-height: 1.6; }
+  .welcome .sub { font-size: 14px; color: var(--text-muted); max-width: 480px; margin: 0 auto 24px; line-height: 1.6; }
+  .welcome-time {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 20px; border-radius: 20px;
+    background: var(--gdf-blue-light); border: 1px solid #93C5FD;
+    font-size: 14px; font-weight: 600; color: var(--gdf-blue);
+    margin-bottom: 20px;
+  }
   .welcome-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
   .welcome-features {
-    display: flex; gap: 24px; justify-content: center; margin-top: 40px; flex-wrap: wrap;
+    display: flex; gap: 16px; justify-content: center; margin-top: 32px; flex-wrap: wrap;
   }
   .welcome-feat {
     display: flex; align-items: center; gap: 8px; font-size: 13px;
@@ -338,11 +418,11 @@
   .welcome-feat span { font-size: 18px; }
   .welcome-info-toggle {
     background: none; border: 1px solid var(--border); border-radius: 20px;
-    padding: 8px 20px; font-size: 13px; font-weight: 600; color: var(--accent-blue-dark);
+    padding: 8px 20px; font-size: 13px; font-weight: 600; color: var(--gdf-blue);
     cursor: pointer; font-family: var(--font); transition: all 0.2s; margin-top: 24px;
     display: inline-block;
   }
-  .welcome-info-toggle:hover { background: var(--accent-blue-light); border-color: #bfdbfe; }
+  .welcome-info-toggle:hover { background: var(--gdf-blue-light); border-color: #93C5FD; }
   .welcome-info-content {
     margin-top: 16px; padding: 20px 24px; background: var(--bg-input);
     border: 1px solid var(--border); border-radius: var(--radius);
@@ -372,8 +452,8 @@
   .review-header p { font-size: 14px; color: var(--text-secondary); }
   .review-ra {
     display: inline-block; margin-top: 12px; padding: 6px 18px;
-    background: var(--accent-blue-light); border: 1px solid #bfdbfe;
-    border-radius: 20px; font-size: 14px; font-weight: 700; color: var(--accent-blue-dark);
+    background: var(--gdf-blue-light); border: 1px solid #93C5FD;
+    border-radius: 20px; font-size: 14px; font-weight: 700; color: var(--gdf-blue);
   }
 
   .review-item {
@@ -383,7 +463,7 @@
     transition: all 0.2s; font-family: var(--font); margin-bottom: 8px;
     box-shadow: var(--shadow-sm);
   }
-  .review-item:hover { border-color: var(--accent-blue); box-shadow: 0 2px 8px rgba(59,130,246,0.1); }
+  .review-item:hover { border-color: var(--gdf-blue); box-shadow: 0 2px 8px rgba(21,101,192,0.1); }
   .review-item.pending { background: var(--accent-red-light); border-color: #fecaca; }
   .review-item-icon { font-size: 20px; flex-shrink: 0; }
   .review-item-body { flex: 1; min-width: 0; }
@@ -397,6 +477,14 @@
   }
   .review-edit { color: var(--text-dim); font-size: 16px; flex-shrink: 0; }
   .review-actions { display: flex; gap: 10px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+
+  /* Review section group headers */
+  .review-group-label {
+    font-size: 11px; font-weight: 700; color: var(--gdf-blue);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-top: 16px; margin-bottom: 8px; padding-left: 4px;
+  }
+  .review-group-label:first-child { margin-top: 0; }
 
   /* Error message */
   .error-msg {
@@ -417,7 +505,7 @@
     .no-print { display: none !important; }
     .container { max-width: 100%; }
     .step-card { box-shadow: none !important; border: 1px solid #ddd !important; }
-    textarea, input[type="text"], select { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; min-height: 30px !important; font-size: 12px !important; box-shadow: none !important; }
+    textarea, input[type="text"], input[type="email"], select { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; min-height: 30px !important; font-size: 12px !important; box-shadow: none !important; }
     .step-question { color: #000 !important; font-size: 16px !important; }
     .step-hint { color: #333 !important; font-size: 11px !important; }
     .step-icon { font-size: 20px !important; }
@@ -426,8 +514,8 @@
     .review-item-preview { color: #333 !important; }
     .footer { color: #999 !important; border-top-color: #ddd !important; }
     .header { box-shadow: none !important; }
-    .header-brand h1 { color: #000 !important; }
-    .header-brand span { color: #666 !important; }
+    .header-brand-text h1 { color: #000 !important; }
+    .header-brand-text span { color: #666 !important; }
     .review-ra { background: #e0e7ff !important; color: #1e40af !important; }
     .autosave-indicator { display: none !important; }
   }
@@ -446,6 +534,9 @@
     .success-actions { flex-direction: column; }
     .success-actions button { width: 100%; }
     .step-card { padding: 20px 16px; }
+    .phase-stepper-bar { display: none; }
+    .phase-stepper-mobile { display: block; }
+    .phase-stepper-info { flex-direction: column; gap: 4px; text-align: center; }
   }
 </style>
 </head>
@@ -456,83 +547,336 @@
 
 <script>
 /* ===================================================
-   CONFIGURAÇÃO - COLE AQUI A URL DO SEU GOOGLE APPS SCRIPT
+   CONFIGURACAO - URL DO GOOGLE APPS SCRIPT
    =================================================== */
 var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvLX37nFf9wZrSga5WzuXcG56ZLSgc1p7akVW4_52kZAUD-TjF69CsCEPbd_t-X05QEw/exec';
 
 /* ===================================================
-   REGIÕES ADMINISTRATIVAS DO DF
+   REGIOES ADMINISTRATIVAS DO DF
    =================================================== */
 var REGIOES_DF = [
   "RA-I Plano Piloto",
   "RA-II Gama",
   "RA-III Taguatinga",
-  "RA-IV Brazlândia",
+  "RA-IV Brazl\u00e2ndia",
   "RA-V Sobradinho",
   "RA-VI Planaltina",
-  "RA-VII Paranoá",
-  "RA-VIII Núcleo Bandeirante",
-  "RA-IX Ceilândia",
-  "RA-X Guará",
+  "RA-VII Parano\u00e1",
+  "RA-VIII N\u00facleo Bandeirante",
+  "RA-IX Ceil\u00e2ndia",
+  "RA-X Guar\u00e1",
   "RA-XI Cruzeiro",
   "RA-XII Samambaia",
   "RA-XIII Santa Maria",
-  "RA-XIV São Sebastião",
+  "RA-XIV S\u00e3o Sebasti\u00e3o",
   "RA-XV Recanto das Emas",
   "RA-XVI Lago Sul",
   "RA-XVII Riacho Fundo",
   "RA-XVIII Lago Norte",
-  "RA-XIX Candangolândia",
-  "RA-XX Águas Claras",
+  "RA-XIX Candangol\u00e2ndia",
+  "RA-XX \u00c1guas Claras",
   "RA-XXI Riacho Fundo II",
   "RA-XXII Sudoeste/Octogonal",
-  "RA-XXIII Varjão",
+  "RA-XXIII Varj\u00e3o",
   "RA-XXIV Park Way",
   "RA-XXV SCIA/Estrutural",
   "RA-XXVI Sobradinho II",
-  "RA-XXVII Jardim Botânico",
-  "RA-XXVIII Itapoã",
+  "RA-XXVII Jardim Bot\u00e2nico",
+  "RA-XXVIII Itapo\u00e3",
   "RA-XXIX SIA",
   "RA-XXX Vicente Pires",
   "RA-XXXI Fercal",
-  "RA-XXXII Sol Nascente e Pôr do Sol",
+  "RA-XXXII Sol Nascente e P\u00f4r do Sol",
   "RA-XXXIII Arniqueira",
   "RA-XXXIV Arapoanga",
-  "RA-XXXV Água Quente"
+  "RA-XXXV \u00c1gua Quente"
 ];
 
 /* ===================================================
-   PRÁTICAS DE GOVERNANÇA (Resolução CGOV Nº 04/2024)
+   PRATICAS DE GOVERNANCA (Resolucao CGOV N 04/2024)
    =================================================== */
 var PRATICAS_GOVERNANCA = [
-  "Comitê Interno de Governança (CIG)",
-  "Planejamento Estratégico",
-  "Gestão de Riscos",
-  "Programa de Integridade Pública",
+  "Comit\u00ea Interno de Governan\u00e7a (CIG)",
+  "Planejamento Estrat\u00e9gico",
+  "Gest\u00e3o de Riscos",
+  "Programa de Integridade P\u00fablica",
   "Programa de Integridade Privada",
   "Conformidade",
   "Controle Interno",
-  "Correição",
+  "Correi\u00e7\u00e3o",
   "Ouvidoria",
-  "Transparência",
-  "Governança de Pessoas",
-  "Governança de Dados",
-  "Governança nas Contratações",
+  "Transpar\u00eancia",
+  "Governan\u00e7a de Pessoas",
+  "Governan\u00e7a de Dados",
+  "Governan\u00e7a nas Contrata\u00e7\u00f5es",
   "Gerenciamento de Processos",
-  "Inovação",
-  "Dimensão Ambiental",
-  "Dimensão Social"
+  "Inova\u00e7\u00e3o",
+  "Dimens\u00e3o Ambiental",
+  "Dimens\u00e3o Social"
 ];
 
 /* ===================================================
-   FASES DO CANVAS (agrupamento visual)
+   PRAZOS PARA ENTREGAS (dropdown)
+   =================================================== */
+var PRAZOS_OPCOES = [
+  "15 dias", "30 dias", "45 dias", "60 dias",
+  "90 dias", "120 dias", "180 dias", "12 meses"
+];
+
+/* ===================================================
+   FIELD DEFINITIONS (all individual fields)
+   =================================================== */
+var FIELD_DEFS = {
+  responsavel_nome: {
+    field: "responsavel_nome", label: "Nome do Respons\u00e1vel",
+    question: "Qual \u00e9 o seu nome?",
+    dica: "Nome completo do servidor respons\u00e1vel pelo preenchimento deste plano.",
+    placeholder: "Seu nome completo...",
+    icon: "\uD83D\uDC64", color: "#1565C0", inputType: "input",
+    exemplos: []
+  },
+  responsavel_email: {
+    field: "responsavel_email", label: "E-mail Institucional",
+    question: "Qual \u00e9 o seu e-mail institucional?",
+    dica: "E-mail para contato sobre este plano de a\u00e7\u00e3o.",
+    placeholder: "seu.email@df.gov.br",
+    icon: "\uD83D\uDCE7", color: "#1565C0", inputType: "email",
+    exemplos: []
+  },
+  ra: {
+    field: "ra", label: "Regi\u00e3o Administrativa",
+    question: "Qual \u00e9 a sua Regi\u00e3o Administrativa?",
+    dica: "Selecione sua RA na lista abaixo.",
+    placeholder: "Selecione sua Regi\u00e3o Administrativa...",
+    icon: "\uD83D\uDCCD", color: "#1565C0", inputType: "select",
+    opcoes: REGIOES_DF, exemplos: []
+  },
+  pratica: {
+    field: "pratica", label: "Pr\u00e1tica de Governan\u00e7a",
+    question: "A qual pr\u00e1tica de governan\u00e7a este projeto se refere?",
+    dica: "Selecione a pr\u00e1tica principal que o projeto vai implementar ou fortalecer, conforme a Resolu\u00e7\u00e3o CGOV N\u00ba 04/2024.",
+    placeholder: "Selecione a pr\u00e1tica de governan\u00e7a...",
+    icon: "\uD83C\uDFDB\uFE0F", color: "#7c3aed", inputType: "select",
+    opcoes: PRATICAS_GOVERNANCA, exemplos: []
+  },
+  projeto: {
+    field: "projeto", label: "Nome do Projeto",
+    question: "Qual \u00e9 o nome do seu projeto?",
+    dica: "Escolha um nome claro e direto. Inclua a sigla da RA para facilitar a identifica\u00e7\u00e3o.",
+    placeholder: "Digite o nome do projeto...",
+    icon: "\uD83C\uDFAF", color: "#1565C0",
+    exemplos: [
+      { titulo: "Governan\u00e7a", texto: "Implanta\u00e7\u00e3o do Comit\u00ea Interno de Governan\u00e7a (CIG) da RA-IX" },
+      { titulo: "Atendimento", texto: "Moderniza\u00e7\u00e3o do Atendimento ao Cidad\u00e3o na RA-III Taguatinga" },
+      { titulo: "Gest\u00e3o de Riscos", texto: "Programa de Gest\u00e3o de Riscos Operacionais da RA-I Plano Piloto" },
+      { titulo: "Transpar\u00eancia", texto: "Portal de Transpar\u00eancia e Presta\u00e7\u00e3o de Contas da RA-V Sobradinho" }
+    ]
+  },
+  objetivo: {
+    field: "objetivo", label: "Objetivo do Projeto",
+    question: "O que este projeto pretende alcan\u00e7ar?",
+    dica: "Descreva o resultado final desejado. Use verbos como: estruturar, implantar, reduzir, melhorar...",
+    placeholder: "Descreva o objetivo principal...",
+    icon: "\uD83C\uDFC6", color: "#dc2626",
+    exemplos: [
+      { titulo: "Governan\u00e7a", texto: "Estruturar o CIG como inst\u00e2ncia deliberativa para qualificar decis\u00f5es e dar seguran\u00e7a jur\u00eddica \u00e0 gest\u00e3o da RA." },
+      { titulo: "Atendimento", texto: "Reduzir em 50% o tempo de espera do cidad\u00e3o e implantar sistema de agendamento online." },
+      { titulo: "Contratos", texto: "Garantir 100% de conformidade na fiscaliza\u00e7\u00e3o de contratos vigentes da RA." }
+    ]
+  },
+  descricao: {
+    field: "descricao", label: "Descri\u00e7\u00e3o do Projeto",
+    question: "Descreva brevemente o projeto.",
+    dica: "Diferente do objetivo (o que quer alcan\u00e7ar), aqui descreva o que ser\u00e1 feito na pr\u00e1tica, a abrang\u00eancia e a quais diretrizes est\u00e1 vinculado.",
+    placeholder: "Descreva o escopo e contexto...",
+    icon: "\uD83D\uDCCB", color: "#2563eb",
+    exemplos: [
+      { titulo: "Governan\u00e7a", texto: "Formaliza\u00e7\u00e3o do CIG por portaria, elabora\u00e7\u00e3o de regimento interno, capacita\u00e7\u00e3o dos membros e in\u00edcio das reuni\u00f5es ordin\u00e1rias mensais, alinhado \u00e0s diretrizes da SEGOV/CGDF." },
+      { titulo: "Capacita\u00e7\u00e3o", texto: "Programa de capacita\u00e7\u00e3o continuada para 45 servidores da RA em gest\u00e3o p\u00fablica, integridade e atendimento, com 6 m\u00f3dulos ao longo de 12 meses." }
+    ]
+  },
+  produto: {
+    field: "produto", label: "Produto Principal",
+    question: "Qual \u00e9 o resultado concreto que ser\u00e1 entregue?",
+    dica: "Diferente do objetivo (abstrato), o produto \u00e9 algo concreto \u2014 que se possa apontar e dizer: \"isto foi entregue\".",
+    placeholder: "O principal produto do projeto...",
+    icon: "\uD83D\uDCE6", color: "#ea580c",
+    exemplos: [
+      { titulo: "Governan\u00e7a", texto: "CIG formalmente institu\u00eddo, com regimento aprovado e reuni\u00f5es ordin\u00e1rias em funcionamento." },
+      { titulo: "Atendimento", texto: "Central de atendimento reorganizada com sistema de senhas, agendamento e pesquisa de satisfa\u00e7\u00e3o." },
+      { titulo: "Riscos", texto: "Matriz de riscos da RA elaborada com planos de tratamento para os 10 riscos priorit\u00e1rios." }
+    ]
+  },
+  caracteristicas: {
+    field: "caracteristicas", label: "Caracter\u00edsticas",
+    question: "Quais s\u00e3o as caracter\u00edsticas essenciais desse produto?",
+    dica: "Liste os atributos que tornam o produto completo. Pense: \"para funcionar bem, ele precisa ser/ter...\"",
+    ajuda: "Caracter\u00edsticas s\u00e3o os atributos de qualidade do que ser\u00e1 entregue. Exemplo: se o produto \u00e9 um comit\u00ea, as caracter\u00edsticas podem ser 'reuni\u00f5es mensais', 'atas no SEI', 'composi\u00e7\u00e3o multissetorial'.",
+    placeholder: "Caracter\u00edsticas do produto principal...",
+    icon: "\u2B50", color: "#7c3aed",
+    exemplos: [
+      { titulo: "CIG", texto: "Composi\u00e7\u00e3o multissetorial \u2022 Reuni\u00f5es mensais com ata no SEI \u2022 Pauta estruturada \u2022 Delibera\u00e7\u00f5es registradas \u2022 Alinhamento com a SEGOV/CGDF." },
+      { titulo: "Atendimento", texto: "Acess\u00edvel a PCD \u2022 Bil\u00edngue (portugu\u00eas/Libras) \u2022 Tempo m\u00e1ximo de espera: 15 min \u2022 Pesquisa de satisfa\u00e7\u00e3o digital." }
+    ]
+  },
+  justificativa: {
+    field: "justificativa", label: "Justificativa",
+    question: "Por que este projeto \u00e9 necess\u00e1rio?",
+    dica: "Responda: qual problema resolve? Que risco evita? Por que agora? Traga dados se poss\u00edvel.",
+    placeholder: "O que motiva este projeto...",
+    icon: "\u2705", color: "#059669",
+    exemplos: [
+      { titulo: "Governan\u00e7a", texto: "A aus\u00eancia de inst\u00e2ncia formal de governan\u00e7a exp\u00f5e a gest\u00e3o a riscos em auditorias do TCDF. As oficinas SEGOV/CGDF criaram a base t\u00e9cnica para implementa\u00e7\u00e3o imediata." },
+      { titulo: "Atendimento", texto: "Pesquisa da Ouvidoria indica que 67% das reclama\u00e7\u00f5es referem-se a tempo de espera. A RA atende 12 mil cidad\u00e3os/m\u00eas sem sistema de organiza\u00e7\u00e3o." }
+    ]
+  },
+  indicador: {
+    field: "indicador", label: "Indicador de Resultado",
+    question: "Como voc\u00ea vai medir o sucesso?",
+    dica: "Pense em n\u00fameros concretos: percentuais, quantidades, prazos. Se o projeto der certo, que n\u00famero muda?",
+    ajuda: "Indicadores s\u00e3o n\u00fameros que mostram se o projeto est\u00e1 funcionando. Pense em algo que voc\u00ea possa contar ou medir. Exemplo: 'n\u00famero de reuni\u00f5es realizadas' ou 'tempo m\u00e9dio de atendimento'.",
+    placeholder: "Indicadores de sucesso...",
+    icon: "\uD83D\uDCCA", color: "#059669",
+    exemplos: [
+      { titulo: "Governan\u00e7a", texto: "% de reuni\u00f5es realizadas vs. programadas (meta: 100%).\nN\u00ba de riscos identificados e tratados.\n\u00cdndice de conformidade no checklist da CGDF." },
+      { titulo: "Atendimento", texto: "Tempo m\u00e9dio de espera (meta: < 15 min).\n\u00cdndice de satisfa\u00e7\u00e3o do cidad\u00e3o (meta: > 80%).\nN\u00ba de atendimentos/dia." }
+    ]
+  },
+  premissas: {
+    field: "premissas", label: "Premissas",
+    question: "O que precisa dar certo para o projeto funcionar?",
+    dica: "S\u00e3o condi\u00e7\u00f5es que voc\u00ea assume como verdadeiras. Se alguma falhar, o projeto fica comprometido.",
+    ajuda: "Premissas s\u00e3o coisas que voc\u00ea assume como certas para o projeto funcionar. Exemplo: 'os servidores ter\u00e3o tempo dedicado', 'o SEI estar\u00e1 dispon\u00edvel'. Se alguma premissa falhar, o projeto pode ser prejudicado.",
+    placeholder: "Fatores cr\u00edticos de sucesso...",
+    icon: "\uD83C\uDFC5", color: "#b45309",
+    exemplos: [
+      { titulo: "T\u00edpicas", texto: "Apoio do(a) Administrador(a) Regional.\nServidores capacitados com disponibilidade de tempo.\nAcesso ao SEI funcionando.\nSuporte t\u00e9cnico da SEGOV conforme comprometido." }
+    ]
+  },
+  barreiras: {
+    field: "barreiras", label: "Barreiras",
+    question: "Quais dificuldades j\u00e1 existem hoje?",
+    dica: "Diferente de riscos (que podem acontecer), barreiras s\u00e3o obst\u00e1culos conhecidos e atuais \u2014 coisas que j\u00e1 atrapalham.",
+    placeholder: "Dificuldades existentes...",
+    icon: "\uD83D\uDEA7", color: "#dc2626",
+    exemplos: [
+      { titulo: "Comuns nas RAs", texto: "Ac\u00famulo de fun\u00e7\u00f5es dos servidores.\nResist\u00eancia cultural a mudan\u00e7as.\nRotatividade em cargos comissionados.\nInfraestrutura limitada (salas, equipamentos)." }
+    ]
+  },
+  riscos: {
+    field: "riscos", label: "Riscos",
+    question: "O que pode dar errado no futuro?",
+    dica: "Eventos incertos mas poss\u00edveis. Pense: \"e se acontecer X, como impacta o projeto?\"",
+    placeholder: "Eventos que podem impactar...",
+    icon: "\u26A0\uFE0F", color: "#d97706",
+    exemplos: [
+      { titulo: "Frequentes", texto: "Troca de Administrador(a) com descontinuidade.\nPerda de servidores capacitados por remo\u00e7\u00e3o.\nSobrecarga de demandas urgentes.\nCorte or\u00e7ament\u00e1rio inesperado." }
+    ]
+  }
+};
+
+/* ===================================================
+   STEPS (grouped screens - 10 instead of 16)
+   =================================================== */
+var STEPS = [
+  { id: "welcome", type: "welcome" },
+  {
+    id: "identificacao", type: "group", label: "Identifica\u00e7\u00e3o",
+    icon: "\uD83D\uDCCD", question: "Identifique sua RA e a pr\u00e1tica de governan\u00e7a",
+    dica: "Selecione os dados b\u00e1sicos para come\u00e7ar o plano.",
+    fields: ["responsavel_nome", "responsavel_email", "ra", "pratica"]
+  },
+  {
+    id: "nome-objetivo", type: "group", label: "Nome e Objetivo",
+    icon: "\uD83C\uDFAF", question: "Defina o nome e o objetivo do projeto",
+    dica: "Escolha um nome claro e descreva o que pretende alcan\u00e7ar.",
+    contexto: "Com a RA e pr\u00e1tica definidas, vamos nomear e direcionar o projeto.",
+    fields: ["projeto", "objetivo"]
+  },
+  {
+    id: "detalhamento", type: "group", label: "Descri\u00e7\u00e3o e Produto",
+    icon: "\uD83D\uDCCB", question: "Descreva o projeto e o produto esperado",
+    dica: "Explique o que ser\u00e1 feito na pr\u00e1tica e qual ser\u00e1 a entrega concreta.",
+    contexto: "Com o objetivo definido, descreva como pretende chegar l\u00e1 e o que ser\u00e1 entregue.",
+    fields: ["descricao", "produto"]
+  },
+  {
+    id: "caracteristicas", type: "single", label: "Caracter\u00edsticas",
+    fieldId: "caracteristicas"
+  },
+  {
+    id: "analise", type: "group", label: "Justificativa e Indicadores",
+    icon: "\uD83D\uDCCA", question: "Justifique o projeto e defina como medir o sucesso",
+    dica: "Explique por que o projeto \u00e9 necess\u00e1rio e como ser\u00e1 avaliado.",
+    contexto: "Agora explique por que vale a pena investir e como saber se deu certo.",
+    fields: ["justificativa", "indicador"]
+  },
+  {
+    id: "partes", type: "partes", label: "Partes Interessadas",
+    question: "Quem est\u00e1 envolvido no projeto?",
+    contexto: "Vamos identificar as pessoas e grupos ligados ao projeto.",
+    icon: "\uD83D\uDC65", color: "#334155",
+    dica: "Identifique quem patrocina (apoia/decide), quem executa (faz o trabalho) e quem se beneficia (usa o resultado).",
+    ajuda: "Partes interessadas s\u00e3o todas as pessoas ou grupos que influenciam ou s\u00e3o influenciados pelo projeto: quem decide, quem executa, quem usa o resultado final.",
+    exemplos: {
+      patrocinio: ["Administrador(a) Regional (patrocinador)", "Chefe de Gabinete (gestor do projeto)"],
+      equipe: ["Membros do CIG capacitados nas oficinas", "Representantes das coordena\u00e7\u00f5es", "Assessoria jur\u00eddica da RA"],
+      publico: ["Diretos: servidores e gestores da RA", "Indiretos: popula\u00e7\u00e3o da regi\u00e3o administrativa", "\u00d3rg\u00e3os de controle: TCDF, CGDF"]
+    }
+  },
+  {
+    id: "entregas", type: "entregas", label: "Entregas Intermedi\u00e1rias",
+    question: "Quebre o projeto em etapas \u2014 o que ser\u00e1 entregue em cada uma?",
+    contexto: "Com tudo definido, divida o projeto em etapas menores e concretas.",
+    icon: "\uD83D\uDCC5", color: "#059669",
+    dica: "Cada entrega deve ter: o que ser\u00e1 entregue, as atividades necess\u00e1rias, prazo e custo estimado.",
+    ajuda: "Entregas intermedi\u00e1rias s\u00e3o os marcos do projeto \u2014 resultados parciais que mostram que o trabalho est\u00e1 avan\u00e7ando. Pense nos passos at\u00e9 chegar ao produto final.",
+    exemplos: [
+      { entrega: "Ato normativo do CIG publicado.", atividades: "Minutar portaria \u2192 Assessoria jur\u00eddica \u2192 Assinatura \u2192 Publica\u00e7\u00e3o no DODF.", prazo: "30 dias", investimento: "Sem custo direto." },
+      { entrega: "1\u00aa reuni\u00e3o ordin\u00e1ria realizada.", atividades: "Regimento aprovado \u2192 Pauta definida \u2192 Convoca\u00e7\u00e3o \u2192 Ata registrada no SEI.", prazo: "60 dias", investimento: "Sem custo direto." }
+    ]
+  },
+  {
+    id: "riscos-premissas", type: "group", label: "Premissas, Barreiras e Riscos",
+    icon: "\u26A0\uFE0F", question: "Identifique premissas, barreiras e riscos",
+    dica: "Pense nas condi\u00e7\u00f5es necess\u00e1rias, obst\u00e1culos existentes e o que pode dar errado.",
+    contexto: "\u00daltimo bloco! Identifique o que pode influenciar o sucesso do projeto.",
+    fields: ["premissas", "barreiras", "riscos"]
+  },
+  { id: "review", type: "review" }
+];
+
+/* ===================================================
+   PHASES (visual grouping for stepper)
    =================================================== */
 var PHASES = [
-  { name: "Identidade do Projeto", steps: ["ra", "pratica", "projeto", "objetivo"] },
-  { name: "Detalhamento", steps: ["descricao", "produto", "caracteristicas"] },
-  { name: "Análise", steps: ["justificativa", "indicador"] },
-  { name: "Pessoas e Planejamento", steps: ["partes", "entregas"] },
-  { name: "Riscos e Premissas", steps: ["premissas", "barreiras", "riscos"] }
+  { name: "Identifica\u00e7\u00e3o", steps: ["identificacao", "nome-objetivo"] },
+  { name: "Detalhamento", steps: ["detalhamento", "caracteristicas"] },
+  { name: "An\u00e1lise", steps: ["analise"] },
+  { name: "Pessoas e Entregas", steps: ["partes", "entregas"] },
+  { name: "Premissas e Riscos", steps: ["riscos-premissas"] }
+];
+
+/* ===================================================
+   REVIEW ITEMS (individual fields for review screen)
+   =================================================== */
+var REVIEW_ITEMS = [
+  { id: "responsavel_nome", field: "responsavel_nome", label: "Nome do Respons\u00e1vel", icon: "\uD83D\uDC64", phase: "Identifica\u00e7\u00e3o" },
+  { id: "responsavel_email", field: "responsavel_email", label: "E-mail Institucional", icon: "\uD83D\uDCE7", phase: "Identifica\u00e7\u00e3o" },
+  { id: "ra", field: "ra", label: "Regi\u00e3o Administrativa", icon: "\uD83D\uDCCD", phase: "Identifica\u00e7\u00e3o" },
+  { id: "pratica", field: "pratica", label: "Pr\u00e1tica de Governan\u00e7a", icon: "\uD83C\uDFDB\uFE0F", phase: "Identifica\u00e7\u00e3o" },
+  { id: "projeto", field: "projeto", label: "Nome do Projeto", icon: "\uD83C\uDFAF", phase: "Identifica\u00e7\u00e3o" },
+  { id: "objetivo", field: "objetivo", label: "Objetivo", icon: "\uD83C\uDFC6", phase: "Identifica\u00e7\u00e3o" },
+  { id: "descricao", field: "descricao", label: "Descri\u00e7\u00e3o", icon: "\uD83D\uDCCB", phase: "Detalhamento" },
+  { id: "produto", field: "produto", label: "Produto Principal", icon: "\uD83D\uDCE6", phase: "Detalhamento" },
+  { id: "caracteristicas", field: "caracteristicas", label: "Caracter\u00edsticas", icon: "\u2B50", phase: "Detalhamento" },
+  { id: "justificativa", field: "justificativa", label: "Justificativa", icon: "\u2705", phase: "An\u00e1lise" },
+  { id: "indicador", field: "indicador", label: "Indicador", icon: "\uD83D\uDCCA", phase: "An\u00e1lise" },
+  { id: "partes", type: "partes", label: "Partes Interessadas", icon: "\uD83D\uDC65", phase: "Pessoas e Entregas" },
+  { id: "entregas", type: "entregas", label: "Entregas", icon: "\uD83D\uDCC5", phase: "Pessoas e Entregas" },
+  { id: "premissas", field: "premissas", label: "Premissas", icon: "\uD83C\uDFC5", phase: "Premissas e Riscos" },
+  { id: "barreiras", field: "barreiras", label: "Barreiras", icon: "\uD83D\uDEA7", phase: "Premissas e Riscos" },
+  { id: "riscos", field: "riscos", label: "Riscos", icon: "\u26A0\uFE0F", phase: "Premissas e Riscos" }
 ];
 
 function getPhaseForStep(stepId) {
@@ -542,198 +886,52 @@ function getPhaseForStep(stepId) {
   return '';
 }
 
+function getCurrentPhaseIndex() {
+  var step = STEPS[currentStep];
+  for (var i = 0; i < PHASES.length; i++) {
+    if (PHASES[i].steps.indexOf(step.id) >= 0) return i;
+  }
+  return -1;
+}
+
+function getStepIndexForField(fieldId) {
+  for (var i = 0; i < STEPS.length; i++) {
+    var s = STEPS[i];
+    if (s.fieldId === fieldId) return i;
+    if (s.type === 'group' && s.fields && s.fields.indexOf(fieldId) >= 0) return i;
+    if (s.type === 'partes' && ['patrocinio', 'equipe', 'publico', 'partes'].indexOf(fieldId) >= 0) return i;
+    if (s.type === 'entregas' && fieldId === 'entregas') return i;
+  }
+  return 1;
+}
+
+function getFirstStepOfPhase(phaseIdx) {
+  if (phaseIdx < 0 || phaseIdx >= PHASES.length) return 1;
+  var firstStepId = PHASES[phaseIdx].steps[0];
+  for (var i = 0; i < STEPS.length; i++) {
+    if (STEPS[i].id === firstStepId) return i;
+  }
+  return 1;
+}
+
 /* ===================================================
-   CAMPOS OBRIGATÓRIOS
+   CAMPOS OBRIGATORIOS
    =================================================== */
-var REQUIRED_FIELDS = ['ra', 'pratica', 'projeto', 'objetivo', 'descricao', 'produto', 'caracteristicas', 'justificativa', 'indicador', 'partes', 'entregas', 'premissas', 'barreiras', 'riscos'];
+var REQUIRED_FIELDS = ['responsavel_nome', 'ra', 'pratica', 'projeto', 'objetivo', 'descricao', 'produto', 'caracteristicas', 'justificativa', 'indicador', 'partes', 'entregas', 'premissas', 'barreiras', 'riscos'];
 
 function isRequired(fieldOrId) {
   return REQUIRED_FIELDS.indexOf(fieldOrId) >= 0;
 }
 
 /* ===================================================
-   STEPS DATA
-   =================================================== */
-var STEPS = [
-  { id: "welcome", type: "welcome" },
-  {
-    id: "ra", field: "ra", label: "Região Administrativa",
-    question: "Qual é a sua Região Administrativa?",
-    dica: "Selecione sua RA na lista abaixo.",
-    placeholder: "Selecione sua Região Administrativa...",
-    icon: "\uD83D\uDCCD", color: "#3b82f6", inputType: "select",
-    opcoes: REGIOES_DF, exemplos: []
-  },
-  {
-    id: "pratica", field: "pratica", label: "Prática de Governança",
-    question: "A qual prática de governança este projeto se refere?",
-    contexto: "Cada projeto do Plano de Ação do CIG deve estar vinculado a uma das práticas do Modelo de Governança Pública do DF.",
-    dica: "Selecione a prática de governança principal que o projeto vai implementar ou fortalecer, conforme a Resolução CGOV Nº 04/2024.",
-    placeholder: "Selecione a prática de governança...",
-    icon: "\uD83C\uDFDB\uFE0F", color: "#7c3aed", inputType: "select",
-    opcoes: PRATICAS_GOVERNANCA, exemplos: []
-  },
-  {
-    id: "projeto", field: "projeto", label: "Nome do Projeto",
-    question: "Qual é o nome do seu projeto?",
-    contexto: "Agora que identificou sua RA, vamos nomear o projeto.",
-    dica: "Escolha um nome claro e direto. Inclua a sigla da RA para facilitar a identificação.",
-    placeholder: "Digite o nome do projeto...",
-    icon: "\uD83C\uDFAF", color: "#3b82f6",
-    exemplos: [
-      { titulo: "Governança", texto: "Implantação do Comitê Interno de Governança (CIG) da RA-IX" },
-      { titulo: "Atendimento", texto: "Modernização do Atendimento ao Cidadão na RA-III Taguatinga" },
-      { titulo: "Gestão de Riscos", texto: "Programa de Gestão de Riscos Operacionais da RA-I Plano Piloto" },
-      { titulo: "Transparência", texto: "Portal de Transparência e Prestação de Contas da RA-V Sobradinho" }
-    ]
-  },
-  {
-    id: "objetivo", field: "objetivo", label: "Objetivo do Projeto",
-    question: "O que este projeto pretende alcançar?",
-    contexto: "Com o nome definido, descreva a meta principal do projeto.",
-    dica: "Descreva o resultado final desejado. Use verbos como: estruturar, implantar, reduzir, melhorar...",
-    placeholder: "Descreva o objetivo principal...",
-    icon: "\uD83C\uDFC6", color: "#dc2626",
-    exemplos: [
-      { titulo: "Governança", texto: "Estruturar o CIG como instância deliberativa para qualificar decisões e dar segurança jurídica à gestão da RA." },
-      { titulo: "Atendimento", texto: "Reduzir em 50% o tempo de espera do cidadão e implantar sistema de agendamento online." },
-      { titulo: "Contratos", texto: "Garantir 100% de conformidade na fiscalização de contratos vigentes da RA." }
-    ]
-  },
-  {
-    id: "descricao", field: "descricao", label: "Descrição do Projeto",
-    question: "Descreva brevemente o projeto.",
-    contexto: "Você definiu o objetivo. Agora descreva como pretende chegar lá.",
-    dica: "Diferente do objetivo (o que quer alcançar), aqui descreva o que será feito na prática, a abrangência e a quais diretrizes está vinculado.",
-    placeholder: "Descreva o escopo e contexto...",
-    icon: "\uD83D\uDCCB", color: "#2563eb",
-    exemplos: [
-      { titulo: "Governança", texto: "Formalização do CIG por portaria, elaboração de regimento interno, capacitação dos membros e início das reuniões ordinárias mensais, alinhado às diretrizes da SEGOV/CGDF." },
-      { titulo: "Capacitação", texto: "Programa de capacitação continuada para 45 servidores da RA em gestão pública, integridade e atendimento, com 6 módulos ao longo de 12 meses." }
-    ]
-  },
-  {
-    id: "produto", field: "produto", label: "Produto Principal",
-    question: "Qual é o resultado concreto que será entregue?",
-    contexto: "Pensando na descrição do projeto, qual será a entrega principal e tangível?",
-    dica: "Diferente do objetivo (abstrato), o produto é algo concreto \u2014 que se possa apontar e dizer: \"isto foi entregue\".",
-    placeholder: "O principal produto do projeto...",
-    icon: "\uD83D\uDCE6", color: "#ea580c",
-    exemplos: [
-      { titulo: "Governança", texto: "CIG formalmente instituído, com regimento aprovado e reuniões ordinárias em funcionamento." },
-      { titulo: "Atendimento", texto: "Central de atendimento reorganizada com sistema de senhas, agendamento e pesquisa de satisfação." },
-      { titulo: "Riscos", texto: "Matriz de riscos da RA elaborada com planos de tratamento para os 10 riscos prioritários." }
-    ]
-  },
-  {
-    id: "caracteristicas", field: "caracteristicas", label: "Características",
-    question: "Quais são as características essenciais desse produto?",
-    contexto: "Sobre o produto que você descreveu acima, que qualidades ele precisa ter?",
-    dica: "Liste os atributos que tornam o produto completo. Pense: \"para funcionar bem, ele precisa ser/ter...\"",
-    ajuda: "Características são os atributos de qualidade do que será entregue. Exemplo: se o produto é um comitê, as características podem ser 'reuniões mensais', 'atas no SEI', 'composição multissetorial'.",
-    placeholder: "Características do produto principal...",
-    icon: "\u2B50", color: "#7c3aed",
-    exemplos: [
-      { titulo: "CIG", texto: "Composição multissetorial \u2022 Reuniões mensais com ata no SEI \u2022 Pauta estruturada \u2022 Deliberações registradas \u2022 Alinhamento com a SEGOV/CGDF." },
-      { titulo: "Atendimento", texto: "Acessível a PCD \u2022 Bilíngue (português/Libras) \u2022 Tempo máximo de espera: 15 min \u2022 Pesquisa de satisfação digital." }
-    ]
-  },
-  {
-    id: "justificativa", field: "justificativa", label: "Justificativa",
-    question: "Por que este projeto é necessário?",
-    contexto: "Agora explique por que vale a pena investir neste projeto.",
-    dica: "Responda: qual problema resolve? Que risco evita? Por que agora? Traga dados se possível.",
-    placeholder: "O que motiva este projeto...",
-    icon: "\u2705", color: "#059669",
-    exemplos: [
-      { titulo: "Governança", texto: "A ausência de instância formal de governança expõe a gestão a riscos em auditorias do TCDF. As oficinas SEGOV/CGDF criaram a base técnica para implementação imediata." },
-      { titulo: "Atendimento", texto: "Pesquisa da Ouvidoria indica que 67% das reclamações referem-se a tempo de espera. A RA atende 12 mil cidadãos/mês sem sistema de organização." }
-    ]
-  },
-  {
-    id: "indicador", field: "indicador", label: "Indicador de Resultado",
-    question: "Como você vai medir o sucesso?",
-    contexto: "Definida a justificativa, como saberemos se o projeto deu certo?",
-    dica: "Pense em números concretos: percentuais, quantidades, prazos. Se o projeto der certo, que número muda?",
-    ajuda: "Indicadores são números que mostram se o projeto está funcionando. Pense em algo que você possa contar ou medir. Exemplo: 'número de reuniões realizadas' ou 'tempo médio de atendimento'.",
-    placeholder: "Indicadores de sucesso...",
-    icon: "\uD83D\uDCCA", color: "#059669",
-    exemplos: [
-      { titulo: "Governança", texto: "% de reuniões realizadas vs. programadas (meta: 100%).\nN\u00BA de riscos identificados e tratados.\nÍndice de conformidade no checklist da CGDF." },
-      { titulo: "Atendimento", texto: "Tempo médio de espera (meta: < 15 min).\nÍndice de satisfação do cidadão (meta: > 80%).\nN\u00BA de atendimentos/dia." }
-    ]
-  },
-  {
-    id: "partes", type: "partes", label: "Partes Interessadas",
-    question: "Quem está envolvido no projeto?",
-    contexto: "Agora vamos identificar as pessoas e grupos ligados ao projeto.",
-    icon: "\uD83D\uDC65", color: "#334155",
-    dica: "Identifique quem patrocina (apoia/decide), quem executa (faz o trabalho) e quem se beneficia (usa o resultado).",
-    ajuda: "Partes interessadas são todas as pessoas ou grupos que influenciam ou são influenciados pelo projeto: quem decide, quem executa, quem usa o resultado final.",
-    exemplos: {
-      patrocinio: ["Administrador(a) Regional (patrocinador)", "Chefe de Gabinete (gestor do projeto)"],
-      equipe: ["Membros do CIG capacitados nas oficinas", "Representantes das coordenações", "Assessoria jurídica da RA"],
-      publico: ["Diretos: servidores e gestores da RA", "Indiretos: população da região administrativa", "Órgãos de controle: TCDF, CGDF"]
-    }
-  },
-  {
-    id: "entregas", type: "entregas", label: "Entregas Intermediárias",
-    question: "Quebre o projeto em etapas \u2014 o que será entregue em cada uma?",
-    contexto: "Com tudo definido, divida o projeto em etapas menores e concretas.",
-    icon: "\uD83D\uDCC5", color: "#059669",
-    dica: "Cada entrega deve ter: o que será entregue, as atividades necessárias, prazo e custo estimado. Comece com 1 ou 2 entregas \u2014 você pode adicionar mais depois.",
-    ajuda: "Entregas intermediárias são os marcos do projeto \u2014 resultados parciais que mostram que o trabalho está avançando. Pense nos passos até chegar ao produto final.",
-    exemplos: [
-      { entrega: "Ato normativo do CIG publicado.", atividades: "Minutar portaria \u2192 Assessoria jurídica \u2192 Assinatura \u2192 Publicação no DODF.", prazo: "30 dias", investimento: "Sem custo direto." },
-      { entrega: "1\u00AA reunião ordinária realizada.", atividades: "Regimento aprovado \u2192 Pauta definida \u2192 Convocação \u2192 Ata registrada no SEI.", prazo: "60 dias", investimento: "Sem custo direto." }
-    ]
-  },
-  {
-    id: "premissas", field: "premissas", label: "Premissas",
-    question: "O que precisa dar certo para o projeto funcionar?",
-    contexto: "Quase lá! Pense nas condições necessárias para o sucesso do projeto.",
-    dica: "São condições que você assume como verdadeiras. Se alguma falhar, o projeto fica comprometido.",
-    ajuda: "Premissas são coisas que você assume como certas para o projeto funcionar. Exemplo: 'os servidores terão tempo dedicado', 'o SEI estará disponível'. Se alguma premissa falhar, o projeto pode ser prejudicado.",
-    placeholder: "Fatores críticos de sucesso...",
-    icon: "\uD83C\uDFC5", color: "#b45309",
-    exemplos: [
-      { titulo: "Típicas", texto: "Apoio do(a) Administrador(a) Regional.\nServidores capacitados com disponibilidade de tempo.\nAcesso ao SEI funcionando.\nSuporte técnico da SEGOV conforme comprometido." }
-    ]
-  },
-  {
-    id: "barreiras", field: "barreiras", label: "Barreiras",
-    question: "Quais dificuldades já existem hoje?",
-    contexto: "Pensando na realidade da sua RA, que obstáculos já existem?",
-    dica: "Diferente de riscos (que podem acontecer), barreiras são obstáculos conhecidos e atuais \u2014 coisas que já atrapalham.",
-    placeholder: "Dificuldades existentes...",
-    icon: "\uD83D\uDEA7", color: "#dc2626",
-    exemplos: [
-      { titulo: "Comuns nas RAs", texto: "Acúmulo de funções dos servidores.\nResistência cultural a mudanças.\nRotatividade em cargos comissionados.\nInfraestrutura limitada (salas, equipamentos)." }
-    ]
-  },
-  {
-    id: "riscos", field: "riscos", label: "Riscos",
-    question: "O que pode dar errado no futuro?",
-    contexto: "Último passo! Pense no que pode acontecer de inesperado.",
-    dica: "Eventos incertos mas possíveis. Pense: \"e se acontecer X, como impacta o projeto?\"",
-    placeholder: "Eventos que podem impactar...",
-    icon: "\u26A0\uFE0F", color: "#d97706",
-    exemplos: [
-      { titulo: "Frequentes", texto: "Troca de Administrador(a) com descontinuidade.\nPerda de servidores capacitados por remoção.\nSobrecarga de demandas urgentes.\nCorte orçamentário inesperado." }
-    ]
-  },
-  { id: "review", type: "review" }
-];
-
-/* ===================================================
    MOTIVATION MESSAGES
    =================================================== */
 var MOTIVATIONS = [
-  { min: 0, max: 10, msg: "Vamos lá! O primeiro passo é o mais importante." },
-  { min: 11, max: 25, msg: "Ótimo começo! Continue preenchendo, está ficando bom." },
-  { min: 26, max: 50, msg: "Quase na metade! Seu projeto já está tomando forma." },
-  { min: 51, max: 75, msg: "Mais da metade! O plano está ficando completo." },
-  { min: 76, max: 95, msg: "Falta pouco! Seu projeto está quase pronto para enviar." },
+  { min: 0, max: 10, msg: "Vamos l\u00e1! O primeiro passo \u00e9 o mais importante." },
+  { min: 11, max: 25, msg: "\u00d3timo come\u00e7o! Continue preenchendo, est\u00e1 ficando bom." },
+  { min: 26, max: 50, msg: "Quase na metade! Seu projeto j\u00e1 est\u00e1 tomando forma." },
+  { min: 51, max: 75, msg: "Mais da metade! O plano est\u00e1 ficando completo." },
+  { min: 76, max: 95, msg: "Falta pouco! Seu projeto est\u00e1 quase pronto para enviar." },
   { min: 96, max: 100, msg: "Excelente! Plano 100% preenchido. Hora de enviar!" }
 ];
 
@@ -756,6 +954,7 @@ var submitting = false;
 var showSuccess = false;
 
 var data = {
+  responsavel_nome: "", responsavel_email: "",
   ra: "", pratica: "", projeto: "", objetivo: "", descricao: "",
   produto: "", caracteristicas: "", justificativa: "",
   indicador: "", patrocinio: "", equipe: "", publico: "",
@@ -773,7 +972,6 @@ function loadFromStorage() {
     var saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       var parsed = JSON.parse(saved);
-      var exportDate = parsed.exportDate;
       delete parsed.exportDate;
       Object.keys(parsed).forEach(function(k) { data[k] = parsed[k]; });
     }
@@ -832,7 +1030,7 @@ function scheduleAutosave() {
 function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
 function getProgress() {
-  var fields = [data.ra, data.pratica, data.projeto, data.objetivo, data.descricao, data.produto,
+  var fields = [data.responsavel_nome, data.responsavel_email, data.ra, data.pratica, data.projeto, data.objetivo, data.descricao, data.produto,
     data.caracteristicas, data.justificativa, data.indicador,
     data.patrocinio, data.equipe, data.publico,
     data.premissas, data.barreiras, data.riscos];
@@ -845,8 +1043,9 @@ function getProgress() {
 
 function getRequiredEmpty() {
   var required = [
-    { field: 'ra', label: 'Região Administrativa' },
-    { field: 'pratica', label: 'Prática de Governança' },
+    { field: 'responsavel_nome', label: 'Nome do Respons\u00e1vel' },
+    { field: 'ra', label: 'Regi\u00e3o Administrativa' },
+    { field: 'pratica', label: 'Pr\u00e1tica de Governan\u00e7a' },
     { field: 'projeto', label: 'Nome do Projeto' },
     { field: 'objetivo', label: 'Objetivo' }
   ];
@@ -876,16 +1075,30 @@ function prev() { if (currentStep > 0) goTo(currentStep - 1); }
 
 function saveCurrentInputs() {
   var step = STEPS[currentStep];
-  if (step.field) {
-    var el = document.getElementById('field-' + step.field);
-    if (el) data[step.field] = el.value;
+
+  // Single field step
+  if (step.type === 'single' && step.fieldId) {
+    var el = document.getElementById('field-' + step.fieldId);
+    if (el) data[step.fieldId] = el.value;
   }
+
+  // Group step - save all fields
+  if (step.type === 'group' && step.fields) {
+    step.fields.forEach(function(fieldId) {
+      var el = document.getElementById('field-' + fieldId);
+      if (el) data[fieldId] = el.value;
+    });
+  }
+
+  // Partes
   if (step.type === 'partes') {
     ['patrocinio', 'equipe', 'publico'].forEach(function(k) {
       var el = document.getElementById('field-' + k);
       if (el) data[k] = el.value;
     });
   }
+
+  // Entregas
   if (step.type === 'entregas') {
     data.entregas.forEach(function(_, i) {
       ['entrega', 'atividades', 'prazo', 'investimento'].forEach(function(k) {
@@ -924,14 +1137,13 @@ function importJSON() {
         saveToStorage();
         if (currentStep === 0) currentStep = 1;
         render();
-      } catch (err) { alert('Arquivo inválido.'); }
+      } catch (err) { alert('Arquivo inv\u00e1lido.'); }
     };
     reader.readAsText(file);
   };
   input.click();
 }
 
-/* Melhoria #8: Exemplo clicável mesmo com campo preenchido */
 function handleExampleClick(e) {
   var card = e.currentTarget;
   var field = card.dataset.field;
@@ -942,7 +1154,7 @@ function handleExampleClick(e) {
     if (el) el.value = text;
     scheduleAutosave();
   } else {
-    if (confirm('O campo já está preenchido. Deseja substituir pelo exemplo?')) {
+    if (confirm('O campo j\u00e1 est\u00e1 preenchido. Deseja substituir pelo exemplo?')) {
       data[field] = text;
       var el = document.getElementById('field-' + field);
       if (el) el.value = text;
@@ -951,7 +1163,6 @@ function handleExampleClick(e) {
   }
 }
 
-/* Melhoria #6: Pré-preencher investimento */
 function addEntrega() {
   saveCurrentInputs();
   data.entregas.push({ entrega: '', atividades: '', prazo: '', investimento: 'Sem custo direto' });
@@ -963,7 +1174,7 @@ function removeEntrega(idx) {
   if (data.entregas.length <= 1) return;
   var entry = data.entregas[idx];
   var hasContent = entry.entrega.trim() || entry.atividades.trim() || entry.prazo.trim() || (entry.investimento.trim() && entry.investimento.trim() !== 'Sem custo direto');
-  if (hasContent && !confirm('Tem certeza que deseja remover a Entrega ' + (idx + 1) + '? Os dados preenchidos serão perdidos.')) {
+  if (hasContent && !confirm('Tem certeza que deseja remover a Entrega ' + (idx + 1) + '? Os dados preenchidos ser\u00e3o perdidos.')) {
     return;
   }
   saveCurrentInputs();
@@ -973,11 +1184,12 @@ function removeEntrega(idx) {
 }
 
 function clearAllData() {
-  if (!confirm('Tem certeza que deseja limpar todos os dados? Esta ação não pode ser desfeita.')) return;
+  if (!confirm('Tem certeza que deseja limpar todos os dados? Esta a\u00e7\u00e3o n\u00e3o pode ser desfeita.')) return;
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem(STORAGE_STEP_KEY);
   localStorage.removeItem(STORAGE_SENT_KEY);
   data = {
+    responsavel_nome: "", responsavel_email: "",
     ra: "", pratica: "", projeto: "", objetivo: "", descricao: "",
     produto: "", caracteristicas: "", justificativa: "",
     indicador: "", patrocinio: "", equipe: "", publico: "",
@@ -991,17 +1203,16 @@ function clearAllData() {
   render();
 }
 
-/* Toggle da explicação do Plano de Ação */
 function toggleCanvasInfo() {
   var el = document.getElementById('canvas-info-content');
   var btn = document.getElementById('canvas-info-btn');
   if (!el) return;
   if (el.style.display === 'none') {
     el.style.display = 'block';
-    if (btn) btn.textContent = 'Fechar explicação';
+    if (btn) btn.textContent = 'Fechar explica\u00e7\u00e3o';
   } else {
     el.style.display = 'none';
-    if (btn) btn.textContent = 'O que é o Plano de Ação do CIG?';
+    if (btn) btn.textContent = 'O que \u00e9 o Plano de A\u00e7\u00e3o do CIG?';
   }
 }
 
@@ -1026,15 +1237,14 @@ function submitToSEGOV() {
   saveCurrentInputs();
   saveToStorage();
 
-  // Validate minimum fields
   var empty = getRequiredEmpty();
   if (empty.length > 0) {
-    alert('Por favor, preencha os campos obrigatórios antes de enviar:\n\n- ' + empty.join('\n- '));
+    alert('Por favor, preencha os campos obrigat\u00f3rios antes de enviar:\n\n- ' + empty.join('\n- '));
     return;
   }
 
   if (GOOGLE_SCRIPT_URL === 'COLE_SUA_URL_AQUI') {
-    alert('O envio ainda não foi configurado.\n\nO administrador precisa configurar a URL do Google Apps Script.');
+    alert('O envio ainda n\u00e3o foi configurado.\n\nO administrador precisa configurar a URL do Google Apps Script.');
     return;
   }
 
@@ -1064,17 +1274,17 @@ function submitToSEGOV() {
     var errorEl = document.getElementById('submit-error');
     if (errorEl) {
       errorEl.style.display = 'block';
-      errorEl.textContent = 'Erro ao enviar. Verifique sua conexão e tente novamente.';
+      errorEl.textContent = 'Erro ao enviar. Verifique sua conex\u00e3o e tente novamente.';
     }
   });
 }
 
 /* ===================================================
-   INPUT EVENT LISTENERS (autosave on typing)
+   INPUT EVENT LISTENERS
    =================================================== */
 var inputDebounce = null;
 function attachInputListeners() {
-  document.querySelectorAll('#app textarea, #app input[type="text"], #app select').forEach(function(el) {
+  document.querySelectorAll('#app textarea, #app input[type="text"], #app input[type="email"], #app select').forEach(function(el) {
     el.addEventListener('input', function() {
       clearTimeout(inputDebounce);
       inputDebounce = setTimeout(scheduleAutosave, 800);
@@ -1091,7 +1301,7 @@ function attachInputListeners() {
    RENDERERS
    =================================================== */
 
-/* Welcome com explicação e import condicional */
+/* Welcome screen - with time estimate and GDF branding */
 function renderWelcome() {
   var hasSaved = localStorage.getItem(STORAGE_KEY);
   var resumeBtn = hasSaved
@@ -1099,89 +1309,136 @@ function renderWelcome() {
     : '';
 
   return '<div class="welcome">' +
-    '<div class="welcome-icon">\uD83C\uDFDB\uFE0F</div>' +
-    '<h2>Plano de Ação do CIG</h2>' +
-    '<p>Elabore o <strong>Plano de Ação do Comitê Interno de Governança</strong> da sua Região Administrativa de forma guiada, passo a passo.</p>' +
-    '<p class="sub">Iniciativa da <strong>Secretaria de Estado de Governo (SEGOV)</strong> e da <strong>Controladoria-Geral do DF (CGDF)</strong>, conforme o Modelo de Governança Pública do DF (Resolução CGOV Nº 04/2024).</p>' +
+    '<div class="welcome-logo">' +
+      '<div class="welcome-logo-badge">GDF</div>' +
+      '<div class="welcome-logo-text">' +
+        '<strong>Governo do Distrito Federal</strong>' +
+        'SEGOV \u2022 Controladoria-Geral do DF' +
+      '</div>' +
+    '</div>' +
+    '<h2>Plano de A\u00e7\u00e3o do CIG</h2>' +
+    '<p>Elabore o <strong>Plano de A\u00e7\u00e3o do Comit\u00ea Interno de Governan\u00e7a</strong> da sua Regi\u00e3o Administrativa de forma guiada, passo a passo.</p>' +
+    '<div class="welcome-time">\u23F1\uFE0F Preenchimento em aproximadamente 15 minutos</div>' +
     '<div class="welcome-btns">' +
-      '<button class="btn-primary" onclick="next()">Começar</button>' +
+      '<button class="btn-primary" onclick="next()">Come\u00e7ar o Plano de A\u00e7\u00e3o</button>' +
       resumeBtn +
     '</div>' +
+    '<div class="welcome-features">' +
+      '<div class="welcome-feat"><span>\uD83D\uDCDD</span> 8 etapas simples</div>' +
+      '<div class="welcome-feat"><span>\uD83D\uDCBE</span> Salva automaticamente</div>' +
+      '<div class="welcome-feat"><span>\uD83D\uDCA1</span> Exemplos em cada campo</div>' +
+    '</div>' +
     '<div style="margin-top:24px">' +
-      '<button class="welcome-info-toggle" id="canvas-info-btn" onclick="toggleCanvasInfo()">O que é o Plano de Ação do CIG?</button>' +
+      '<button class="welcome-info-toggle" id="canvas-info-btn" onclick="toggleCanvasInfo()">O que \u00e9 o Plano de A\u00e7\u00e3o do CIG?</button>' +
       '<div id="canvas-info-content" class="welcome-info-content" style="display:none">' +
-        '<p><strong>O Plano de Ação do CIG</strong> é o instrumento que organiza os projetos de governança de cada Administração Regional em uma estrutura clara e objetiva.</p>' +
-        '<p>De acordo com o <strong>Modelo de Governança Pública do Governo do DF</strong> (Resolução CGOV Nº 04/2024), cada RA deve implementar práticas de governança monitoradas pela SEGOV e pela CGDF.</p>' +
-        '<p>Este formulário guia você por cada campo, com exemplos práticos para inspirar. Suas respostas são salvas automaticamente no navegador. Ao final, o plano é enviado diretamente para a SEGOV.</p>' +
-        '<p>Não se preocupe em acertar tudo de primeira! Você pode voltar e editar qualquer campo a qualquer momento.</p>' +
+        '<p><strong>O Plano de A\u00e7\u00e3o do CIG</strong> \u00e9 o instrumento que organiza os projetos de governan\u00e7a de cada Administra\u00e7\u00e3o Regional em uma estrutura clara e objetiva.</p>' +
+        '<p>De acordo com o <strong>Modelo de Governan\u00e7a P\u00fablica do Governo do DF</strong> (Resolu\u00e7\u00e3o CGOV N\u00ba 04/2024), cada RA deve implementar pr\u00e1ticas de governan\u00e7a monitoradas pela SEGOV e pela CGDF.</p>' +
+        '<p>Este formul\u00e1rio guia voc\u00ea por cada campo, com exemplos pr\u00e1ticos para inspirar. Suas respostas s\u00e3o salvas automaticamente no navegador. Ao final, o plano \u00e9 enviado diretamente para a SEGOV.</p>' +
+        '<p>N\u00e3o se preocupe em acertar tudo de primeira! Voc\u00ea pode voltar e editar qualquer campo a qualquer momento.</p>' +
       '</div>' +
     '</div>' +
   '</div>';
 }
 
-/* Melhorias #1 (select), #2 (obrigatório/opcional), #5 (contexto), #7 (tooltip) */
-function renderField(step) {
-  /* Melhoria #5: Contexto conectando passos */
-  var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
-
+/* Render a single field (used for single-type steps and inside groups) */
+function renderSingleFieldInput(def, isInsideGroup) {
   var exHTML = '';
-  if (step.exemplos && step.exemplos.length) {
+  if (def.exemplos && def.exemplos.length) {
     exHTML = '<div class="examples-label">\uD83D\uDCA1 Exemplos para inspirar</div>';
-    step.exemplos.forEach(function(ex) {
-      exHTML += '<div class="example-card" data-field="' + esc(step.field) + '" data-text="' + esc(ex.texto) + '" title="Clique para usar como base">' +
-        '<div class="example-tag" style="color:' + step.color + '">' + esc(ex.titulo) + '</div>' +
+    def.exemplos.forEach(function(ex) {
+      exHTML += '<div class="example-card" data-field="' + esc(def.field) + '" data-text="' + esc(ex.texto) + '" title="Clique para usar como base">' +
+        '<div class="example-tag" style="color:' + def.color + '">' + esc(ex.titulo) + '</div>' +
         '<div class="example-text">' + esc(ex.texto) + '</div>' +
       '</div>';
     });
-    exHTML += '<div class="examples-hint">Clique num exemplo para usá-lo como ponto de partida, ou escreva o seu abaixo</div>';
+    exHTML += '<div class="examples-hint">Clique num exemplo para us\u00e1-lo como ponto de partida</div>';
   }
 
-  var reqLabel = ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span>';
-  var optLabel = '';
+  var ajudaBtnHTML = def.ajuda ? ' <button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' : '';
+  var ajudaBlockHTML = def.ajuda ? '<div class="ajuda-content" style="display:none">' + esc(def.ajuda) + '</div>' : '';
 
-  var ajudaBtnHTML = step.ajuda ? ' <button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' : '';
-  var ajudaBlockHTML = step.ajuda ? '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>' : '';
-
-  /* Select para RA */
   var inputHTML = '';
-  if (step.inputType === 'select') {
-    inputHTML = '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
-      '<select id="field-' + step.field + '">' +
-      '<option value="">' + esc(step.placeholder || 'Selecione...') + '</option>';
-    step.opcoes.forEach(function(op) {
-      inputHTML += '<option value="' + esc(op) + '"' + (data[step.field] === op ? ' selected' : '') + '>' + esc(op) + '</option>';
+  if (def.inputType === 'select') {
+    inputHTML = '<label class="sr-only" for="field-' + def.field + '">' + esc(def.label) + '</label>' +
+      '<select id="field-' + def.field + '">' +
+      '<option value="">' + esc(def.placeholder || 'Selecione...') + '</option>';
+    def.opcoes.forEach(function(op) {
+      inputHTML += '<option value="' + esc(op) + '"' + (data[def.field] === op ? ' selected' : '') + '>' + esc(op) + '</option>';
     });
     inputHTML += '</select>';
-  } else if (step.inputType === 'input') {
-    inputHTML = '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
-      '<input type="text" id="field-' + step.field + '" value="' + esc(data[step.field]) + '" placeholder="' + esc(step.placeholder) + '">';
+  } else if (def.inputType === 'input' || def.inputType === 'email') {
+    var inputTypeAttr = def.inputType === 'email' ? 'email' : 'text';
+    inputHTML = '<label class="sr-only" for="field-' + def.field + '">' + esc(def.label) + '</label>' +
+      '<input type="' + inputTypeAttr + '" id="field-' + def.field + '" value="' + esc(data[def.field]) + '" placeholder="' + esc(def.placeholder) + '">';
   } else {
-    inputHTML = '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
-      '<textarea id="field-' + step.field + '" rows="5" placeholder="' + esc(step.placeholder) + '">' + esc(data[step.field]) + '</textarea>';
+    var rows = isInsideGroup ? '4' : '5';
+    inputHTML = '<label class="sr-only" for="field-' + def.field + '">' + esc(def.label) + '</label>' +
+      '<textarea id="field-' + def.field + '" rows="' + rows + '" placeholder="' + esc(def.placeholder) + '">' + esc(data[def.field]) + '</textarea>';
   }
 
-  return contextoHTML +
-    '<span class="step-icon">' + step.icon + '</span>' +
-    '<h2 class="step-question">' + esc(step.question) + reqLabel + '</h2>' +
-    '<p class="step-hint">' + esc(step.dica) + ajudaBtnHTML + '</p>' +
+  if (isInsideGroup) {
+    return '<div class="group-field">' +
+      '<div class="group-field-header">' +
+        '<span class="group-field-icon">' + def.icon + '</span>' +
+        '<span class="group-field-label">' + esc(def.label) + '</span>' +
+      '</div>' +
+      '<p class="group-field-hint">' + esc(def.dica) + ajudaBtnHTML + '</p>' +
+      ajudaBlockHTML +
+      exHTML + inputHTML +
+    '</div>';
+  }
+
+  // Full standalone render
+  var reqLabel = ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigat\u00f3rio">*</span>';
+  return '<span class="step-icon">' + def.icon + '</span>' +
+    '<h2 class="step-question">' + esc(def.question) + reqLabel + '</h2>' +
+    '<p class="step-hint">' + esc(def.dica) + ajudaBtnHTML + '</p>' +
     ajudaBlockHTML +
     exHTML + inputHTML;
 }
 
+/* Render a single-type step (one field per screen) */
+function renderSingleStep(step) {
+  var def = FIELD_DEFS[step.fieldId];
+  if (!def) return '';
+  var contextoHTML = def.contexto ? '<div class="step-contexto">' + esc(def.contexto) + '</div>' : '';
+  return contextoHTML + renderSingleFieldInput(def, false);
+}
+
+/* Render a group step (multiple fields per screen) */
+function renderGroup(step) {
+  var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
+
+  var html = contextoHTML +
+    '<span class="step-icon">' + step.icon + '</span>' +
+    '<h2 class="step-question">' + esc(step.question) + '</h2>' +
+    '<p class="step-hint">' + esc(step.dica) + '</p>';
+
+  step.fields.forEach(function(fieldId) {
+    var def = FIELD_DEFS[fieldId];
+    if (def) {
+      html += renderSingleFieldInput(def, true);
+    }
+  });
+
+  return html;
+}
+
+/* Render partes interessadas */
 function renderPartes(step) {
   var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
   var ajudaBtnHTML = step.ajuda ? ' <button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' : '';
   var ajudaBlockHTML = step.ajuda ? '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>' : '';
 
   var subs = [
-    { key: 'patrocinio', label: 'Patrocínio e Gestão', ph: 'Quem patrocina e gerencia?', exs: step.exemplos.patrocinio },
+    { key: 'patrocinio', label: 'Patroc\u00ednio e Gest\u00e3o', ph: 'Quem patrocina e gerencia?', exs: step.exemplos.patrocinio },
     { key: 'equipe', label: 'Equipe Executora', ph: 'Quem vai executar?', exs: step.exemplos.equipe },
-    { key: 'publico', label: 'Público-alvo', ph: 'Quem se beneficia?', exs: step.exemplos.publico }
+    { key: 'publico', label: 'P\u00fablico-alvo', ph: 'Quem se beneficia?', exs: step.exemplos.publico }
   ];
 
   var html = contextoHTML +
     '<span class="step-icon">' + step.icon + '</span>' +
-    '<h2 class="step-question">' + esc(step.question) + ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span></h2>' +
+    '<h2 class="step-question">' + esc(step.question) + ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigat\u00f3rio">*</span></h2>' +
     '<p class="step-hint">' + esc(step.dica) + ajudaBtnHTML + '</p>' +
     ajudaBlockHTML;
 
@@ -1196,6 +1453,7 @@ function renderPartes(step) {
   return html;
 }
 
+/* Render entregas with dropdown for prazo */
 function renderEntregas(step) {
   var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
   var ajudaBtnHTML = step.ajuda ? ' <button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' : '';
@@ -1205,7 +1463,7 @@ function renderEntregas(step) {
   step.exemplos.forEach(function(ex, i) {
     exHTML += '<div style="font-size:12px;color:var(--text-secondary);line-height:1.5;padding:6px 0;' +
       (i < step.exemplos.length - 1 ? 'border-bottom:1px solid var(--border);' : '') + '">' +
-      '<strong style="color:var(--accent-green-dark)">Entrega ' + (i+1) + ':</strong> ' + esc(ex.entrega) +
+      '<strong style="color:var(--gdf-blue)">Entrega ' + (i+1) + ':</strong> ' + esc(ex.entrega) +
       ' <span style="color:var(--text-muted)">\u2192 ' + esc(ex.atividades) + '</span>' +
       ' <span style="color:var(--text-secondary)">(' + esc(ex.prazo) + ')</span>' +
     '</div>';
@@ -1213,6 +1471,18 @@ function renderEntregas(step) {
 
   var entregasHTML = '';
   data.entregas.forEach(function(ent, i) {
+    // Build prazo select with current value handling
+    var prazoIsCustom = ent.prazo && PRAZOS_OPCOES.indexOf(ent.prazo) < 0 && ent.prazo.trim() !== '';
+    var prazoSelectHTML = '<select class="small-select" id="ent-' + i + '-prazo">' +
+      '<option value="">Selecione o prazo...</option>';
+    PRAZOS_OPCOES.forEach(function(op) {
+      prazoSelectHTML += '<option value="' + esc(op) + '"' + (ent.prazo === op ? ' selected' : '') + '>' + esc(op) + '</option>';
+    });
+    if (prazoIsCustom) {
+      prazoSelectHTML += '<option value="' + esc(ent.prazo) + '" selected>' + esc(ent.prazo) + '</option>';
+    }
+    prazoSelectHTML += '</select>';
+
     entregasHTML += '<div class="entrega-card">' +
       '<div class="entrega-header">' +
         '<span class="entrega-badge">Entrega ' + (i + 1) + '</span>' +
@@ -1220,16 +1490,16 @@ function renderEntregas(step) {
       '</div>' +
       '<div class="entrega-grid">' +
         '<div>' +
-          '<label class="entrega-field-label" for="ent-' + i + '-entrega">O que será entregue?</label>' +
+          '<label class="entrega-field-label" for="ent-' + i + '-entrega">O que ser\u00e1 entregue?</label>' +
           '<textarea class="small-textarea" id="ent-' + i + '-entrega" rows="2">' + esc(ent.entrega) + '</textarea>' +
         '</div>' +
         '<div>' +
-          '<label class="entrega-field-label" for="ent-' + i + '-atividades">Atividades necessárias</label>' +
+          '<label class="entrega-field-label" for="ent-' + i + '-atividades">Atividades necess\u00e1rias</label>' +
           '<textarea class="small-textarea" id="ent-' + i + '-atividades" rows="3">' + esc(ent.atividades) + '</textarea>' +
         '</div>' +
         '<div>' +
           '<label class="entrega-field-label" for="ent-' + i + '-prazo">Prazo estimado</label>' +
-          '<textarea class="small-textarea" id="ent-' + i + '-prazo" rows="1">' + esc(ent.prazo) + '</textarea>' +
+          prazoSelectHTML +
         '</div>' +
         '<div>' +
           '<label class="entrega-field-label" for="ent-' + i + '-investimento">Investimento (se houver)</label>' +
@@ -1241,7 +1511,7 @@ function renderEntregas(step) {
 
   return contextoHTML +
     '<span class="step-icon">' + step.icon + '</span>' +
-    '<h2 class="step-question">' + esc(step.question) + ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span></h2>' +
+    '<h2 class="step-question">' + esc(step.question) + ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigat\u00f3rio">*</span></h2>' +
     '<p class="step-hint">' + esc(step.dica) + ajudaBtnHTML + '</p>' +
     ajudaBlockHTML +
     '<div class="entregas-example">' +
@@ -1255,13 +1525,13 @@ function renderEntregas(step) {
 function renderSuccessScreen() {
   return '<div class="success-screen">' +
     '<div class="success-icon">\uD83C\uDF89</div>' +
-    '<h2>Plano de Ação enviado com sucesso!</h2>' +
-    '<p>O Plano de Ação da <strong>' + esc(data.ra || 'sua RA') + '</strong> foi recebido pela SEGOV/SEGEST.</p>' +
-    (data.pratica ? '<p class="sub">Prática: ' + esc(data.pratica) + '</p>' : '') +
+    '<h2>Plano de A\u00e7\u00e3o enviado com sucesso!</h2>' +
+    '<p>O Plano de A\u00e7\u00e3o da <strong>' + esc(data.ra || 'sua RA') + '</strong> foi recebido pela SEGOV/SEGEST.</p>' +
+    (data.pratica ? '<p class="sub">Pr\u00e1tica: ' + esc(data.pratica) + '</p>' : '') +
     '<p class="sub">Projeto: ' + esc(data.projeto || '(sem nome)') + '</p>' +
-    '<div class="success-badge">\u2713 Enviado em ' + new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</div>' +
+    '<div class="success-badge">\u2713 Enviado em ' + new Date().toLocaleDateString('pt-BR') + ' \u00e0s ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</div>' +
     '<div class="success-actions" style="margin-top:24px">' +
-      '<button class="btn-nav btn-nav-prev" onclick="showSuccess=false;render()">Voltar para revisão</button>' +
+      '<button class="btn-nav btn-nav-prev" onclick="showSuccess=false;render()">Voltar para revis\u00e3o</button>' +
       '<button class="btn-nav btn-nav-prev" onclick="clearAllData()">Iniciar novo plano</button>' +
     '</div>' +
   '</div>';
@@ -1270,25 +1540,30 @@ function renderSuccessScreen() {
 function renderReview() {
   if (showSuccess) return renderSuccessScreen();
 
-  var sections = STEPS.filter(function(s) { return s.field || s.type === 'partes' || s.type === 'entregas'; });
-
-  function getVal(s) {
-    if (s.field) return data[s.field];
-    if (s.type === 'partes') return [data.patrocinio, data.equipe, data.publico].filter(Boolean).join('\n');
-    if (s.type === 'entregas') return data.entregas.map(function(e, i) { return (i+1) + '. ' + e.entrega; }).filter(function(e) { return e.length > 3; }).join('\n');
+  function getVal(item) {
+    if (item.field) return data[item.field];
+    if (item.type === 'partes') return [data.patrocinio, data.equipe, data.publico].filter(Boolean).join('\n');
+    if (item.type === 'entregas') return data.entregas.map(function(e, i) { return (i+1) + '. ' + e.entrega; }).filter(function(e) { return e.length > 3; }).join('\n');
     return '';
   }
 
   var items = '';
-  sections.forEach(function(s) {
-    var val = getVal(s);
+  var lastPhase = '';
+  REVIEW_ITEMS.forEach(function(item) {
+    // Phase group headers
+    if (item.phase !== lastPhase) {
+      items += '<div class="review-group-label">' + esc(item.phase) + '</div>';
+      lastPhase = item.phase;
+    }
+
+    var val = getVal(item);
     var filled = val && val.trim().length > 0;
-    var idx = STEPS.indexOf(s);
-    var req = isRequired(s.field || s.id);
-    items += '<button class="review-item ' + (filled ? '' : (req ? 'pending' : '')) + '" data-goto="' + idx + '">' +
-      '<span class="review-item-icon">' + s.icon + '</span>' +
+    var stepIdx = getStepIndexForField(item.id);
+    var req = isRequired(item.field || item.id);
+    items += '<button class="review-item ' + (filled ? '' : (req ? 'pending' : '')) + '" data-goto="' + stepIdx + '">' +
+      '<span class="review-item-icon">' + item.icon + '</span>' +
       '<div class="review-item-body">' +
-        '<div class="review-item-label ' + (filled ? 'filled' : 'empty') + '">' + esc(s.label) + (filled ? '' : (req ? ' \u26A0\uFE0F Obrigatório' : ' (opcional)')) + '</div>' +
+        '<div class="review-item-label ' + (filled ? 'filled' : 'empty') + '">' + esc(item.label) + (filled ? '' : (req ? ' \u26A0\uFE0F Obrigat\u00f3rio' : ' (opcional)')) + '</div>' +
         '<div class="review-item-preview">' + esc(val || (req ? 'Clique para preencher...' : 'Clique para preencher (opcional)...')) + '</div>' +
       '</div>' +
       '<span class="review-edit">\u270F\uFE0F</span>' +
@@ -1302,16 +1577,16 @@ function renderReview() {
   if (sentInfo) {
     var sentDate = new Date(sentInfo.timestamp);
     submitHTML = '<div class="already-sent">' +
-      '<p>\u2713 Plano já enviado em <strong>' + sentDate.toLocaleDateString('pt-BR') + '</strong> às ' + sentDate.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</p>' +
+      '<p>\u2713 Plano j\u00e1 enviado em <strong>' + sentDate.toLocaleDateString('pt-BR') + '</strong> \u00e0s ' + sentDate.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</p>' +
       '<button class="btn-submit" onclick="submitToSEGOV()"' + (submitting ? ' disabled' : '') + '>' +
-        (submitting ? '<span class="spinner"></span>Enviando...' : '\uD83D\uDD04 Reenviar versão atualizada') +
+        (submitting ? '<span class="spinner"></span>Enviando...' : '\uD83D\uDD04 Reenviar vers\u00e3o atualizada') +
       '</button>' +
     '</div>';
   } else {
     submitHTML = '<div class="submit-section">' +
-      '<p>Revisou tudo? Quando estiver pronto, envie o Plano de Ação diretamente para a equipe SEGOV/SEGEST.<br><span style="font-size:11px;color:var(--text-muted)">Apenas os campos com * são obrigatórios. Os demais podem ser preenchidos depois.</span></p>' +
+      '<p>Revisou tudo? Quando estiver pronto, envie o Plano de A\u00e7\u00e3o diretamente para a equipe SEGOV/SEGEST.<br><span style="font-size:11px;color:var(--text-muted)">Apenas os campos com * s\u00e3o obrigat\u00f3rios. Os demais podem ser preenchidos depois.</span></p>' +
       '<button class="btn-submit" onclick="submitToSEGOV()"' + (submitting ? ' disabled' : '') + '>' +
-        (submitting ? '<span class="spinner"></span>Enviando para SEGOV...' : '\uD83D\uDCE8 Enviar Plano de Ação para SEGOV') +
+        (submitting ? '<span class="spinner"></span>Enviando para SEGOV...' : '\uD83D\uDCE8 Enviar Plano de A\u00e7\u00e3o para SEGOV') +
       '</button>' +
       '<div id="submit-error" class="error-msg" style="display:none"></div>' +
     '</div>';
@@ -1319,16 +1594,66 @@ function renderReview() {
 
   return '<div class="review-header">' +
       '<div class="icon">\uD83D\uDCCB</div>' +
-      '<h2>Revisão do Plano de Ação</h2>' +
-      '<p>Revise as informações abaixo. Clique em qualquer seção para editar.</p>' +
+      '<h2>Revis\u00e3o do Plano de A\u00e7\u00e3o</h2>' +
+      '<p>Revise as informa\u00e7\u00f5es abaixo. Clique em qualquer se\u00e7\u00e3o para editar.</p>' +
       (data.ra ? '<div class="review-ra">\uD83D\uDCCD ' + esc(data.ra) + '</div>' : '') +
       (data.pratica ? '<div class="review-ra" style="margin-top:6px;background:#f5f3ff;border-color:#c4b5fd;color:#6d28d9">\uD83C\uDFDB\uFE0F ' + esc(data.pratica) + '</div>' : '') +
     '</div>' +
     items +
     submitHTML +
     '<div class="review-actions">' +
-      '<button class="btn-nav btn-nav-prev" onclick="clearAllData()">Limpar tudo e recomeçar</button>' +
+      '<button class="btn-nav btn-nav-prev" onclick="clearAllData()">Limpar tudo e recome\u00e7ar</button>' +
     '</div>';
+}
+
+/* ===================================================
+   PHASE STEPPER RENDERER
+   =================================================== */
+function renderPhaseStepper(pct) {
+  var currentPhaseIdx = getCurrentPhaseIndex();
+  var step = STEPS[currentStep];
+  var isWelcome = step.type === 'welcome';
+  var isReview = step.type === 'review';
+
+  // Desktop stepper
+  var desktopHTML = '<div class="phase-stepper-bar">';
+  PHASES.forEach(function(phase, i) {
+    var status = 'future';
+    if (i < currentPhaseIdx) status = 'completed';
+    else if (i === currentPhaseIdx) status = 'active';
+
+    if (i > 0) {
+      desktopHTML += '<div class="phase-connector' + (i <= currentPhaseIdx ? ' done' : '') + '"></div>';
+    }
+
+    var firstStep = getFirstStepOfPhase(i);
+    var numDisplay = status === 'completed' ? '\u2713' : String(i + 1);
+    desktopHTML += '<div class="phase-step-item ' + status + '" data-goto="' + firstStep + '" title="Ir para: ' + esc(phase.name) + '">' +
+      '<span class="phase-step-num">' + numDisplay + '</span>' +
+      '<span class="phase-step-name">' + esc(phase.name) + '</span>' +
+    '</div>';
+  });
+  desktopHTML += '</div>';
+
+  // Mobile: just show current phase
+  var mobileLabel = isWelcome ? 'In\u00edcio' : (isReview ? 'Revis\u00e3o' : (currentPhaseIdx >= 0 ? PHASES[currentPhaseIdx].name : ''));
+  var mobileHTML = '<div class="phase-stepper-mobile">' +
+    'Fase: <strong>' + esc(mobileLabel) + '</strong> \u2022 Etapa ' + Math.min(currentStep, STEPS.length - 1) + ' de ' + (STEPS.length - 2) +
+  '</div>';
+
+  // Progress track
+  var progressPct = isWelcome ? 0 : (isReview ? 100 : ((currentStep - 1) / (STEPS.length - 2)) * 100);
+  var progressHTML = '<div class="progress-track" style="margin-top:10px"><div class="progress-fill" style="width:' + progressPct + '%"></div></div>';
+
+  // Info line
+  var infoHTML = '<div class="phase-stepper-info">' +
+    '<span style="color:var(--text-secondary)">Etapa ' + Math.min(currentStep, STEPS.length - 1) + ' de ' + (STEPS.length - 2) + '</span>' +
+    '<span style="font-weight:700;color:' + (pct === 100 ? 'var(--gdf-blue)' : 'var(--gdf-blue)') + '">' + pct + '% preenchido</span>' +
+  '</div>';
+
+  return '<div class="phase-stepper no-print">' +
+    desktopHTML + mobileHTML + progressHTML + infoHTML +
+  '</div>';
 }
 
 /* ===================================================
@@ -1345,34 +1670,16 @@ function render() {
   else if (step.type === 'review') contentHTML = renderReview();
   else if (step.type === 'partes') contentHTML = renderPartes(step);
   else if (step.type === 'entregas') contentHTML = renderEntregas(step);
-  else if (step.field) contentHTML = renderField(step);
+  else if (step.type === 'group') contentHTML = renderGroup(step);
+  else if (step.type === 'single') contentHTML = renderSingleStep(step);
 
-  var dots = '';
-  STEPS.forEach(function(s, i) {
-    var cls = 'progress-dot ';
-    if (i === currentStep) cls += 'progress-dot-active';
-    else if (i < currentStep) cls += 'progress-dot-done';
-    else cls += 'progress-dot-todo';
-    var title = s.label || (s.type === 'welcome' ? 'Início' : 'Revisão');
-    dots += '<button class="' + cls + '" data-goto="' + i + '" title="' + title + '" aria-label="Ir para: ' + title + '"></button>';
-  });
-
-  /* Melhoria #3: Fase atual no progresso */
-  var phaseHTML = '';
-  if (!isFirst && !isLast) {
-    var phaseName = getPhaseForStep(step.id);
-    if (phaseName) {
-      phaseHTML = '<div class="phase-label">' + esc(phaseName) + '</div>';
-    }
-  }
-
-  // Motivation message (only on form steps, not welcome/review)
+  // Motivation message (only on form steps)
   var motivHTML = '';
   if (!isFirst && !isLast) {
     motivHTML = '<div class="motivation no-print">' + getMotivation(pct) + '</div>';
   }
 
-  /* Melhoria #4: Botão "Pular" nos opcionais */
+  // Navigation
   var navHTML = '';
   if (!isFirst || !step.type) {
     navHTML = '<div class="nav-row no-print">';
@@ -1380,7 +1687,7 @@ function render() {
     if (isLast) {
       navHTML += '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir / Gerar PDF</button>';
     } else {
-      navHTML += '<button class="btn-nav btn-nav-next" onclick="next()">Próximo \u2192</button>';
+      navHTML += '<button class="btn-nav btn-nav-next" onclick="next()">Pr\u00f3ximo \u2192</button>';
     }
     navHTML += '</div>';
   }
@@ -1388,28 +1695,23 @@ function render() {
   document.getElementById('app').innerHTML =
     '<div class="header no-print">' +
       '<div class="header-brand">' +
-        '<span>Secretaria de Estado de Governo \u2022 Controladoria-Geral do DF</span>' +
-        '<h1>Plano de Ação do CIG</h1>' +
+        '<div class="gdf-badge">GDF</div>' +
+        '<div class="header-brand-text">' +
+          '<span>Governo do Distrito Federal \u2022 SEGOV \u2022 CGDF</span>' +
+          '<h1>Plano de A\u00e7\u00e3o do CIG</h1>' +
+        '</div>' +
       '</div>' +
     '</div>' +
-    '<div class="progress-bar no-print">' +
-      '<div class="progress-info">' +
-        '<span style="color:var(--text-secondary)">Passo ' + Math.min(currentStep + 1, STEPS.length) + ' de ' + STEPS.length + '</span>' +
-        '<span style="font-weight:700;color:' + (pct === 100 ? 'var(--accent-green-dark)' : 'var(--accent-blue-dark)') + '">' + pct + '% preenchido</span>' +
-      '</div>' +
-      '<div class="progress-track"><div class="progress-fill" style="width:' + ((currentStep / (STEPS.length - 1)) * 100) + '%"></div></div>' +
-      '<div class="progress-dots">' + dots + '</div>' +
-      phaseHTML +
-    '</div>' +
+    renderPhaseStepper(pct) +
     motivHTML +
     '<div class="step-card">' +
       '<div class="step-content">' + contentHTML + '</div>' +
     '</div>' +
     navHTML +
     '<div class="footer">' +
-      'Plano de Ação do CIG \u2022 Administrações Regionais do DF<br>' +
-      'Secretaria de Estado de Governo (SEGOV) \u2022 Controladoria-Geral do DF (CGDF)<br>' +
-      'Modelo de Governança Pública do DF \u2014 Resolução CGOV Nº 04/2024' +
+      'Plano de A\u00e7\u00e3o do CIG \u2022 Administra\u00e7\u00f5es Regionais do DF<br>' +
+      'Governo do Distrito Federal \u2022 Secretaria de Estado de Governo (SEGOV) \u2022 Controladoria-Geral do DF (CGDF)<br>' +
+      'Modelo de Governan\u00e7a P\u00fablica do DF \u2014 Resolu\u00e7\u00e3o CGOV N\u00ba 04/2024' +
     '</div>';
 
   // Attach event listeners
@@ -1423,7 +1725,7 @@ function attachClickListeners() {
     card.addEventListener('click', handleExampleClick);
   });
 
-  // Navigation dots and review items
+  // Navigation: phase stepper items, review items, etc.
   document.querySelectorAll('[data-goto]').forEach(function(el) {
     el.addEventListener('click', function() {
       goTo(parseInt(el.dataset.goto, 10));
@@ -1438,7 +1740,7 @@ function attachClickListeners() {
   });
 
   // Enter key on single-line input or select advances to next step
-  document.querySelectorAll('#app input[type="text"], #app select').forEach(function(el) {
+  document.querySelectorAll('#app input[type="text"], #app input[type="email"], #app select').forEach(function(el) {
     el.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') { e.preventDefault(); next(); }
     });
