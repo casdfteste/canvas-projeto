@@ -560,6 +560,7 @@ var STEPS = [
     id: "ra", field: "ra", label: "Região Administrativa",
     question: "Qual é a sua Região Administrativa?",
     dica: "Selecione sua RA na lista abaixo.",
+    placeholder: "Selecione sua Região Administrativa...",
     icon: "\uD83D\uDCCD", color: "#3b82f6", inputType: "select",
     opcoes: REGIOES_DF, exemplos: []
   },
@@ -568,6 +569,7 @@ var STEPS = [
     question: "A qual prática de governança este projeto se refere?",
     contexto: "Cada projeto do Plano de Ação do CIG deve estar vinculado a uma das práticas do Modelo de Governança Pública do DF.",
     dica: "Selecione a prática de governança principal que o projeto vai implementar ou fortalecer, conforme a Resolução CGOV Nº 04/2024.",
+    placeholder: "Selecione a prática de governança...",
     icon: "\uD83C\uDFDB\uFE0F", color: "#7c3aed", inputType: "select",
     opcoes: PRATICAS_GOVERNANCA, exemplos: []
   },
@@ -1145,7 +1147,7 @@ function renderField(step) {
   if (step.inputType === 'select') {
     inputHTML = '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
       '<select id="field-' + step.field + '">' +
-      '<option value="">Selecione sua Região Administrativa...</option>';
+      '<option value="">' + esc(step.placeholder || 'Selecione...') + '</option>';
     step.opcoes.forEach(function(op) {
       inputHTML += '<option value="' + esc(op) + '"' + (data[step.field] === op ? ' selected' : '') + '>' + esc(op) + '</option>';
     });
