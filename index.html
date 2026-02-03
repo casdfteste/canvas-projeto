@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canvas de Projeto — Plano de Ação do CIG — SEGOV/SEGEST</title>
-<meta name="description" content="Ferramenta guiada para elaboração do Canvas de Projeto do Plano de Ação do CIG das Administrações Regionais do DF">
+<title>Plano de Ação do CIG — SEGOV/SEGEST</title>
+<meta name="description" content="Ferramenta guiada para elaboração do Plano de Ação do CIG das Administrações Regionais do DF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
@@ -545,7 +545,7 @@ function getPhaseForStep(stepId) {
 /* ===================================================
    CAMPOS OBRIGATÓRIOS
    =================================================== */
-var REQUIRED_FIELDS = ['ra', 'pratica', 'projeto', 'objetivo'];
+var REQUIRED_FIELDS = ['ra', 'pratica', 'projeto', 'objetivo', 'descricao', 'produto', 'caracteristicas', 'justificativa', 'indicador', 'partes', 'entregas', 'premissas', 'barreiras', 'riscos'];
 
 function isRequired(fieldOrId) {
   return REQUIRED_FIELDS.indexOf(fieldOrId) >= 0;
@@ -581,7 +581,7 @@ var STEPS = [
     exemplos: [
       { titulo: "Governança", texto: "Implantação do Comitê Interno de Governança (CIG) da RA-IX" },
       { titulo: "Atendimento", texto: "Modernização do Atendimento ao Cidadão na RA-III Taguatinga" },
-      { titulo: "Gestão de Riscos", texto: "Programa de Gestão de Riscos Operacionais da RA-I Brasília" },
+      { titulo: "Gestão de Riscos", texto: "Programa de Gestão de Riscos Operacionais da RA-I Plano Piloto" },
       { titulo: "Transparência", texto: "Portal de Transparência e Prestação de Contas da RA-V Sobradinho" }
     ]
   },
@@ -593,9 +593,9 @@ var STEPS = [
     placeholder: "Descreva o objetivo principal...",
     icon: "\uD83C\uDFC6", color: "#dc2626",
     exemplos: [
-      { titulo: "Governança", texto: "Estruturar o CIG como instância deliberativa para qualificar decisões e dar segurança jurídica à gestão da RA" },
-      { titulo: "Atendimento", texto: "Reduzir em 50% o tempo de espera do cidadão e implantar sistema de agendamento online" },
-      { titulo: "Contratos", texto: "Garantir 100% de conformidade na fiscalização de contratos vigentes da RA" }
+      { titulo: "Governança", texto: "Estruturar o CIG como instância deliberativa para qualificar decisões e dar segurança jurídica à gestão da RA." },
+      { titulo: "Atendimento", texto: "Reduzir em 50% o tempo de espera do cidadão e implantar sistema de agendamento online." },
+      { titulo: "Contratos", texto: "Garantir 100% de conformidade na fiscalização de contratos vigentes da RA." }
     ]
   },
   {
@@ -606,8 +606,8 @@ var STEPS = [
     placeholder: "Descreva o escopo e contexto...",
     icon: "\uD83D\uDCCB", color: "#2563eb",
     exemplos: [
-      { titulo: "Governança", texto: "Formalização do CIG por portaria, elaboração de regimento interno, capacitação dos membros e início das reuniões ordinárias mensais, alinhado às diretrizes SEGOV/CGDF" },
-      { titulo: "Capacitação", texto: "Programa de capacitação continuada para 45 servidores da RA em gestão pública, integridade e atendimento, com 6 módulos ao longo de 12 meses" }
+      { titulo: "Governança", texto: "Formalização do CIG por portaria, elaboração de regimento interno, capacitação dos membros e início das reuniões ordinárias mensais, alinhado às diretrizes da SEGOV/CGDF." },
+      { titulo: "Capacitação", texto: "Programa de capacitação continuada para 45 servidores da RA em gestão pública, integridade e atendimento, com 6 módulos ao longo de 12 meses." }
     ]
   },
   {
@@ -618,9 +618,9 @@ var STEPS = [
     placeholder: "O principal produto do projeto...",
     icon: "\uD83D\uDCE6", color: "#ea580c",
     exemplos: [
-      { titulo: "Governança", texto: "CIG formalmente instituído, com regimento aprovado e reuniões ordinárias em funcionamento" },
-      { titulo: "Atendimento", texto: "Central de atendimento reorganizada com sistema de senhas, agendamento e pesquisa de satisfação" },
-      { titulo: "Riscos", texto: "Matriz de riscos da RA elaborada com planos de tratamento para os 10 riscos prioritários" }
+      { titulo: "Governança", texto: "CIG formalmente instituído, com regimento aprovado e reuniões ordinárias em funcionamento." },
+      { titulo: "Atendimento", texto: "Central de atendimento reorganizada com sistema de senhas, agendamento e pesquisa de satisfação." },
+      { titulo: "Riscos", texto: "Matriz de riscos da RA elaborada com planos de tratamento para os 10 riscos prioritários." }
     ]
   },
   {
@@ -632,8 +632,8 @@ var STEPS = [
     placeholder: "Características do produto principal...",
     icon: "\u2B50", color: "#7c3aed",
     exemplos: [
-      { titulo: "CIG", texto: "Composição multissetorial \u2022 Reuniões mensais com ata no SEI \u2022 Pauta estruturada \u2022 Deliberações registradas \u2022 Alinhamento SEGOV/CGDF" },
-      { titulo: "Atendimento", texto: "Acessível a PCD \u2022 Bilíngue (português/Libras) \u2022 Tempo máximo de espera: 15min \u2022 Pesquisa de satisfação digital" }
+      { titulo: "CIG", texto: "Composição multissetorial \u2022 Reuniões mensais com ata no SEI \u2022 Pauta estruturada \u2022 Deliberações registradas \u2022 Alinhamento com a SEGOV/CGDF." },
+      { titulo: "Atendimento", texto: "Acessível a PCD \u2022 Bilíngue (português/Libras) \u2022 Tempo máximo de espera: 15 min \u2022 Pesquisa de satisfação digital." }
     ]
   },
   {
@@ -657,8 +657,8 @@ var STEPS = [
     placeholder: "Indicadores de sucesso...",
     icon: "\uD83D\uDCCA", color: "#059669",
     exemplos: [
-      { titulo: "Governança", texto: "% de reuniões realizadas vs. programadas (meta: 100%)\nN\u00BA de riscos identificados e tratados\nÍndice de conformidade no checklist CGDF" },
-      { titulo: "Atendimento", texto: "Tempo médio de espera (meta: < 15min)\nÍndice de satisfação do cidadão (meta: > 80%)\nN\u00BA de atendimentos/dia" }
+      { titulo: "Governança", texto: "% de reuniões realizadas vs. programadas (meta: 100%).\nN\u00BA de riscos identificados e tratados.\nÍndice de conformidade no checklist da CGDF." },
+      { titulo: "Atendimento", texto: "Tempo médio de espera (meta: < 15 min).\nÍndice de satisfação do cidadão (meta: > 80%).\nN\u00BA de atendimentos/dia." }
     ]
   },
   {
@@ -682,8 +682,8 @@ var STEPS = [
     dica: "Cada entrega deve ter: o que será entregue, as atividades necessárias, prazo e custo estimado. Comece com 1 ou 2 entregas \u2014 você pode adicionar mais depois.",
     ajuda: "Entregas intermediárias são os marcos do projeto \u2014 resultados parciais que mostram que o trabalho está avançando. Pense nos passos até chegar ao produto final.",
     exemplos: [
-      { entrega: "Ato normativo do CIG publicado", atividades: "Minutar portaria \u2192 Assessoria jurídica \u2192 Assinatura \u2192 DODF", prazo: "30 dias", investimento: "Sem custo direto" },
-      { entrega: "1\u00AA reunião ordinária realizada", atividades: "Regimento aprovado \u2192 Pauta definida \u2192 Convocação \u2192 Ata no SEI", prazo: "60 dias", investimento: "Sem custo direto" }
+      { entrega: "Ato normativo do CIG publicado.", atividades: "Minutar portaria \u2192 Assessoria jurídica \u2192 Assinatura \u2192 Publicação no DODF.", prazo: "30 dias", investimento: "Sem custo direto." },
+      { entrega: "1\u00AA reunião ordinária realizada.", atividades: "Regimento aprovado \u2192 Pauta definida \u2192 Convocação \u2192 Ata registrada no SEI.", prazo: "60 dias", investimento: "Sem custo direto." }
     ]
   },
   {
@@ -695,7 +695,7 @@ var STEPS = [
     placeholder: "Fatores críticos de sucesso...",
     icon: "\uD83C\uDFC5", color: "#b45309",
     exemplos: [
-      { titulo: "Típicas", texto: "Apoio do(a) Administrador(a) Regional\nServidores capacitados com disponibilidade de tempo\nAcesso ao SEI funcionando\nSuporte técnico da SEGOV conforme comprometido" }
+      { titulo: "Típicas", texto: "Apoio do(a) Administrador(a) Regional.\nServidores capacitados com disponibilidade de tempo.\nAcesso ao SEI funcionando.\nSuporte técnico da SEGOV conforme comprometido." }
     ]
   },
   {
@@ -706,7 +706,7 @@ var STEPS = [
     placeholder: "Dificuldades existentes...",
     icon: "\uD83D\uDEA7", color: "#dc2626",
     exemplos: [
-      { titulo: "Comuns nas RAs", texto: "Acúmulo de funções dos servidores\nResistência cultural a mudanças\nRotatividade em cargos comissionados\nInfraestrutura limitada (salas, equipamentos)" }
+      { titulo: "Comuns nas RAs", texto: "Acúmulo de funções dos servidores.\nResistência cultural a mudanças.\nRotatividade em cargos comissionados.\nInfraestrutura limitada (salas, equipamentos)." }
     ]
   },
   {
@@ -717,7 +717,7 @@ var STEPS = [
     placeholder: "Eventos que podem impactar...",
     icon: "\u26A0\uFE0F", color: "#d97706",
     exemplos: [
-      { titulo: "Frequentes", texto: "Troca de Administrador(a) com descontinuidade\nPerda de servidores capacitados por remoção\nSobrecarga de demandas urgentes\nCorte orçamentário inesperado" }
+      { titulo: "Frequentes", texto: "Troca de Administrador(a) com descontinuidade.\nPerda de servidores capacitados por remoção.\nSobrecarga de demandas urgentes.\nCorte orçamentário inesperado." }
     ]
   },
   { id: "review", type: "review" }
@@ -730,9 +730,9 @@ var MOTIVATIONS = [
   { min: 0, max: 10, msg: "Vamos lá! O primeiro passo é o mais importante." },
   { min: 11, max: 25, msg: "Ótimo começo! Continue preenchendo, está ficando bom." },
   { min: 26, max: 50, msg: "Quase na metade! Seu projeto já está tomando forma." },
-  { min: 51, max: 75, msg: "Mais da metade! O canvas está ficando completo." },
+  { min: 51, max: 75, msg: "Mais da metade! O plano está ficando completo." },
   { min: 76, max: 95, msg: "Falta pouco! Seu projeto está quase pronto para enviar." },
-  { min: 96, max: 100, msg: "Excelente! Canvas 100% preenchido. Hora de enviar!" }
+  { min: 96, max: 100, msg: "Excelente! Plano 100% preenchido. Hora de enviar!" }
 ];
 
 function getMotivation(pct) {
@@ -901,7 +901,7 @@ function exportJSON() {
   var url = URL.createObjectURL(blob);
   var a = document.createElement('a');
   a.href = url;
-  a.download = 'canvas-' + (data.ra || 'projeto').replace(/[^a-zA-Z0-9]/g, '-') + '-' + new Date().toISOString().slice(0,10) + '.json';
+  a.download = 'plano-acao-' + (data.ra || 'cig').replace(/[^a-zA-Z0-9]/g, '-') + '-' + new Date().toISOString().slice(0,10) + '.json';
   a.click();
   URL.revokeObjectURL(url);
 }
@@ -989,7 +989,7 @@ function clearAllData() {
   render();
 }
 
-/* Melhoria #10: Toggle da explicação do Canvas */
+/* Toggle da explicação do Plano de Ação */
 function toggleCanvasInfo() {
   var el = document.getElementById('canvas-info-content');
   var btn = document.getElementById('canvas-info-btn');
@@ -999,7 +999,7 @@ function toggleCanvasInfo() {
     if (btn) btn.textContent = 'Fechar explicação';
   } else {
     el.style.display = 'none';
-    if (btn) btn.textContent = 'O que é o Canvas de Projeto?';
+    if (btn) btn.textContent = 'O que é o Plano de Ação do CIG?';
   }
 }
 
@@ -1033,7 +1033,7 @@ function submitToSEGOV() {
   }
 
   if (GOOGLE_SCRIPT_URL === 'COLE_SUA_URL_AQUI') {
-    alert('O envio ainda não foi configurado.\n\nO administrador precisa configurar a URL do Google Apps Script.\nPor enquanto, use "Salvar arquivo" para exportar o JSON.');
+    alert('O envio ainda não foi configurado.\n\nO administrador precisa configurar a URL do Google Apps Script.');
     return;
   }
 
@@ -1063,7 +1063,7 @@ function submitToSEGOV() {
     var errorEl = document.getElementById('submit-error');
     if (errorEl) {
       errorEl.style.display = 'block';
-      errorEl.textContent = 'Erro ao enviar. Verifique sua conexão e tente novamente. Se persistir, use "Salvar arquivo" e envie por e-mail.';
+      errorEl.textContent = 'Erro ao enviar. Verifique sua conexão e tente novamente.';
     }
   });
 }
@@ -1090,35 +1090,28 @@ function attachInputListeners() {
    RENDERERS
    =================================================== */
 
-/* Melhoria #9 e #10: Welcome com "O que é o Canvas?" e import condicional */
+/* Welcome com explicação e import condicional */
 function renderWelcome() {
   var hasSaved = localStorage.getItem(STORAGE_KEY);
   var resumeBtn = hasSaved
     ? '<button class="btn-ghost" onclick="goTo(1)">Continuar de onde parou</button>'
     : '';
-  /* Melhoria #9: Esconder import na primeira visita */
-  var importBtn = hasSaved
-    ? '<button class="btn-ghost" onclick="importJSON()">\uD83D\uDCC2 Importar arquivo salvo</button>'
-    : '';
 
   return '<div class="welcome">' +
-    '<div class="welcome-icon">\uD83D\uDDFA\uFE0F</div>' +
+    '<div class="welcome-icon">\uD83C\uDFDB\uFE0F</div>' +
     '<h2>Plano de Ação do CIG</h2>' +
-    '<p>Este assistente vai guiar você, passo a passo, no preenchimento do Canvas de Projeto para o <strong>Plano de Ação do Comitê Interno de Governança</strong> da sua Região Administrativa.</p>' +
-    '<p class="sub">Em cada etapa você verá <strong style="color:var(--accent-yellow)">exemplos inspiradores</strong> baseados nas práticas do Modelo de Governança Pública do DF. Ao final, envie diretamente para a SEGOV.</p>' +
+    '<p>Este assistente vai guiar você, passo a passo, na elaboração do <strong>Plano de Ação do Comitê Interno de Governança</strong> da sua Região Administrativa.</p>' +
+    '<p class="sub">Iniciativa da <strong>Secretaria de Estado de Governo (SEGOV)</strong> e da <strong>Controladoria-Geral do DF (CGDF)</strong>, conforme o Modelo de Governança Pública do DF (Resolução CGOV Nº 04/2024).</p>' +
     '<div class="welcome-btns">' +
       '<button class="btn-primary" onclick="next()">Começar</button>' +
       resumeBtn +
-      importBtn +
     '</div>' +
-    /* Melhoria #10: Explicação do Canvas */
     '<div style="margin-top:24px">' +
-      '<button class="welcome-info-toggle" id="canvas-info-btn" onclick="toggleCanvasInfo()">O que é o Canvas de Projeto?</button>' +
+      '<button class="welcome-info-toggle" id="canvas-info-btn" onclick="toggleCanvasInfo()">O que é o Plano de Ação do CIG?</button>' +
       '<div id="canvas-info-content" class="welcome-info-content" style="display:none">' +
-        '<p><strong>O Canvas de Projeto</strong> é uma ferramenta visual que resume os principais elementos de um projeto em uma única página. Ele foi adaptado pela SEGOV para as Administrações Regionais do DF, como modelo para o <strong>Plano de Ação dos CIGs</strong>.</p>' +
-        '<p>De acordo com o <strong>Modelo de Governança Pública do Governo do DF</strong> (Resolução CGOV Nº 04/2024), cada RA deve implementar práticas de governança monitoradas pela SEGOV. Este canvas ajuda a estruturar projetos vinculados a essas práticas.</p>' +
-        '<p>Ele ajuda a organizar ideias, alinhar expectativas com a equipe e comunicar o projeto de forma clara para todos os envolvidos \u2014 da sua RA até a SEGOV e a CGDF.</p>' +
-        '<p>Não se preocupe em acertar tudo de primeira! Você pode voltar e editar qualquer campo a qualquer momento. Os campos com <span style="color:var(--accent-red)">*</span> são os únicos obrigatórios para envio.</p>' +
+        '<p><strong>O Plano de Ação do CIG</strong> é o instrumento que organiza os projetos de governança de cada Administração Regional em uma estrutura clara e objetiva.</p>' +
+        '<p>De acordo com o <strong>Modelo de Governança Pública do Governo do DF</strong> (Resolução CGOV Nº 04/2024), cada RA deve implementar práticas de governança monitoradas pela SEGOV e pela CGDF. Este formulário ajuda a estruturar projetos vinculados a essas práticas.</p>' +
+        '<p>Não se preocupe em acertar tudo de primeira! Você pode voltar e editar qualquer campo a qualquer momento.</p>' +
       '</div>' +
     '</div>' +
     '<div class="welcome-features">' +
@@ -1146,11 +1139,8 @@ function renderField(step) {
     exHTML += '<div class="examples-hint">Clique num exemplo para usá-lo como ponto de partida, ou escreva o seu abaixo</div>';
   }
 
-  /* Melhoria #2: Obrigatório vs opcional */
-  var req = isRequired(step.field);
-  var reqLabel = req ? ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span>' : '';
-  var optLabel = !req ? '<span class="optional-tag">(opcional)</span>' : '';
-  var legendHTML = '<div class="required-legend"><span style="color:var(--accent-red)">*</span> = obrigatório para envio' + (!req ? ' &nbsp;\u2022&nbsp; Este campo é opcional, preencha se quiser' : '') + '</div>';
+  var reqLabel = ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span>';
+  var optLabel = '';
 
   /* Melhoria #7: Tooltip de ajuda */
   var ajudaHTML = step.ajuda
@@ -1178,9 +1168,8 @@ function renderField(step) {
 
   return contextoHTML +
     '<span class="step-icon">' + step.icon + '</span>' +
-    '<h2 class="step-question">' + esc(step.question) + reqLabel + optLabel + '</h2>' +
+    '<h2 class="step-question">' + esc(step.question) + reqLabel + '</h2>' +
     '<p class="step-hint">' + esc(step.dica) + ajudaHTML + '</p>' +
-    legendHTML +
     exHTML + inputHTML;
 }
 
@@ -1200,9 +1189,8 @@ function renderPartes(step) {
 
   var html = contextoHTML +
     '<span class="step-icon">' + step.icon + '</span>' +
-    '<h2 class="step-question">' + esc(step.question) + '<span class="optional-tag">(opcional)</span></h2>' +
-    '<p class="step-hint">' + esc(step.dica) + ajudaHTML + '</p>' +
-    '<div class="required-legend">Este campo é opcional, preencha se quiser</div>';
+    '<h2 class="step-question">' + esc(step.question) + ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span></h2>' +
+    '<p class="step-hint">' + esc(step.dica) + ajudaHTML + '</p>';
 
   subs.forEach(function(s) {
     html += '<div class="partes-block">' +
@@ -1263,9 +1251,8 @@ function renderEntregas(step) {
 
   return contextoHTML +
     '<span class="step-icon">' + step.icon + '</span>' +
-    '<h2 class="step-question">' + esc(step.question) + '<span class="optional-tag">(opcional)</span></h2>' +
+    '<h2 class="step-question">' + esc(step.question) + ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span></h2>' +
     '<p class="step-hint">' + esc(step.dica) + ajudaHTML + '</p>' +
-    '<div class="required-legend">Este campo é opcional, preencha se quiser</div>' +
     '<div class="entregas-example">' +
       '<div class="examples-label">\uD83D\uDCA1 Exemplo de entregas (Projeto CIG)</div>' +
       exHTML +
@@ -1277,15 +1264,14 @@ function renderEntregas(step) {
 function renderSuccessScreen() {
   return '<div class="success-screen">' +
     '<div class="success-icon">\uD83C\uDF89</div>' +
-    '<h2>Canvas enviado com sucesso!</h2>' +
-    '<p>O Canvas de Projeto da <strong>' + esc(data.ra || 'sua RA') + '</strong> foi recebido pela SEGOV/SEGEST.</p>' +
+    '<h2>Plano de Ação enviado com sucesso!</h2>' +
+    '<p>O Plano de Ação da <strong>' + esc(data.ra || 'sua RA') + '</strong> foi recebido pela SEGOV/SEGEST.</p>' +
     (data.pratica ? '<p class="sub">Prática: ' + esc(data.pratica) + '</p>' : '') +
     '<p class="sub">Projeto: ' + esc(data.projeto || '(sem nome)') + '</p>' +
     '<div class="success-badge">\u2713 Enviado em ' + new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</div>' +
     '<div class="success-actions" style="margin-top:24px">' +
-      '<button class="btn-nav btn-nav-next" onclick="exportJSON()">\uD83D\uDCBE Salvar cópia local</button>' +
-      '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir / PDF</button>' +
       '<button class="btn-nav btn-nav-prev" onclick="showSuccess=false;render()">Voltar para revisão</button>' +
+      '<button class="btn-nav btn-nav-prev" onclick="clearAllData()">Iniciar novo plano</button>' +
     '</div>' +
   '</div>';
 }
@@ -1325,16 +1311,16 @@ function renderReview() {
   if (sentInfo) {
     var sentDate = new Date(sentInfo.timestamp);
     submitHTML = '<div class="already-sent">' +
-      '<p>\u2713 Canvas já enviado em <strong>' + sentDate.toLocaleDateString('pt-BR') + '</strong> às ' + sentDate.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</p>' +
+      '<p>\u2713 Plano já enviado em <strong>' + sentDate.toLocaleDateString('pt-BR') + '</strong> às ' + sentDate.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</p>' +
       '<button class="btn-submit" onclick="submitToSEGOV()"' + (submitting ? ' disabled' : '') + '>' +
         (submitting ? '<span class="spinner"></span>Enviando...' : '\uD83D\uDD04 Reenviar versão atualizada') +
       '</button>' +
     '</div>';
   } else {
     submitHTML = '<div class="submit-section">' +
-      '<p>Revisou tudo? Quando estiver pronto, envie o canvas diretamente para a equipe SEGOV/SEGEST.<br><span style="font-size:11px;color:var(--text-muted)">Apenas os campos com * são obrigatórios. Os demais podem ser preenchidos depois.</span></p>' +
+      '<p>Revisou tudo? Quando estiver pronto, envie o Plano de Ação diretamente para a equipe SEGOV/SEGEST.<br><span style="font-size:11px;color:var(--text-muted)">Apenas os campos com * são obrigatórios. Os demais podem ser preenchidos depois.</span></p>' +
       '<button class="btn-submit" onclick="submitToSEGOV()"' + (submitting ? ' disabled' : '') + '>' +
-        (submitting ? '<span class="spinner"></span>Enviando para SEGOV...' : '\uD83D\uDCE8 Enviar Canvas para SEGOV') +
+        (submitting ? '<span class="spinner"></span>Enviando para SEGOV...' : '\uD83D\uDCE8 Enviar Plano de Ação para SEGOV') +
       '</button>' +
       '<div id="submit-error" class="error-msg" style="display:none"></div>' +
     '</div>';
@@ -1342,7 +1328,7 @@ function renderReview() {
 
   return '<div class="review-header">' +
       '<div class="icon">\uD83D\uDCCB</div>' +
-      '<h2>Revisão do Canvas</h2>' +
+      '<h2>Revisão do Plano de Ação</h2>' +
       '<p>Revise as informações abaixo. Clique em qualquer seção para editar.</p>' +
       (data.ra ? '<div class="review-ra">\uD83D\uDCCD ' + esc(data.ra) + '</div>' : '') +
       (data.pratica ? '<div class="review-ra" style="margin-top:6px;background:#f5f3ff;border-color:#c4b5fd;color:#6d28d9">\uD83C\uDFDB\uFE0F ' + esc(data.pratica) + '</div>' : '') +
@@ -1350,9 +1336,7 @@ function renderReview() {
     items +
     submitHTML +
     '<div class="review-actions">' +
-      '<button class="btn-nav btn-nav-next" onclick="exportJSON()">\uD83D\uDCBE Salvar arquivo</button>' +
-      '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir / PDF</button>' +
-      '<button class="btn-nav btn-nav-prev" onclick="clearAllData()">Limpar tudo</button>' +
+      '<button class="btn-nav btn-nav-prev" onclick="clearAllData()">Limpar tudo e recomeçar</button>' +
     '</div>';
 }
 
@@ -1405,14 +1389,7 @@ function render() {
     if (isLast) {
       navHTML += '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir / Gerar PDF</button>';
     } else {
-      var stepIsRequired = isRequired(step.field || step.id);
-      var showSkip = !stepIsRequired && !isFirst && step.type !== 'welcome';
-      navHTML += '<div class="nav-right">';
-      if (showSkip) {
-        navHTML += '<button class="btn-nav btn-nav-skip" onclick="next()">Pular</button>';
-      }
       navHTML += '<button class="btn-nav btn-nav-next" onclick="next()">Próximo \u2192</button>';
-      navHTML += '</div>';
     }
     navHTML += '</div>';
   }
@@ -1420,12 +1397,8 @@ function render() {
   document.getElementById('app').innerHTML =
     '<div class="header no-print">' +
       '<div class="header-brand">' +
-        '<span>SEGOV/SEGEST \u2022 Plano de Ação do CIG</span>' +
-        '<h1>Canvas de Projeto</h1>' +
-      '</div>' +
-      '<div class="header-actions">' +
-        '<button class="btn-small" onclick="importJSON()">\uD83D\uDCC2 Importar</button>' +
-        '<button class="btn-small" onclick="exportJSON()">\uD83D\uDCBE Salvar</button>' +
+        '<span>Secretaria de Estado de Governo \u2022 Controladoria-Geral do DF</span>' +
+        '<h1>Plano de Ação do CIG</h1>' +
       '</div>' +
     '</div>' +
     '<div class="progress-bar no-print">' +
@@ -1443,9 +1416,9 @@ function render() {
     '</div>' +
     navHTML +
     '<div class="footer">' +
-      'Canvas de Projeto \u2022 Plano de Ação do CIG \u2022 SEGOV/SEGEST<br>' +
-      'Modelo de Governança Pública do DF \u2014 Resolução CGOV Nº 04/2024<br>' +
-      'Adaptado da Rede Conexão Inovação Pública (CC BY-NC-SA 4.0)' +
+      'Plano de Ação do CIG \u2022 Administrações Regionais do DF<br>' +
+      'Secretaria de Estado de Governo (SEGOV) \u2022 Controladoria-Geral do DF (CGDF)<br>' +
+      'Modelo de Governança Pública do DF \u2014 Resolução CGOV Nº 04/2024' +
     '</div>';
 
   // Attach event listeners
