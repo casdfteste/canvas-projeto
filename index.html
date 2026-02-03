@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canvas de Projeto — SEGOV/SEGEST</title>
-<meta name="description" content="Ferramenta guiada para elaboração do Canvas de Projeto das Administrações Regionais do DF">
+<title>Canvas de Projeto — Plano de Ação do CIG — SEGOV/SEGEST</title>
+<meta name="description" content="Ferramenta guiada para elaboração do Canvas de Projeto do Plano de Ação do CIG das Administrações Regionais do DF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
@@ -500,10 +500,33 @@ var REGIOES_DF = [
 ];
 
 /* ===================================================
+   PRÁTICAS DE GOVERNANÇA (Resolução CGOV Nº 04/2024)
+   =================================================== */
+var PRATICAS_GOVERNANCA = [
+  "Comitê Interno de Governança (CIG)",
+  "Planejamento Estratégico",
+  "Gestão de Riscos",
+  "Programa de Integridade Pública",
+  "Programa de Integridade Privada",
+  "Conformidade",
+  "Controle Interno",
+  "Correição",
+  "Ouvidoria",
+  "Transparência",
+  "Governança de Pessoas",
+  "Governança de Dados",
+  "Governança nas Contratações",
+  "Gerenciamento de Processos",
+  "Inovação",
+  "Dimensão Ambiental",
+  "Dimensão Social"
+];
+
+/* ===================================================
    FASES DO CANVAS (agrupamento visual)
    =================================================== */
 var PHASES = [
-  { name: "Identidade do Projeto", steps: ["ra", "projeto", "objetivo"] },
+  { name: "Identidade do Projeto", steps: ["ra", "pratica", "projeto", "objetivo"] },
   { name: "Detalhamento", steps: ["descricao", "produto", "caracteristicas"] },
   { name: "Análise", steps: ["justificativa", "indicador"] },
   { name: "Pessoas e Planejamento", steps: ["partes", "entregas"] },
@@ -520,7 +543,7 @@ function getPhaseForStep(stepId) {
 /* ===================================================
    CAMPOS OBRIGATÓRIOS
    =================================================== */
-var REQUIRED_FIELDS = ['ra', 'projeto', 'objetivo'];
+var REQUIRED_FIELDS = ['ra', 'pratica', 'projeto', 'objetivo'];
 
 function isRequired(fieldOrId) {
   return REQUIRED_FIELDS.indexOf(fieldOrId) >= 0;
@@ -537,6 +560,14 @@ var STEPS = [
     dica: "Selecione sua RA na lista abaixo.",
     icon: "\uD83D\uDCCD", color: "#3b82f6", inputType: "select",
     opcoes: REGIOES_DF, exemplos: []
+  },
+  {
+    id: "pratica", field: "pratica", label: "Prática de Governança",
+    question: "A qual prática de governança este projeto se refere?",
+    contexto: "Cada projeto do Plano de Ação do CIG deve estar vinculado a uma das práticas do Modelo de Governança Pública do DF.",
+    dica: "Selecione a prática de governança principal que o projeto vai implementar ou fortalecer, conforme a Resolução CGOV Nº 04/2024.",
+    icon: "\uD83C\uDFDB\uFE0F", color: "#7c3aed", inputType: "select",
+    opcoes: PRATICAS_GOVERNANCA, exemplos: []
   },
   {
     id: "projeto", field: "projeto", label: "Nome do Projeto",
@@ -721,7 +752,7 @@ var submitting = false;
 var showSuccess = false;
 
 var data = {
-  ra: "", projeto: "", objetivo: "", descricao: "",
+  ra: "", pratica: "", projeto: "", objetivo: "", descricao: "",
   produto: "", caracteristicas: "", justificativa: "",
   indicador: "", patrocinio: "", equipe: "", publico: "",
   premissas: "", barreiras: "", riscos: "",
@@ -797,7 +828,7 @@ function scheduleAutosave() {
 function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
 function getProgress() {
-  var fields = [data.ra, data.projeto, data.objetivo, data.descricao, data.produto,
+  var fields = [data.ra, data.pratica, data.projeto, data.objetivo, data.descricao, data.produto,
     data.caracteristicas, data.justificativa, data.indicador,
     data.patrocinio, data.equipe, data.publico,
     data.premissas, data.barreiras, data.riscos];
@@ -811,6 +842,7 @@ function getProgress() {
 function getRequiredEmpty() {
   var required = [
     { field: 'ra', label: 'Região Administrativa' },
+    { field: 'pratica', label: 'Prática de Governança' },
     { field: 'projeto', label: 'Nome do Projeto' },
     { field: 'objetivo', label: 'Objetivo' }
   ];
@@ -942,7 +974,7 @@ function clearAllData() {
   localStorage.removeItem(STORAGE_STEP_KEY);
   localStorage.removeItem(STORAGE_SENT_KEY);
   data = {
-    ra: "", projeto: "", objetivo: "", descricao: "",
+    ra: "", pratica: "", projeto: "", objetivo: "", descricao: "",
     produto: "", caracteristicas: "", justificativa: "",
     indicador: "", patrocinio: "", equipe: "", publico: "",
     premissas: "", barreiras: "", riscos: "",
@@ -1069,9 +1101,9 @@ function renderWelcome() {
 
   return '<div class="welcome">' +
     '<div class="welcome-icon">\uD83D\uDDFA\uFE0F</div>' +
-    '<h2>Vamos construir o seu projeto!</h2>' +
-    '<p>Este assistente vai guiar você, passo a passo, no preenchimento do Canvas de Projeto da sua Região Administrativa.</p>' +
-    '<p class="sub">Em cada etapa você verá <strong style="color:var(--accent-yellow)">exemplos inspiradores</strong> de diferentes tipos de projeto para ajudar a pensar no seu. Ao final, envie diretamente para a SEGOV.</p>' +
+    '<h2>Plano de Ação do CIG</h2>' +
+    '<p>Este assistente vai guiar você, passo a passo, no preenchimento do Canvas de Projeto para o <strong>Plano de Ação do Comitê Interno de Governança</strong> da sua Região Administrativa.</p>' +
+    '<p class="sub">Em cada etapa você verá <strong style="color:var(--accent-yellow)">exemplos inspiradores</strong> baseados nas práticas do Modelo de Governança Pública do DF. Ao final, envie diretamente para a SEGOV.</p>' +
     '<div class="welcome-btns">' +
       '<button class="btn-primary" onclick="next()">Começar</button>' +
       resumeBtn +
@@ -1081,8 +1113,9 @@ function renderWelcome() {
     '<div style="margin-top:24px">' +
       '<button class="welcome-info-toggle" id="canvas-info-btn" onclick="toggleCanvasInfo()">O que é o Canvas de Projeto?</button>' +
       '<div id="canvas-info-content" class="welcome-info-content" style="display:none">' +
-        '<p><strong>O Canvas de Projeto</strong> é uma ferramenta visual que resume os principais elementos de um projeto em uma única página. Ele foi adaptado pela SEGOV para as Administrações Regionais do DF.</p>' +
-        '<p>Ele ajuda a organizar ideias, alinhar expectativas com a equipe e comunicar o projeto de forma clara para todos os envolvidos \u2014 da sua RA até a SEGOV.</p>' +
+        '<p><strong>O Canvas de Projeto</strong> é uma ferramenta visual que resume os principais elementos de um projeto em uma única página. Ele foi adaptado pela SEGOV para as Administrações Regionais do DF, como modelo para o <strong>Plano de Ação dos CIGs</strong>.</p>' +
+        '<p>De acordo com o <strong>Modelo de Governança Pública do Governo do DF</strong> (Resolução CGOV Nº 04/2024), cada RA deve implementar práticas de governança monitoradas pela SEGOV. Este canvas ajuda a estruturar projetos vinculados a essas práticas.</p>' +
+        '<p>Ele ajuda a organizar ideias, alinhar expectativas com a equipe e comunicar o projeto de forma clara para todos os envolvidos \u2014 da sua RA até a SEGOV e a CGDF.</p>' +
         '<p>Não se preocupe em acertar tudo de primeira! Você pode voltar e editar qualquer campo a qualquer momento. Os campos com <span style="color:var(--accent-red)">*</span> são os únicos obrigatórios para envio.</p>' +
       '</div>' +
     '</div>' +
@@ -1244,6 +1277,7 @@ function renderSuccessScreen() {
     '<div class="success-icon">\uD83C\uDF89</div>' +
     '<h2>Canvas enviado com sucesso!</h2>' +
     '<p>O Canvas de Projeto da <strong>' + esc(data.ra || 'sua RA') + '</strong> foi recebido pela SEGOV/SEGEST.</p>' +
+    (data.pratica ? '<p class="sub">Prática: ' + esc(data.pratica) + '</p>' : '') +
     '<p class="sub">Projeto: ' + esc(data.projeto || '(sem nome)') + '</p>' +
     '<div class="success-badge">\u2713 Enviado em ' + new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'}) + '</div>' +
     '<div class="success-actions" style="margin-top:24px">' +
@@ -1309,6 +1343,7 @@ function renderReview() {
       '<h2>Revisão do Canvas</h2>' +
       '<p>Revise as informações abaixo. Clique em qualquer seção para editar.</p>' +
       (data.ra ? '<div class="review-ra">\uD83D\uDCCD ' + esc(data.ra) + '</div>' : '') +
+      (data.pratica ? '<div class="review-ra" style="margin-top:6px;background:#f5f3ff;border-color:#c4b5fd;color:#6d28d9">\uD83C\uDFDB\uFE0F ' + esc(data.pratica) + '</div>' : '') +
     '</div>' +
     items +
     submitHTML +
@@ -1383,7 +1418,7 @@ function render() {
   document.getElementById('app').innerHTML =
     '<div class="header no-print">' +
       '<div class="header-brand">' +
-        '<span>SEGOV/SEGEST \u2022 Governança nas Administrações Regionais</span>' +
+        '<span>SEGOV/SEGEST \u2022 Plano de Ação do CIG</span>' +
         '<h1>Canvas de Projeto</h1>' +
       '</div>' +
       '<div class="header-actions">' +
@@ -1406,7 +1441,8 @@ function render() {
     '</div>' +
     navHTML +
     '<div class="footer">' +
-      'Canvas de Projeto \u2022 SEGOV/SEGEST \u2014 Assessoria de Planejamento Estratégico<br>' +
+      'Canvas de Projeto \u2022 Plano de Ação do CIG \u2022 SEGOV/SEGEST<br>' +
+      'Modelo de Governança Pública do DF \u2014 Resolução CGOV Nº 04/2024<br>' +
       'Adaptado da Rede Conexão Inovação Pública (CC BY-NC-SA 4.0)' +
     '</div>';
 
