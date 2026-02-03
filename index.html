@@ -86,6 +86,12 @@
   .btn-nav-prev:hover { background: var(--bg-deep); color: var(--text-primary); }
   .btn-nav-print { background: var(--accent-green-dark); color: #fff; box-shadow: 0 2px 8px rgba(5,150,105,0.25); }
   .btn-nav-print:hover { background: var(--accent-green); }
+  .btn-nav-skip {
+    padding: 10px 20px; border-radius: 10px; font-size: 13px; font-weight: 600;
+    cursor: pointer; font-family: var(--font); transition: all 0.2s;
+    background: transparent; color: var(--text-muted); border: 1.5px dashed var(--border-strong);
+  }
+  .btn-nav-skip:hover { color: var(--text-secondary); background: var(--bg-input); border-color: var(--accent-blue); }
 
   .btn-primary {
     padding: 14px 36px; border-radius: var(--radius); border: none;
@@ -180,9 +186,14 @@
   .progress-dot-done { width: 8px; background: var(--accent-green); }
   .progress-dot-todo { width: 8px; background: var(--border-strong); }
   .progress-dot:hover { opacity: 0.7; }
+  .phase-label {
+    text-align: center; margin-top: 6px; font-size: 11px; font-weight: 700;
+    color: var(--accent-blue-dark); letter-spacing: 0.06em; text-transform: uppercase;
+  }
 
   /* Navigation */
-  .nav-row { display: flex; justify-content: space-between; margin-top: 24px; gap: 12px; }
+  .nav-row { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; gap: 12px; }
+  .nav-right { display: flex; gap: 8px; align-items: center; }
 
   /* Content area */
   .step-card {
@@ -196,6 +207,36 @@
   .step-icon { font-size: 36px; display: block; margin-bottom: 8px; }
   .step-question { font-size: 24px; font-weight: 800; color: var(--text-primary); margin-bottom: 6px; letter-spacing: -0.01em; }
   .step-hint { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
+
+  /* Context note (connects steps) */
+  .step-contexto {
+    font-size: 13px; color: var(--accent-blue-dark); background: var(--accent-blue-light);
+    border: 1px solid #bfdbfe; border-radius: 8px; padding: 8px 14px;
+    margin-bottom: 12px; line-height: 1.5;
+  }
+
+  /* Help tooltip */
+  .ajuda-btn {
+    background: none; border: 1px solid var(--border); cursor: pointer; font-size: 12px;
+    vertical-align: middle; padding: 2px 8px; border-radius: 12px;
+    color: var(--text-muted); font-family: var(--font); font-weight: 600;
+    transition: all 0.2s; margin-left: 8px;
+  }
+  .ajuda-btn:hover { background: var(--accent-blue-light); color: var(--accent-blue-dark); border-color: #bfdbfe; }
+  .ajuda-content {
+    font-size: 13px; color: var(--text-secondary); background: #f0f9ff;
+    border: 1px solid #bae6fd; border-radius: 8px; padding: 10px 14px;
+    margin-top: 8px; margin-bottom: 12px; line-height: 1.6;
+  }
+
+  /* Optional/required labels */
+  .optional-tag {
+    font-size: 12px; font-weight: 400; color: var(--text-dim);
+    font-style: italic; margin-left: 4px;
+  }
+  .required-legend {
+    font-size: 11px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;
+  }
 
   /* Examples */
   .examples-label {
@@ -221,6 +262,17 @@
   }
   textarea:focus, input[type="text"]:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
   input[type="text"] { font-size: 16px; font-weight: 600; }
+
+  select {
+    width: 100%; background: var(--bg-input); border: 2px solid var(--border);
+    border-radius: var(--radius); padding: 14px 18px; font-size: 16px;
+    font-weight: 600; color: var(--text-primary); font-family: var(--font);
+    cursor: pointer; transition: border-color 0.2s; outline: none;
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center;
+  }
+  select:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
 
   textarea.small-textarea {
     font-size: 13.5px; padding: 10px 14px; border-radius: var(--radius-sm);
@@ -284,6 +336,24 @@
     padding: 8px 14px; border-radius: 20px; border: 1px solid var(--border);
   }
   .welcome-feat span { font-size: 18px; }
+  .welcome-info-toggle {
+    background: none; border: 1px solid var(--border); border-radius: 20px;
+    padding: 8px 20px; font-size: 13px; font-weight: 600; color: var(--accent-blue-dark);
+    cursor: pointer; font-family: var(--font); transition: all 0.2s; margin-top: 24px;
+    display: inline-block;
+  }
+  .welcome-info-toggle:hover { background: var(--accent-blue-light); border-color: #bfdbfe; }
+  .welcome-info-content {
+    margin-top: 16px; padding: 20px 24px; background: var(--bg-input);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    text-align: left; max-width: 540px; margin-left: auto; margin-right: auto;
+  }
+  .welcome-info-content p {
+    font-size: 14px !important; color: var(--text-secondary) !important;
+    line-height: 1.7 !important; margin-bottom: 10px !important; max-width: none !important;
+    text-align: left !important;
+  }
+  .welcome-info-content p:last-child { margin-bottom: 0 !important; }
 
   /* Autosave indicator */
   .autosave-indicator {
@@ -347,7 +417,7 @@
     .no-print { display: none !important; }
     .container { max-width: 100%; }
     .step-card { box-shadow: none !important; border: 1px solid #ddd !important; }
-    textarea, input[type="text"] { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; min-height: 30px !important; font-size: 12px !important; box-shadow: none !important; }
+    textarea, input[type="text"], select { border: 1px solid #ccc !important; background: #fff !important; color: #000 !important; min-height: 30px !important; font-size: 12px !important; box-shadow: none !important; }
     .step-question { color: #000 !important; font-size: 16px !important; }
     .step-hint { color: #333 !important; font-size: 11px !important; }
     .step-icon { font-size: 20px !important; }
@@ -369,6 +439,7 @@
     .entrega-grid { grid-template-columns: 1fr; }
     .welcome-features { flex-direction: column; align-items: center; }
     .nav-row { flex-direction: column; }
+    .nav-right { width: 100%; justify-content: center; }
     .btn-nav { width: 100%; text-align: center; }
     .review-actions { flex-direction: column; }
     .review-actions button { width: 100%; text-align: center; }
@@ -390,6 +461,72 @@
 var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzvLX37nFf9wZrSga5WzuXcG56ZLSgc1p7akVW4_52kZAUD-TjF69CsCEPbd_t-X05QEw/exec';
 
 /* ===================================================
+   REGIÕES ADMINISTRATIVAS DO DF
+   =================================================== */
+var REGIOES_DF = [
+  "RA-I Plano Piloto",
+  "RA-II Gama",
+  "RA-III Taguatinga",
+  "RA-IV Brazlândia",
+  "RA-V Sobradinho",
+  "RA-VI Planaltina",
+  "RA-VII Paranoá",
+  "RA-VIII Núcleo Bandeirante",
+  "RA-IX Ceilândia",
+  "RA-X Guará",
+  "RA-XI Cruzeiro",
+  "RA-XII Samambaia",
+  "RA-XIII Santa Maria",
+  "RA-XIV São Sebastião",
+  "RA-XV Recanto das Emas",
+  "RA-XVI Lago Sul",
+  "RA-XVII Riacho Fundo",
+  "RA-XVIII Lago Norte",
+  "RA-XIX Candangolândia",
+  "RA-XX Águas Claras",
+  "RA-XXI Riacho Fundo II",
+  "RA-XXII Sudoeste/Octogonal",
+  "RA-XXIII Varjão",
+  "RA-XXIV Park Way",
+  "RA-XXV SCIA/Estrutural",
+  "RA-XXVI Sobradinho II",
+  "RA-XXVII Jardim Botânico",
+  "RA-XXVIII Itapoã",
+  "RA-XXIX SIA",
+  "RA-XXX Vicente Pires",
+  "RA-XXXI Fercal",
+  "RA-XXXII Sol Nascente/Pôr do Sol",
+  "RA-XXXIII Arniqueira"
+];
+
+/* ===================================================
+   FASES DO CANVAS (agrupamento visual)
+   =================================================== */
+var PHASES = [
+  { name: "Identidade do Projeto", steps: ["ra", "projeto", "objetivo"] },
+  { name: "Detalhamento", steps: ["descricao", "produto", "caracteristicas"] },
+  { name: "Análise", steps: ["justificativa", "indicador"] },
+  { name: "Pessoas e Planejamento", steps: ["partes", "entregas"] },
+  { name: "Riscos e Premissas", steps: ["premissas", "barreiras", "riscos"] }
+];
+
+function getPhaseForStep(stepId) {
+  for (var i = 0; i < PHASES.length; i++) {
+    if (PHASES[i].steps.indexOf(stepId) >= 0) return PHASES[i].name;
+  }
+  return '';
+}
+
+/* ===================================================
+   CAMPOS OBRIGATÓRIOS
+   =================================================== */
+var REQUIRED_FIELDS = ['ra', 'projeto', 'objetivo'];
+
+function isRequired(fieldOrId) {
+  return REQUIRED_FIELDS.indexOf(fieldOrId) >= 0;
+}
+
+/* ===================================================
    STEPS DATA
    =================================================== */
 var STEPS = [
@@ -397,13 +534,14 @@ var STEPS = [
   {
     id: "ra", field: "ra", label: "Região Administrativa",
     question: "Qual é a sua Região Administrativa?",
-    dica: "Identifique sua RA para personalizar o canvas.",
-    placeholder: "Ex: RA-IX Ceilândia",
-    icon: "\uD83D\uDCCD", color: "#3b82f6", inputType: "input", exemplos: []
+    dica: "Selecione sua RA na lista abaixo.",
+    icon: "\uD83D\uDCCD", color: "#3b82f6", inputType: "select",
+    opcoes: REGIOES_DF, exemplos: []
   },
   {
     id: "projeto", field: "projeto", label: "Nome do Projeto",
     question: "Qual é o nome do seu projeto?",
+    contexto: "Agora que identificou sua RA, vamos nomear o projeto.",
     dica: "Escolha um nome claro e direto. Inclua a sigla da RA para facilitar a identificação.",
     placeholder: "Digite o nome do projeto...",
     icon: "\uD83C\uDFAF", color: "#3b82f6",
@@ -417,7 +555,8 @@ var STEPS = [
   {
     id: "objetivo", field: "objetivo", label: "Objetivo do Projeto",
     question: "O que este projeto pretende alcançar?",
-    dica: "Descreva o resultado final desejado. Use verbos no infinitivo: estruturar, implantar, reduzir, melhorar...",
+    contexto: "Com o nome definido, descreva a meta principal do projeto.",
+    dica: "Descreva o resultado final desejado. Use verbos como: estruturar, implantar, reduzir, melhorar...",
     placeholder: "Descreva o objetivo principal...",
     icon: "\uD83C\uDFC6", color: "#dc2626",
     exemplos: [
@@ -429,7 +568,8 @@ var STEPS = [
   {
     id: "descricao", field: "descricao", label: "Descrição do Projeto",
     question: "Descreva brevemente o projeto.",
-    dica: "Contextualize: o que será feito, qual a abrangência, e a quais diretrizes está vinculado.",
+    contexto: "Você definiu o objetivo. Agora descreva como pretende chegar lá.",
+    dica: "Diferente do objetivo (o que quer alcançar), aqui descreva o que será feito na prática, a abrangência e a quais diretrizes está vinculado.",
     placeholder: "Descreva o escopo e contexto...",
     icon: "\uD83D\uDCCB", color: "#2563eb",
     exemplos: [
@@ -440,7 +580,8 @@ var STEPS = [
   {
     id: "produto", field: "produto", label: "Produto Principal",
     question: "Qual é o resultado concreto que será entregue?",
-    dica: "Pense em algo tangível \u2014 que se possa apontar e dizer: \"isto foi entregue\".",
+    contexto: "Pensando na descrição do projeto, qual será a entrega principal e tangível?",
+    dica: "Diferente do objetivo (abstrato), o produto é algo concreto \u2014 que se possa apontar e dizer: \"isto foi entregue\".",
     placeholder: "O principal produto do projeto...",
     icon: "\uD83D\uDCE6", color: "#ea580c",
     exemplos: [
@@ -452,7 +593,9 @@ var STEPS = [
   {
     id: "caracteristicas", field: "caracteristicas", label: "Características",
     question: "Quais são as características essenciais desse produto?",
-    dica: "Liste as qualidades que tornam o produto completo e funcional.",
+    contexto: "Sobre o produto que você descreveu acima, que qualidades ele precisa ter?",
+    dica: "Liste os atributos que tornam o produto completo. Pense: \"para funcionar bem, ele precisa ser/ter...\"",
+    ajuda: "Características são os atributos de qualidade do que será entregue. Exemplo: se o produto é um comitê, as características podem ser 'reuniões mensais', 'atas no SEI', 'composição multissetorial'.",
     placeholder: "Características do produto principal...",
     icon: "\u2B50", color: "#7c3aed",
     exemplos: [
@@ -463,6 +606,7 @@ var STEPS = [
   {
     id: "justificativa", field: "justificativa", label: "Justificativa",
     question: "Por que este projeto é necessário?",
+    contexto: "Agora explique por que vale a pena investir neste projeto.",
     dica: "Responda: qual problema resolve? Que risco evita? Por que agora? Traga dados se possível.",
     placeholder: "O que motiva este projeto...",
     icon: "\u2705", color: "#059669",
@@ -474,7 +618,9 @@ var STEPS = [
   {
     id: "indicador", field: "indicador", label: "Indicador de Resultado",
     question: "Como você vai medir o sucesso?",
-    dica: "Defina métricas concretas: percentuais, quantidades, prazos. Se o projeto der certo, que número muda?",
+    contexto: "Definida a justificativa, como saberemos se o projeto deu certo?",
+    dica: "Pense em números concretos: percentuais, quantidades, prazos. Se o projeto der certo, que número muda?",
+    ajuda: "Indicadores são números que mostram se o projeto está funcionando. Pense em algo que você possa contar ou medir. Exemplo: 'número de reuniões realizadas' ou 'tempo médio de atendimento'.",
     placeholder: "Indicadores de sucesso...",
     icon: "\uD83D\uDCCA", color: "#059669",
     exemplos: [
@@ -485,8 +631,10 @@ var STEPS = [
   {
     id: "partes", type: "partes", label: "Partes Interessadas",
     question: "Quem está envolvido no projeto?",
+    contexto: "Agora vamos identificar as pessoas e grupos ligados ao projeto.",
     icon: "\uD83D\uDC65", color: "#334155",
-    dica: "Identifique quem patrocina, quem executa e quem se beneficia.",
+    dica: "Identifique quem patrocina (apoia/decide), quem executa (faz o trabalho) e quem se beneficia (usa o resultado).",
+    ajuda: "Partes interessadas são todas as pessoas ou grupos que influenciam ou são influenciados pelo projeto: quem decide, quem executa, quem usa o resultado final.",
     exemplos: {
       patrocinio: ["Administrador(a) Regional (patrocinador)", "Chefe de Gabinete (gestor do projeto)"],
       equipe: ["Membros do CIG capacitados nas oficinas", "Representantes das coordenações", "Assessoria jurídica da RA"],
@@ -496,8 +644,10 @@ var STEPS = [
   {
     id: "entregas", type: "entregas", label: "Entregas Intermediárias",
     question: "Quebre o projeto em etapas \u2014 o que será entregue em cada uma?",
+    contexto: "Com tudo definido, divida o projeto em etapas menores e concretas.",
     icon: "\uD83D\uDCC5", color: "#059669",
-    dica: "Cada entrega deve ter: o que será entregue, as atividades necessárias, prazo e custo estimado. Comece com 2 a 4 entregas.",
+    dica: "Cada entrega deve ter: o que será entregue, as atividades necessárias, prazo e custo estimado. Comece com 1 ou 2 entregas \u2014 você pode adicionar mais depois.",
+    ajuda: "Entregas intermediárias são os marcos do projeto \u2014 resultados parciais que mostram que o trabalho está avançando. Pense nos passos até chegar ao produto final.",
     exemplos: [
       { entrega: "Ato normativo do CIG publicado", atividades: "Minutar portaria \u2192 Assessoria jurídica \u2192 Assinatura \u2192 DODF", prazo: "30 dias", investimento: "Sem custo direto" },
       { entrega: "1\u00AA reunião ordinária realizada", atividades: "Regimento aprovado \u2192 Pauta definida \u2192 Convocação \u2192 Ata no SEI", prazo: "60 dias", investimento: "Sem custo direto" }
@@ -506,7 +656,9 @@ var STEPS = [
   {
     id: "premissas", field: "premissas", label: "Premissas",
     question: "O que precisa dar certo para o projeto funcionar?",
+    contexto: "Quase lá! Pense nas condições necessárias para o sucesso do projeto.",
     dica: "São condições que você assume como verdadeiras. Se alguma falhar, o projeto fica comprometido.",
+    ajuda: "Premissas são coisas que você assume como certas para o projeto funcionar. Exemplo: 'os servidores terão tempo dedicado', 'o SEI estará disponível'. Se alguma premissa falhar, o projeto pode ser prejudicado.",
     placeholder: "Fatores críticos de sucesso...",
     icon: "\uD83C\uDFC5", color: "#b45309",
     exemplos: [
@@ -516,7 +668,8 @@ var STEPS = [
   {
     id: "barreiras", field: "barreiras", label: "Barreiras",
     question: "Quais dificuldades já existem hoje?",
-    dica: "Diferente de riscos, barreiras são obstáculos conhecidos e atuais \u2014 coisas que já atrapalham.",
+    contexto: "Pensando na realidade da sua RA, que obstáculos já existem?",
+    dica: "Diferente de riscos (que podem acontecer), barreiras são obstáculos conhecidos e atuais \u2014 coisas que já atrapalham.",
     placeholder: "Dificuldades existentes...",
     icon: "\uD83D\uDEA7", color: "#dc2626",
     exemplos: [
@@ -526,6 +679,7 @@ var STEPS = [
   {
     id: "riscos", field: "riscos", label: "Riscos",
     question: "O que pode dar errado no futuro?",
+    contexto: "Último passo! Pense no que pode acontecer de inesperado.",
     dica: "Eventos incertos mas possíveis. Pense: \"e se acontecer X, como impacta o projeto?\"",
     placeholder: "Eventos que podem impactar...",
     icon: "\u26A0\uFE0F", color: "#d97706",
@@ -572,8 +726,7 @@ var data = {
   indicador: "", patrocinio: "", equipe: "", publico: "",
   premissas: "", barreiras: "", riscos: "",
   entregas: [
-    { entrega: "", atividades: "", prazo: "", investimento: "" },
-    { entrega: "", atividades: "", prazo: "", investimento: "" }
+    { entrega: "", atividades: "", prazo: "", investimento: "Sem custo direto" }
   ]
 };
 
@@ -742,6 +895,7 @@ function importJSON() {
   input.click();
 }
 
+/* Melhoria #8: Exemplo clicável mesmo com campo preenchido */
 function handleExampleClick(e) {
   var card = e.currentTarget;
   var field = card.dataset.field;
@@ -751,12 +905,20 @@ function handleExampleClick(e) {
     var el = document.getElementById('field-' + field);
     if (el) el.value = text;
     scheduleAutosave();
+  } else {
+    if (confirm('O campo já está preenchido. Deseja substituir pelo exemplo?')) {
+      data[field] = text;
+      var el = document.getElementById('field-' + field);
+      if (el) el.value = text;
+      scheduleAutosave();
+    }
   }
 }
 
+/* Melhoria #6: Pré-preencher investimento */
 function addEntrega() {
   saveCurrentInputs();
-  data.entregas.push({ entrega: '', atividades: '', prazo: '', investimento: '' });
+  data.entregas.push({ entrega: '', atividades: '', prazo: '', investimento: 'Sem custo direto' });
   saveToStorage();
   render();
 }
@@ -764,7 +926,7 @@ function addEntrega() {
 function removeEntrega(idx) {
   if (data.entregas.length <= 1) return;
   var entry = data.entregas[idx];
-  var hasContent = entry.entrega.trim() || entry.atividades.trim() || entry.prazo.trim() || entry.investimento.trim();
+  var hasContent = entry.entrega.trim() || entry.atividades.trim() || entry.prazo.trim() || (entry.investimento.trim() && entry.investimento.trim() !== 'Sem custo direto');
   if (hasContent && !confirm('Tem certeza que deseja remover a Entrega ' + (idx + 1) + '? Os dados preenchidos serão perdidos.')) {
     return;
   }
@@ -785,13 +947,39 @@ function clearAllData() {
     indicador: "", patrocinio: "", equipe: "", publico: "",
     premissas: "", barreiras: "", riscos: "",
     entregas: [
-      { entrega: "", atividades: "", prazo: "", investimento: "" },
-      { entrega: "", atividades: "", prazo: "", investimento: "" }
+      { entrega: "", atividades: "", prazo: "", investimento: "Sem custo direto" }
     ]
   };
   currentStep = 0;
   showSuccess = false;
   render();
+}
+
+/* Melhoria #10: Toggle da explicação do Canvas */
+function toggleCanvasInfo() {
+  var el = document.getElementById('canvas-info-content');
+  var btn = document.getElementById('canvas-info-btn');
+  if (!el) return;
+  if (el.style.display === 'none') {
+    el.style.display = 'block';
+    if (btn) btn.textContent = 'Fechar explicação';
+  } else {
+    el.style.display = 'none';
+    if (btn) btn.textContent = 'O que é o Canvas de Projeto?';
+  }
+}
+
+/* Melhoria #7: Toggle tooltip de ajuda */
+function toggleAjuda(btn) {
+  var content = btn.nextElementSibling;
+  if (!content) return;
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    btn.textContent = 'Fechar';
+  } else {
+    content.style.display = 'none';
+    btn.textContent = 'Saiba mais';
+  }
 }
 
 /* ===================================================
@@ -851,21 +1039,32 @@ function submitToSEGOV() {
    =================================================== */
 var inputDebounce = null;
 function attachInputListeners() {
-  document.querySelectorAll('#app textarea, #app input[type="text"]').forEach(function(el) {
+  document.querySelectorAll('#app textarea, #app input[type="text"], #app select').forEach(function(el) {
     el.addEventListener('input', function() {
       clearTimeout(inputDebounce);
       inputDebounce = setTimeout(scheduleAutosave, 800);
     });
+    if (el.tagName === 'SELECT') {
+      el.addEventListener('change', function() {
+        scheduleAutosave();
+      });
+    }
   });
 }
 
 /* ===================================================
    RENDERERS
    =================================================== */
+
+/* Melhoria #9 e #10: Welcome com "O que é o Canvas?" e import condicional */
 function renderWelcome() {
   var hasSaved = localStorage.getItem(STORAGE_KEY);
   var resumeBtn = hasSaved
     ? '<button class="btn-ghost" onclick="goTo(1)">Continuar de onde parou</button>'
+    : '';
+  /* Melhoria #9: Esconder import na primeira visita */
+  var importBtn = hasSaved
+    ? '<button class="btn-ghost" onclick="importJSON()">\uD83D\uDCC2 Importar arquivo salvo</button>'
     : '';
 
   return '<div class="welcome">' +
@@ -876,7 +1075,16 @@ function renderWelcome() {
     '<div class="welcome-btns">' +
       '<button class="btn-primary" onclick="next()">Começar</button>' +
       resumeBtn +
-      '<button class="btn-ghost" onclick="importJSON()">\uD83D\uDCC2 Importar arquivo salvo</button>' +
+      importBtn +
+    '</div>' +
+    /* Melhoria #10: Explicação do Canvas */
+    '<div style="margin-top:24px">' +
+      '<button class="welcome-info-toggle" id="canvas-info-btn" onclick="toggleCanvasInfo()">O que é o Canvas de Projeto?</button>' +
+      '<div id="canvas-info-content" class="welcome-info-content" style="display:none">' +
+        '<p><strong>O Canvas de Projeto</strong> é uma ferramenta visual que resume os principais elementos de um projeto em uma única página. Ele foi adaptado pela SEGOV para as Administrações Regionais do DF.</p>' +
+        '<p>Ele ajuda a organizar ideias, alinhar expectativas com a equipe e comunicar o projeto de forma clara para todos os envolvidos \u2014 da sua RA até a SEGOV.</p>' +
+        '<p>Não se preocupe em acertar tudo de primeira! Você pode voltar e editar qualquer campo a qualquer momento. Os campos com <span style="color:var(--accent-red)">*</span> são os únicos obrigatórios para envio.</p>' +
+      '</div>' +
     '</div>' +
     '<div class="welcome-features">' +
       '<div class="welcome-feat"><span>\uD83D\uDCA1</span> Exemplos em cada passo</div>' +
@@ -886,44 +1094,80 @@ function renderWelcome() {
   '</div>';
 }
 
+/* Melhorias #1 (select), #2 (obrigatório/opcional), #5 (contexto), #7 (tooltip) */
 function renderField(step) {
+  /* Melhoria #5: Contexto conectando passos */
+  var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
+
   var exHTML = '';
   if (step.exemplos && step.exemplos.length) {
     exHTML = '<div class="examples-label">\uD83D\uDCA1 Exemplos para inspirar</div>';
     step.exemplos.forEach(function(ex) {
-      exHTML += '<div class="example-card" data-field="' + esc(step.field) + '" data-text="' + esc(ex.texto) + '" title="Clique para usar como base (campo vazio)">' +
+      exHTML += '<div class="example-card" data-field="' + esc(step.field) + '" data-text="' + esc(ex.texto) + '" title="Clique para usar como base">' +
         '<div class="example-tag" style="color:' + step.color + '">' + esc(ex.titulo) + '</div>' +
         '<div class="example-text">' + esc(ex.texto) + '</div>' +
       '</div>';
     });
-    exHTML += '<div class="examples-hint">Clique num exemplo para usá-lo como ponto de partida (campo vazio) ou escreva o seu abaixo</div>';
+    exHTML += '<div class="examples-hint">Clique num exemplo para usá-lo como ponto de partida, ou escreva o seu abaixo</div>';
   }
 
-  var isRequired = (step.field === 'ra' || step.field === 'projeto' || step.field === 'objetivo');
-  var reqLabel = isRequired ? ' <span style="color:var(--accent-red)">*</span>' : '';
+  /* Melhoria #2: Obrigatório vs opcional */
+  var req = isRequired(step.field);
+  var reqLabel = req ? ' <span style="color:var(--accent-red);font-size:18px" title="Campo obrigatório">*</span>' : '';
+  var optLabel = !req ? '<span class="optional-tag">(opcional)</span>' : '';
+  var legendHTML = '<div class="required-legend"><span style="color:var(--accent-red)">*</span> = obrigatório para envio' + (!req ? ' &nbsp;\u2022&nbsp; Este campo é opcional, preencha se quiser' : '') + '</div>';
 
-  var inputHTML = step.inputType === 'input'
-    ? '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
-      '<input type="text" id="field-' + step.field + '" value="' + esc(data[step.field]) + '" placeholder="' + esc(step.placeholder) + '">'
-    : '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
+  /* Melhoria #7: Tooltip de ajuda */
+  var ajudaHTML = step.ajuda
+    ? '<button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' +
+      '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>'
+    : '';
+
+  /* Melhoria #1: Select para RA */
+  var inputHTML = '';
+  if (step.inputType === 'select') {
+    inputHTML = '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
+      '<select id="field-' + step.field + '">' +
+      '<option value="">Selecione sua Região Administrativa...</option>';
+    step.opcoes.forEach(function(op) {
+      inputHTML += '<option value="' + esc(op) + '"' + (data[step.field] === op ? ' selected' : '') + '>' + esc(op) + '</option>';
+    });
+    inputHTML += '</select>';
+  } else if (step.inputType === 'input') {
+    inputHTML = '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
+      '<input type="text" id="field-' + step.field + '" value="' + esc(data[step.field]) + '" placeholder="' + esc(step.placeholder) + '">';
+  } else {
+    inputHTML = '<label class="sr-only" for="field-' + step.field + '">' + esc(step.label) + '</label>' +
       '<textarea id="field-' + step.field + '" rows="5" placeholder="' + esc(step.placeholder) + '">' + esc(data[step.field]) + '</textarea>';
+  }
 
-  return '<span class="step-icon">' + step.icon + '</span>' +
-    '<h2 class="step-question">' + esc(step.question) + reqLabel + '</h2>' +
-    '<p class="step-hint">' + esc(step.dica) + '</p>' +
+  return contextoHTML +
+    '<span class="step-icon">' + step.icon + '</span>' +
+    '<h2 class="step-question">' + esc(step.question) + reqLabel + optLabel + '</h2>' +
+    '<p class="step-hint">' + esc(step.dica) + ajudaHTML + '</p>' +
+    legendHTML +
     exHTML + inputHTML;
 }
 
+/* Melhoria #5: Contexto e #7: Tooltip em Partes */
 function renderPartes(step) {
+  var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
+  var ajudaHTML = step.ajuda
+    ? '<button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' +
+      '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>'
+    : '';
+
   var subs = [
     { key: 'patrocinio', label: 'Patrocínio e Gestão', ph: 'Quem patrocina e gerencia?', exs: step.exemplos.patrocinio },
     { key: 'equipe', label: 'Equipe Executora', ph: 'Quem vai executar?', exs: step.exemplos.equipe },
     { key: 'publico', label: 'Público-alvo', ph: 'Quem se beneficia?', exs: step.exemplos.publico }
   ];
 
-  var html = '<span class="step-icon">' + step.icon + '</span>' +
-    '<h2 class="step-question">' + esc(step.question) + '</h2>' +
-    '<p class="step-hint">' + esc(step.dica) + '</p>';
+  var html = contextoHTML +
+    '<span class="step-icon">' + step.icon + '</span>' +
+    '<h2 class="step-question">' + esc(step.question) + '<span class="optional-tag">(opcional)</span></h2>' +
+    '<p class="step-hint">' + esc(step.dica) + ajudaHTML + '</p>' +
+    '<div class="required-legend">Este campo é opcional, preencha se quiser</div>';
 
   subs.forEach(function(s) {
     html += '<div class="partes-block">' +
@@ -936,7 +1180,14 @@ function renderPartes(step) {
   return html;
 }
 
+/* Melhoria #5: Contexto e #7: Tooltip em Entregas */
 function renderEntregas(step) {
+  var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
+  var ajudaHTML = step.ajuda
+    ? '<button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' +
+      '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>'
+    : '';
+
   var exHTML = '';
   step.exemplos.forEach(function(ex, i) {
     exHTML += '<div style="font-size:12px;color:var(--text-secondary);line-height:1.5;padding:6px 0;' +
@@ -968,16 +1219,18 @@ function renderEntregas(step) {
           '<textarea class="small-textarea" id="ent-' + i + '-prazo" rows="1">' + esc(ent.prazo) + '</textarea>' +
         '</div>' +
         '<div>' +
-          '<label class="entrega-field-label" for="ent-' + i + '-investimento">Investimento</label>' +
+          '<label class="entrega-field-label" for="ent-' + i + '-investimento">Investimento (se houver)</label>' +
           '<textarea class="small-textarea" id="ent-' + i + '-investimento" rows="1">' + esc(ent.investimento) + '</textarea>' +
         '</div>' +
       '</div>' +
     '</div>';
   });
 
-  return '<span class="step-icon">' + step.icon + '</span>' +
-    '<h2 class="step-question">' + esc(step.question) + '</h2>' +
-    '<p class="step-hint">' + esc(step.dica) + '</p>' +
+  return contextoHTML +
+    '<span class="step-icon">' + step.icon + '</span>' +
+    '<h2 class="step-question">' + esc(step.question) + '<span class="optional-tag">(opcional)</span></h2>' +
+    '<p class="step-hint">' + esc(step.dica) + ajudaHTML + '</p>' +
+    '<div class="required-legend">Este campo é opcional, preencha se quiser</div>' +
     '<div class="entregas-example">' +
       '<div class="examples-label">\uD83D\uDCA1 Exemplo de entregas (Projeto CIG)</div>' +
       exHTML +
@@ -1018,11 +1271,12 @@ function renderReview() {
     var val = getVal(s);
     var filled = val && val.trim().length > 0;
     var idx = STEPS.indexOf(s);
-    items += '<button class="review-item ' + (filled ? '' : 'pending') + '" data-goto="' + idx + '">' +
+    var req = isRequired(s.field || s.id);
+    items += '<button class="review-item ' + (filled ? '' : (req ? 'pending' : '')) + '" data-goto="' + idx + '">' +
       '<span class="review-item-icon">' + s.icon + '</span>' +
       '<div class="review-item-body">' +
-        '<div class="review-item-label ' + (filled ? 'filled' : 'empty') + '">' + esc(s.label) + (filled ? '' : ' \u26A0\uFE0F Pendente') + '</div>' +
-        '<div class="review-item-preview">' + esc(val || 'Clique para preencher...') + '</div>' +
+        '<div class="review-item-label ' + (filled ? 'filled' : 'empty') + '">' + esc(s.label) + (filled ? '' : (req ? ' \u26A0\uFE0F Obrigatório' : ' (opcional)')) + '</div>' +
+        '<div class="review-item-preview">' + esc(val || (req ? 'Clique para preencher...' : 'Clique para preencher (opcional)...')) + '</div>' +
       '</div>' +
       '<span class="review-edit">\u270F\uFE0F</span>' +
     '</button>';
@@ -1042,7 +1296,7 @@ function renderReview() {
     '</div>';
   } else {
     submitHTML = '<div class="submit-section">' +
-      '<p>Revisou tudo? Quando estiver pronto, envie o canvas diretamente para a equipe SEGOV/SEGEST.</p>' +
+      '<p>Revisou tudo? Quando estiver pronto, envie o canvas diretamente para a equipe SEGOV/SEGEST.<br><span style="font-size:11px;color:var(--text-muted)">Apenas os campos com * são obrigatórios. Os demais podem ser preenchidos depois.</span></p>' +
       '<button class="btn-submit" onclick="submitToSEGOV()"' + (submitting ? ' disabled' : '') + '>' +
         (submitting ? '<span class="spinner"></span>Enviando para SEGOV...' : '\uD83D\uDCE8 Enviar Canvas para SEGOV') +
       '</button>' +
@@ -1091,12 +1345,22 @@ function render() {
     dots += '<button class="' + cls + '" data-goto="' + i + '" title="' + title + '" aria-label="Ir para: ' + title + '"></button>';
   });
 
+  /* Melhoria #3: Fase atual no progresso */
+  var phaseHTML = '';
+  if (!isFirst && !isLast) {
+    var phaseName = getPhaseForStep(step.id);
+    if (phaseName) {
+      phaseHTML = '<div class="phase-label">' + esc(phaseName) + '</div>';
+    }
+  }
+
   // Motivation message (only on form steps, not welcome/review)
   var motivHTML = '';
   if (!isFirst && !isLast) {
     motivHTML = '<div class="motivation no-print">' + getMotivation(pct) + '</div>';
   }
 
+  /* Melhoria #4: Botão "Pular" nos opcionais */
   var navHTML = '';
   if (!isFirst || !step.type) {
     navHTML = '<div class="nav-row no-print">';
@@ -1104,7 +1368,14 @@ function render() {
     if (isLast) {
       navHTML += '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir / Gerar PDF</button>';
     } else {
+      var stepIsRequired = isRequired(step.field || step.id);
+      var showSkip = !stepIsRequired && !isFirst && step.type !== 'welcome';
+      navHTML += '<div class="nav-right">';
+      if (showSkip) {
+        navHTML += '<button class="btn-nav btn-nav-skip" onclick="next()">Pular</button>';
+      }
       navHTML += '<button class="btn-nav btn-nav-next" onclick="next()">Próximo \u2192</button>';
+      navHTML += '</div>';
     }
     navHTML += '</div>';
   }
@@ -1127,6 +1398,7 @@ function render() {
       '</div>' +
       '<div class="progress-track"><div class="progress-fill" style="width:' + ((currentStep / (STEPS.length - 1)) * 100) + '%"></div></div>' +
       '<div class="progress-dots">' + dots + '</div>' +
+      phaseHTML +
     '</div>' +
     motivHTML +
     '<div class="step-card">' +
@@ -1163,8 +1435,8 @@ function attachClickListeners() {
     });
   });
 
-  // Enter key on single-line input advances to next step
-  document.querySelectorAll('#app input[type="text"]').forEach(function(el) {
+  // Enter key on single-line input or select advances to next step
+  document.querySelectorAll('#app input[type="text"], #app select').forEach(function(el) {
     el.addEventListener('keydown', function(e) {
       if (e.key === 'Enter') { e.preventDefault(); next(); }
     });
