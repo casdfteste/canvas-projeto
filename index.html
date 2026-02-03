@@ -1099,7 +1099,7 @@ function renderWelcome() {
   return '<div class="welcome">' +
     '<div class="welcome-icon">\uD83C\uDFDB\uFE0F</div>' +
     '<h2>Plano de Ação do CIG</h2>' +
-    '<p>Este assistente vai guiar você, passo a passo, na elaboração do <strong>Plano de Ação do Comitê Interno de Governança</strong> da sua Região Administrativa.</p>' +
+    '<p>Elabore o <strong>Plano de Ação do Comitê Interno de Governança</strong> da sua Região Administrativa de forma guiada, passo a passo.</p>' +
     '<p class="sub">Iniciativa da <strong>Secretaria de Estado de Governo (SEGOV)</strong> e da <strong>Controladoria-Geral do DF (CGDF)</strong>, conforme o Modelo de Governança Pública do DF (Resolução CGOV Nº 04/2024).</p>' +
     '<div class="welcome-btns">' +
       '<button class="btn-primary" onclick="next()">Começar</button>' +
@@ -1109,14 +1109,10 @@ function renderWelcome() {
       '<button class="welcome-info-toggle" id="canvas-info-btn" onclick="toggleCanvasInfo()">O que é o Plano de Ação do CIG?</button>' +
       '<div id="canvas-info-content" class="welcome-info-content" style="display:none">' +
         '<p><strong>O Plano de Ação do CIG</strong> é o instrumento que organiza os projetos de governança de cada Administração Regional em uma estrutura clara e objetiva.</p>' +
-        '<p>De acordo com o <strong>Modelo de Governança Pública do Governo do DF</strong> (Resolução CGOV Nº 04/2024), cada RA deve implementar práticas de governança monitoradas pela SEGOV e pela CGDF. Este formulário ajuda a estruturar projetos vinculados a essas práticas.</p>' +
+        '<p>De acordo com o <strong>Modelo de Governança Pública do Governo do DF</strong> (Resolução CGOV Nº 04/2024), cada RA deve implementar práticas de governança monitoradas pela SEGOV e pela CGDF.</p>' +
+        '<p>Este formulário guia você por cada campo, com exemplos práticos para inspirar. Suas respostas são salvas automaticamente no navegador. Ao final, o plano é enviado diretamente para a SEGOV.</p>' +
         '<p>Não se preocupe em acertar tudo de primeira! Você pode voltar e editar qualquer campo a qualquer momento.</p>' +
       '</div>' +
-    '</div>' +
-    '<div class="welcome-features">' +
-      '<div class="welcome-feat"><span>\uD83D\uDCA1</span> Exemplos em cada passo</div>' +
-      '<div class="welcome-feat"><span>\uD83D\uDCBE</span> Salva automaticamente</div>' +
-      '<div class="welcome-feat"><span>\uD83D\uDCE8</span> Envio direto para SEGOV</div>' +
     '</div>' +
   '</div>';
 }
