@@ -68,10 +68,10 @@
   .header-brand { display: flex; align-items: center; gap: 14px; }
   .gdf-badge {
     display: flex; align-items: center; justify-content: center;
-    width: 44px; height: 44px; border-radius: 8px;
-    background: var(--gdf-blue); color: #fff;
-    font-size: 13px; font-weight: 900; letter-spacing: 0.05em;
-    flex-shrink: 0; line-height: 1;
+    flex-shrink: 0;
+  }
+  .gdf-badge img {
+    height: 40px; width: auto; border-radius: 4px;
   }
   .header-brand-text span {
     font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
@@ -387,9 +387,10 @@
   }
   .welcome-logo-badge {
     display: flex; align-items: center; justify-content: center;
-    width: 48px; height: 48px; border-radius: 10px;
-    background: var(--gdf-blue); color: #fff;
-    font-size: 15px; font-weight: 900; letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .welcome-logo-badge img {
+    height: 48px; width: auto; border-radius: 6px;
   }
   .welcome-logo-text {
     text-align: left; font-size: 13px; color: var(--gdf-blue);
@@ -1310,7 +1311,7 @@ function renderWelcome() {
 
   return '<div class="welcome">' +
     '<div class="welcome-logo">' +
-      '<div class="welcome-logo-badge">GDF</div>' +
+      '<div class="welcome-logo-badge"><img src="data:image/png;base64,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" alt="GDF"></div>' +
       '<div class="welcome-logo-text">' +
         '<strong>Governo do Distrito Federal</strong>' +
         'SEGOV \u2022 Controladoria-Geral do DF' +
@@ -1695,7 +1696,7 @@ function render() {
   document.getElementById('app').innerHTML =
     '<div class="header no-print">' +
       '<div class="header-brand">' +
-        '<div class="gdf-badge">GDF</div>' +
+        '<div class="gdf-badge"><img src="data:image/png;base64,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" alt="GDF"></div>' +
         '<div class="header-brand-text">' +
           '<span>Governo do Distrito Federal \u2022 SEGOV \u2022 CGDF</span>' +
           '<h1>Plano de A\u00e7\u00e3o do CIG</h1>' +
