@@ -1693,7 +1693,7 @@ function render() {
     if (isLast) {
        navHTML += '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir</button>';
       navHTML += '<button class="btn-nav" onclick="gerarPDFIndividual()" style="background:#1565C0;color:#fff">\uD83D\uDCC4 Baixar PDF deste Plano</button>';
-      navHTML += '<button class="btn-nav" onclick="gerarPDFTodos()" id="btn-pdf-todos" style="background:#059669;color:#fff">\uD83D\uDCCA PDF de Todos os Registros</button>';
+      navHTML += '<button class="btn-nav" onclick="abrirPainelPDF()" id="btn-pdf-todos" style="background:#059669;color:#fff">\uD83D\uDCCA Gerar PDFs por RA</button>';
     } else {
       navHTML += '<button class="btn-nav btn-nav-next" onclick="next()">Pr\u00f3ximo \u2192</button>';
     }
@@ -1829,72 +1829,117 @@ function gerarPDFIndividual() {
       doc.save("plano-de-acao-" + (data.projeto || "canvas") + ".pdf");
     }
 
-    function gerarPDFTodos() {
-      var btn = document.getElementById("btn-pdf-todos");
-      if (btn) btn.textContent = "Carregando...";
+    function abrirPainelPDF() {
+      var overlay = document.getElementById("painel-pdf-overlay");
+      if (overlay) { overlay.style.display = "flex"; return; }
+      overlay = document.createElement("div");
+      overlay.id = "painel-pdf-overlay";
+      overlay.style.cssText = "position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999";
+      var box = document.createElement("div");
+      box.style.cssText = "background:#fff;border-radius:12px;padding:24px;max-width:420px;width:90%;max-height:80vh;overflow-y:auto";
+      var html = '<h3 style="margin:0 0 16px">Gerar PDF por RA</h3>';
+      html += '<select id="filtro-ra" style="width:100%;padding:10px;font-size:14px;border:1px solid #ccc;border-radius:6px;margin-bottom:12px">';
+      html += '<option value="__todas__">Todas as RAs (um PDF por RA)</option>';
+      REGIOES_DF.forEach(function(ra) { html += '<option value="' + ra + '">' + ra + '</option>'; });
+      html += '</select>';
+      html += '<div id="pdf-status" style="margin-bottom:12px;font-size:13px;color:#475569"></div>';
+      html += '<div style="display:flex;gap:8px">';
+      html += '<button onclick="gerarPDFPorRA()" style="flex:1;padding:10px;background:#059669;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:14px">Gerar PDF</button>';
+      html += '<button onclick="document.getElementById(\'painel-pdf-overlay\').style.display=\'none\'" style="flex:1;padding:10px;background:#e2e8f0;color:#1e293b;border:none;border-radius:6px;cursor:pointer;font-size:14px">Fechar</button>';
+      html += '</div>';
+      box.innerHTML = html;
+      overlay.appendChild(box);
+      overlay.addEventListener("click", function(e) { if (e.target === overlay) overlay.style.display = "none"; });
+      document.body.appendChild(overlay);
+    }
+
+    function gerarPDFPorRA() {
+      var select = document.getElementById("filtro-ra");
+      var status = document.getElementById("pdf-status");
+      var raEscolhida = select.value;
+      status.textContent = "Buscando dados...";
       fetch(GOOGLE_SCRIPT_URL)
         .then(function(r) { return r.json(); })
         .then(function(result) {
           if (result.status !== "ok") {
-            alert("Erro ao buscar dados: " + (result.message || ""));
+            status.textContent = "Erro: " + (result.message || "");
             return;
           }
-          var doc = new jspdf.jsPDF("landscape");
-          var margin = 10;
-          doc.setFontSize(14);
-          doc.setFont("helvetica", "bold");
-          doc.text("Relatorio Geral - Planos de Acao do CIG", margin, 15);
-          doc.setFontSize(9);
-          doc.setFont("helvetica", "normal");
-          doc.text("Gerado em: " + new Date().toLocaleString("pt-BR") + " | Total: " + result.total + " registros", margin, 22);
-          var headers = [["Data", "Nome", "Email", "RA", "Pratica", "Projeto", "Objetivo"]];
-          var rows = result.registros.map(function(r) {
-            return [
-              r["Data/Hora"] || "",
-              r["Nome"] || "",
-              r["Email"] || "",
-              (r["Regiao Administrativa"] || "").substring(0, 25),
-              (r["Pratica de Governanca"] || "").substring(0, 30),
-              (r["Projeto"] || "").substring(0, 30),
-              (r["Objetivo"] || "").substring(0, 40)
-            ];
-          });
-          doc.autoTable({
-            startY: 28,
-            head: headers,
-            body: rows,
-            margin: { left: margin, right: margin },
-            styles: { fontSize: 7, cellPadding: 2 },
-            headStyles: { fillColor: [26, 115, 232] },
-            alternateRowStyles: { fillColor: [248, 249, 250] }
-          });
-          result.registros.forEach(function(reg) {
-            doc.addPage("portrait");
-            var y = 20;
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "bold");
-            doc.text("Plano de Acao: " + (reg["Projeto"] || ""), margin, y);
-            y += 10;
-            doc.setFontSize(9);
-            doc.setFont("helvetica", "normal");
-            Object.keys(reg).forEach(function(key) {
-              if (y > 270) { doc.addPage(); y = 20; }
-              doc.setFont("helvetica", "bold");
-              doc.text(key + ":", margin, y);
-              y += 5;
-              doc.setFont("helvetica", "normal");
-              var val = String(reg[key] || "(vazio)");
-              var lines = doc.splitTextToSize(val, 180);
-              doc.text(lines, margin, y);
-              y += lines.length * 4.5 + 5;
+          if (raEscolhida === "__todas__") {
+            var raMap = {};
+            result.registros.forEach(function(reg) {
+              var ra = reg["Regiao Administrativa"] || "Sem RA";
+              if (!raMap[ra]) raMap[ra] = [];
+              raMap[ra].push(reg);
             });
-          });
-          doc.save("relatorio-geral-planos-de-acao.pdf");
+            var ras = Object.keys(raMap);
+            if (ras.length === 0) { status.textContent = "Nenhum registro encontrado."; return; }
+            status.textContent = "Gerando " + ras.length + " PDFs...";
+            var count = 0;
+            ras.forEach(function(ra) {
+              gerarPDFDeRegistros(raMap[ra], ra);
+              count++;
+              status.textContent = "Gerado " + count + " de " + ras.length + " PDFs";
+            });
+            status.textContent = ras.length + " PDFs gerados com sucesso!";
+          } else {
+            var filtrados = result.registros.filter(function(reg) {
+              return (reg["Regiao Administrativa"] || "") === raEscolhida;
+            });
+            if (filtrados.length === 0) {
+              status.textContent = "Nenhum registro encontrado para " + raEscolhida;
+              return;
+            }
+            gerarPDFDeRegistros(filtrados, raEscolhida);
+            status.textContent = "PDF gerado com " + filtrados.length + " registro(s)!";
+          }
         })
-        .catch(function(err) { alert("Erro: " + err); })
-        .finally(function() {
-          if (btn) btn.textContent = "\uD83D\uDCCA PDF de Todos os Registros";
+        .catch(function(err) { status.textContent = "Erro: " + err; });
+    }
+
+    function gerarPDFDeRegistros(registros, tituloRA) {
+      var doc = new jspdf.jsPDF();
+      var margin = 15;
+      var campos = [
+        "Data/Hora", "Nome", "Email", "Regiao Administrativa",
+        "Pratica de Governanca", "Projeto", "Objetivo", "Descricao",
+        "Produto", "Caracteristicas", "Justificativa", "Indicador",
+        "Patrocinio", "Equipe", "Publico-alvo", "Premissas",
+        "Barreiras", "Riscos", "Entregas"
+      ];
+      registros.forEach(function(reg, idx) {
+        if (idx > 0) doc.addPage();
+        var y = 20;
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "bold");
+        doc.text("Plano de Acao do CIG", margin, y);
+        y += 8;
+        doc.setFontSize(11);
+        doc.text(tituloRA, margin, y);
+        y += 6;
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        doc.text("Registro " + (idx + 1) + " de " + registros.length, margin, y);
+        y += 10;
+        doc.setDrawColor(26, 115, 232);
+        doc.line(margin, y, 195, y);
+        y += 8;
+        campos.forEach(function(key) {
+          if (y > 270) { doc.addPage(); y = 20; }
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(9);
+          doc.text(key + ":", margin, y);
+          y += 5;
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(9);
+          var val = String(reg[key] || "(vazio)");
+          var lines = doc.splitTextToSize(val, 170);
+          doc.text(lines, margin + 5, y);
+          y += lines.length * 4.5 + 5;
         });
+      });
+      var nomeArquivo = tituloRA.replace(/[^a-zA-Z0-9]/g, "-").replace(/-+/g, "-");
+      doc.save("plano-acao-" + nomeArquivo + ".pdf");
     }
 
   render();
