@@ -1691,9 +1691,10 @@ function render() {
     navHTML = '<div class="nav-row no-print">';
     navHTML += isFirst ? '<div></div>' : '<button class="btn-nav btn-nav-prev" onclick="prev()">\u2190 Anterior</button>';
     if (isLast) {
- navHTML += '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir</button>';
-  navHTML += '<button class="btn-nav" onclick="gerarPDFIndividual()" style="background:#1565C0;color:#fff">\uD83D\uDCC4 Baixar PDF deste Plano</button>';
-  navHTML += '<button class="btn-nav" onclick="gerarPDFTodos()" id="btn-pdf-todos" style="background:#059669;color:#fff">\uD83D\uDCCA PDF de Todos os Registros</button>';    } else {
+       navHTML += '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir</button>';
+      navHTML += '<button class="btn-nav" onclick="gerarPDFIndividual()" style="background:#1565C0;color:#fff">\uD83D\uDCC4 Baixar PDF deste Plano</button>';
+      navHTML += '<button class="btn-nav" onclick="gerarPDFTodos()" id="btn-pdf-todos" style="background:#059669;color:#fff">\uD83D\uDCCA PDF de Todos os Registros</button>';
+    } else {
       navHTML += '<button class="btn-nav btn-nav-next" onclick="next()">Pr\u00f3ximo \u2192</button>';
     }
     navHTML += '</div>';
@@ -1895,5 +1896,8 @@ function gerarPDFIndividual() {
           if (btn) btn.textContent = "\uD83D\uDCCA PDF de Todos os Registros";
         });
     }
+
+  render();
+</script>
 </body>
 </html>
