@@ -1900,12 +1900,12 @@ function gerarPDFIndividual() {
     function gerarPDFDeRegistros(registros, tituloRA) {
       var doc = new jspdf.jsPDF();
       var margin = 15;
-      var campos = [
+      var camposInfo = [
         "Data/Hora", "Nome", "Email", "Regiao Administrativa",
         "Pratica de Governanca", "Projeto", "Objetivo", "Descricao",
         "Produto", "Caracteristicas", "Justificativa", "Indicador",
         "Patrocinio", "Equipe", "Publico-alvo", "Premissas",
-        "Barreiras", "Riscos", "Entregas"
+        "Barreiras", "Riscos"
       ];
       registros.forEach(function(reg, idx) {
         if (idx > 0) doc.addPage();
@@ -1924,7 +1924,7 @@ function gerarPDFIndividual() {
         doc.setDrawColor(26, 115, 232);
         doc.line(margin, y, 195, y);
         y += 8;
-        campos.forEach(function(key) {
+        camposInfo.forEach(function(key) {
           if (y > 270) { doc.addPage(); y = 20; }
           doc.setFont("helvetica", "bold");
           doc.setFontSize(9);
@@ -1937,6 +1937,41 @@ function gerarPDFIndividual() {
           doc.text(lines, margin + 5, y);
           y += lines.length * 4.5 + 5;
         });
+        var entregasRaw = String(reg["Entregas"] || "");
+        if (entregasRaw && entregasRaw !== "(vazio)") {
+          if (y > 240) { doc.addPage(); y = 20; }
+          y += 4;
+          doc.setFont("helvetica", "bold");
+          doc.setFontSize(10);
+          doc.text("Entregas:", margin, y);
+          y += 8;
+          var entregasList = entregasRaw.split("\n");
+          var tabelaEntregas = [];
+          entregasList.forEach(function(linha) {
+            var numMatch = linha.match(/Entrega\s*(\d+):\s*(.*?)\s*\|\s*Atividades:\s*(.*?)\s*\|\s*Prazo:\s*(.*?)\s*\|\s*Investimento:\s*(.*)/);
+            if (numMatch) {
+              tabelaEntregas.push([numMatch[1], numMatch[2], numMatch[3], numMatch[4], numMatch[5]]);
+            } else {
+              tabelaEntregas.push(["", linha, "", "", ""]);
+            }
+          });
+          doc.autoTable({
+            startY: y,
+            head: [["#", "Entrega", "Atividades", "Prazo", "Investimento"]],
+            body: tabelaEntregas,
+            margin: { left: margin, right: margin },
+            styles: { fontSize: 8, cellPadding: 3 },
+            headStyles: { fillColor: [26, 115, 232] },
+            columnStyles: {
+              0: { cellWidth: 10 },
+              1: { cellWidth: 55 },
+              2: { cellWidth: 55 },
+              3: { cellWidth: 25 },
+              4: { cellWidth: 30 }
+            }
+          });
+          y = doc.lastAutoTable.finalY + 10;
+        }
       });
       var nomeArquivo = tituloRA.replace(/[^a-zA-Z0-9]/g, "-").replace(/-+/g, "-");
       doc.save("plano-acao-" + nomeArquivo + ".pdf");
