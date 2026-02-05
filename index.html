@@ -584,26 +584,7 @@
     background: rgba(255,255,255,0.7);
     border-radius: 6px;
   }
-  .processo-sei-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 12px;
-    padding: 10px 16px;
-    background: var(--gdf-blue);
-    color: white !important;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
-    transition: all 0.2s;
-    box-shadow: 0 2px 8px rgba(21, 101, 192, 0.3);
-  }
-  .processo-sei-link:hover {
-    background: var(--gdf-blue-dark);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.4);
-  }
+
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -1415,11 +1396,29 @@ function attachInputListeners() {
   });
 }
 
+
+/* ===================================================
+   ACESSO ADMIN - GERAR PDFs DAS RAs
+   =================================================== */
+var ADMIN_KEY = 'segest2025';
+
+function verificarAdmin() {
+  var senha = prompt('Digite a senha de administrador:');
+  if (senha === ADMIN_KEY) {
+    var btn = document.getElementById('btn-pdf-todos');
+    if (btn) {
+      btn.style.display = '';
+      alert('Acesso liberado! O botão "Gerar PDFs de Todas as RAs" está disponível.');
+    }
+  } else if (senha !== null) {
+    alert('Senha incorreta.');
+  }
+}
+
 /* Atualizar exibição do Processo SEI */
 function atualizarProcessoSEI(raValue) {
   var container = document.getElementById('processo-sei-container');
   var numberEl = document.getElementById('processo-sei-number');
-  var linkEl = document.getElementById('processo-sei-link');
 
   if (!container || !numberEl) return;
 
@@ -1428,16 +1427,9 @@ function atualizarProcessoSEI(raValue) {
   if (processoSEI) {
     numberEl.textContent = processoSEI;
     container.classList.add('visible');
-    if (linkEl) {
-      linkEl.href = 'https://sei.df.gov.br/sei/controlador.php?acao=procedimento_trabalhar&id_procedimento=' + processoSEI.replace(/[^0-9]/g, '');
-      linkEl.style.display = '';
-    }
   } else {
     numberEl.textContent = '';
     container.classList.remove('visible');
-    if (linkEl) {
-      linkEl.style.display = 'none';
-    }
   }
 }
 
@@ -1523,10 +1515,6 @@ function renderSingleFieldInput(def, isInsideGroup) {
         '<div class="processo-sei-info">' +
           '<strong>Importante:</strong> Este é o processo SEI onde devem ser inseridos todos os documentos relacionados ao CIG e PEI desta RA.' +
         '</div>' +
-        '<a id="processo-sei-link" href="https://sei.df.gov.br/sei/controlador.php?acao=procedimento_trabalhar&id_procedimento=' + processoSEI.replace(/[^0-9]/g, '') + '" target="_blank" class="processo-sei-link" style="' + (processoSEI ? '' : 'display:none') + '">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>' +
-          ' Abrir no SEI' +
-        '</a>' +
       '</div>';
     }
   } else if (def.inputType === 'input' || def.inputType === 'email') {
@@ -1850,7 +1838,7 @@ function render() {
     if (isLast) {
        navHTML += '<button class="btn-nav btn-nav-print" onclick="window.print()">\uD83D\uDDA8\uFE0F Imprimir</button>';
       navHTML += '<button class="btn-nav" onclick="gerarPDFIndividual()" style="background:#1565C0;color:#fff">\uD83D\uDCC4 Baixar PDF deste Plano</button>';
-      navHTML += '<button class="btn-nav" onclick="abrirPainelPDF()" id="btn-pdf-todos" style="background:#059669;color:#fff">\uD83D\uDCCA Gerar PDFs por RA</button>';
+      navHTML += '<button class="btn-nav" onclick="abrirPainelPDF()" id="btn-pdf-todos" style="display:none" style="background:#059669;color:#fff">\uD83D\uDCCA Gerar PDFs por RA</button>';
     } else {
       navHTML += '<button class="btn-nav btn-nav-next" onclick="next()">Pr\u00f3ximo \u2192</button>';
     }
