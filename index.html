@@ -539,6 +539,71 @@
     .phase-stepper-mobile { display: block; }
     .phase-stepper-info { flex-direction: column; gap: 4px; text-align: center; }
   }
+
+
+  /* ===== ESTILOS DO PROCESSO SEI ===== */
+  .processo-sei-box {
+    margin-top: 16px;
+    padding: 18px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-left: 4px solid var(--gdf-blue);
+    border-radius: var(--radius);
+    display: none;
+  }
+  .processo-sei-box.visible {
+    display: block;
+    animation: fadeInSei 0.3s ease-in-out;
+  }
+  @keyframes fadeInSei {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .processo-sei-label {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 4px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .processo-sei-number {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gdf-blue);
+    font-family: 'Courier New', Consolas, monospace;
+    letter-spacing: 0.5px;
+    padding: 6px 0;
+  }
+  .processo-sei-info {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.5;
+    padding: 10px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 6px;
+  }
+  .processo-sei-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 10px 16px;
+    background: var(--gdf-blue);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(21, 101, 192, 0.3);
+  }
+  .processo-sei-link:hover {
+    background: var(--gdf-blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.4);
+  }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -594,6 +659,48 @@ var REGIOES_DF = [
   "RA-XXXIV Arapoanga",
   "RA-XXXV \u00c1gua Quente"
 ];
+
+/* ===================================================
+   MAPEAMENTO DE PROCESSOS SEI POR RA
+   (Bloco Interno SEI 4953057 - CIG/PEI)
+   =================================================== */
+var PROCESSOS_SEI = {
+  "RA-I Plano Piloto": "04018-00002996/2025-80",
+  "RA-II Gama": "04018-00002426/2025-90",
+  "RA-III Taguatinga": "04018-00002468/2025-21",
+  "RA-IV Brazlândia": "04018-00002977/2025-53",
+  "RA-V Sobradinho": "04018-00002975/2025-64",
+  "RA-VI Planaltina": "04018-00002664/2025-03",
+  "RA-VII Paranoá": "04018-00002562/2025-80",
+  "RA-VIII Núcleo Bandeirante": "04018-00003008/2025-10",
+  "RA-IX Ceilândia": "04018-00003005/2025-86",
+  "RA-X Guará": "04018-00002565/2025-13",
+  "RA-XI Cruzeiro": "04018-00002567/2025-11",
+  "RA-XII Samambaia": "04018-00002637/2025-22",
+  "RA-XIII Santa Maria": "04018-00002427/2025-34",
+  "RA-XIV São Sebastião": "04018-00002662/2025-14",
+  "RA-XV Recanto das Emas": "04018-00002638/2025-77",
+  "RA-XVI Lago Sul": "04018-00002990/2025-11",
+  "RA-XVII Riacho Fundo": "04018-00002639/2025-11",
+  "RA-XVIII Lago Norte": "04018-00002973/2025-75",
+  "RA-XIX Candangolândia": "04018-00003007/2025-75",
+  "RA-XX Águas Claras": "04018-00002471/2025-44",
+  "RA-XXI Riacho Fundo II": "04018-00002640/2025-46",
+  "RA-XXII Sudoeste/Octogonal": "04018-00002991/2025-57",
+  "RA-XXIII Varjão": "04018-00002994/2025-91",
+  "RA-XXIV Park Way": "04018-00002998/2025-79",
+  "RA-XXV SCIA/Estrutural": "04018-00002566/2025-68",
+  "RA-XXVI Sobradinho II": "04018-00002976/2025-17",
+  "RA-XXVII Jardim Botânico": "04018-00002661/2025-61",
+  "RA-XXVIII Itapoã": "04018-00002564/2025-79",
+  "RA-XXIX SIA": "04018-00003003/2025-97",
+  "RA-XXX Vicente Pires": "04018-00002470/2025-08",
+  "RA-XXXI Fercal": "04018-00002665/2025-40",
+  "RA-XXXII Sol Nascente e Pôr do Sol": "04018-00003004/2025-31",
+  "RA-XXXIII Arniqueira": "04018-00002472/2025-99",
+  "RA-XXXIV Arapoanga": "04018-00002663/2025-51",
+  "RA-XXXV Água Quente": "04018-00002974/2025-10"
+};
 
 /* ===================================================
    PRATICAS DE GOVERNANCA (Resolucao CGOV N 04/2024)
@@ -1256,7 +1363,8 @@ function submitToSEGOV() {
 
   var payload = Object.assign({}, data, {
     submittedAt: new Date().toISOString(),
-    userAgent: navigator.userAgent
+    userAgent: navigator.userAgent,
+    processo_sei: data.ra && PROCESSOS_SEI[data.ra] ? PROCESSOS_SEI[data.ra] : ''
   });
 
   fetch(GOOGLE_SCRIPT_URL, {
@@ -1298,9 +1406,39 @@ function attachInputListeners() {
     if (el.tagName === 'SELECT') {
       el.addEventListener('change', function() {
         scheduleAutosave();
+        // Atualizar Processo SEI quando RA mudar
+        if (el.id === 'field-ra') {
+          atualizarProcessoSEI(el.value);
+        }
       });
     }
   });
+}
+
+/* Atualizar exibição do Processo SEI */
+function atualizarProcessoSEI(raValue) {
+  var container = document.getElementById('processo-sei-container');
+  var numberEl = document.getElementById('processo-sei-number');
+  var linkEl = document.getElementById('processo-sei-link');
+
+  if (!container || !numberEl) return;
+
+  var processoSEI = raValue && PROCESSOS_SEI[raValue] ? PROCESSOS_SEI[raValue] : '';
+
+  if (processoSEI) {
+    numberEl.textContent = processoSEI;
+    container.classList.add('visible');
+    if (linkEl) {
+      linkEl.href = 'https://sei.df.gov.br/sei/controlador.php?acao=procedimento_trabalhar&id_procedimento=' + processoSEI.replace(/[^0-9]/g, '');
+      linkEl.style.display = '';
+    }
+  } else {
+    numberEl.textContent = '';
+    container.classList.remove('visible');
+    if (linkEl) {
+      linkEl.style.display = 'none';
+    }
+  }
 }
 
 /* ===================================================
@@ -1372,6 +1510,25 @@ function renderSingleFieldInput(def, isInsideGroup) {
       inputHTML += '<option value="' + esc(op) + '"' + (data[def.field] === op ? ' selected' : '') + '>' + esc(op) + '</option>';
     });
     inputHTML += '</select>';
+    // Adicionar container do Processo SEI para o campo RA
+    if (def.field === 'ra') {
+      var processoSEI = data.ra && PROCESSOS_SEI[data.ra] ? PROCESSOS_SEI[data.ra] : '';
+      var visibleClass = processoSEI ? ' visible' : '';
+      inputHTML += '<div id="processo-sei-container" class="processo-sei-box' + visibleClass + '">' +
+        '<div class="processo-sei-label">' +
+          '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>' +
+          ' Processo SEI (CIG/PEI):' +
+        '</div>' +
+        '<div id="processo-sei-number" class="processo-sei-number">' + processoSEI + '</div>' +
+        '<div class="processo-sei-info">' +
+          '<strong>Importante:</strong> Este é o processo SEI onde devem ser inseridos todos os documentos relacionados ao CIG e PEI desta RA.' +
+        '</div>' +
+        '<a id="processo-sei-link" href="https://sei.df.gov.br/sei/controlador.php?acao=procedimento_trabalhar&id_procedimento=' + processoSEI.replace(/[^0-9]/g, '') + '" target="_blank" class="processo-sei-link" style="' + (processoSEI ? '' : 'display:none') + '">' +
+          '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 00-2 2v14a2 2 0 002 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>' +
+          ' Abrir no SEI' +
+        '</a>' +
+      '</div>';
+    }
   } else if (def.inputType === 'input' || def.inputType === 'email') {
     var inputTypeAttr = def.inputType === 'email' ? 'email' : 'text';
     inputHTML = '<label class="sr-only" for="field-' + def.field + '">' + esc(def.label) + '</label>' +
