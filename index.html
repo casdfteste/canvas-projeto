@@ -2044,51 +2044,77 @@ function gerarPDFIndividual() {
 
     function gerarPDFDeRegistros(registros, tituloRA) {
       var doc = new jspdf.jsPDF();
+      var pageWidth = doc.internal.pageSize.getWidth();
       var margin = 15;
-      var camposInfo = [
-        "Data/Hora", "Nome", "Email", "Regiao Administrativa",
-        "Pratica de Governanca", "Projeto", "Objetivo", "Descricao",
-        "Produto", "Caracteristicas", "Justificativa", "Indicador",
-        "Patrocinio", "Equipe", "Publico-alvo", "Premissas",
-        "Barreiras", "Riscos"
+      var campos = [
+        { key: "Nome", label: "Responsavel" },
+        { key: "Email", label: "Email" },
+        { key: "Regiao Administrativa", label: "Regiao Administrativa" },
+        { key: "Pratica de Governanca", label: "Pratica de Governanca" },
+        { key: "Projeto", label: "Projeto" },
+        { key: "Objetivo", label: "Objetivo" },
+        { key: "Descricao", label: "Descricao" },
+        { key: "Produto", label: "Produto Principal" },
+        { key: "Caracteristicas", label: "Caracteristicas" },
+        { key: "Justificativa", label: "Justificativa" },
+        { key: "Indicador", label: "Indicador" },
+        { key: "Patrocinio", label: "Patrocinio" },
+        { key: "Equipe", label: "Equipe" },
+        { key: "Publico-alvo", label: "Publico-alvo" },
+        { key: "Premissas", label: "Premissas" },
+        { key: "Barreiras", label: "Barreiras" },
+        { key: "Riscos", label: "Riscos" }
       ];
       registros.forEach(function(reg, idx) {
         if (idx > 0) doc.addPage();
         var y = 20;
-        doc.setFontSize(14);
+        // Cabeçalho centralizado (igual ao PDF individual)
+        doc.setFontSize(16);
         doc.setFont("helvetica", "bold");
-        doc.text("Plano de Acao do CIG", margin, y);
+        doc.text("Plano de Acao do CIG", pageWidth / 2, y, { align: "center" });
         y += 8;
-        doc.setFontSize(11);
-        doc.text(tituloRA, margin, y);
-        y += 6;
-        doc.setFontSize(9);
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(21, 101, 192);
+        doc.text(tituloRA, pageWidth / 2, y, { align: "center" });
+        doc.setTextColor(0, 0, 0);
+        y += 8;
+        doc.setFontSize(10);
         doc.setFont("helvetica", "normal");
-        doc.text("Registro " + (idx + 1) + " de " + registros.length, margin, y);
+        var dataEnvio = reg["Data/Hora"] || new Date().toLocaleString("pt-BR");
+        doc.text("Data: " + dataEnvio, pageWidth / 2, y, { align: "center" });
+        y += 5;
+        doc.setFontSize(9);
+        doc.setTextColor(100, 100, 100);
+        doc.text("Registro " + (idx + 1) + " de " + registros.length, pageWidth / 2, y, { align: "center" });
+        doc.setTextColor(0, 0, 0);
         y += 10;
-        doc.setDrawColor(26, 115, 232);
-        doc.line(margin, y, 195, y);
-        y += 8;
-        camposInfo.forEach(function(key) {
+        // Linha divisória
+        doc.setDrawColor(21, 101, 192);
+        doc.setLineWidth(0.5);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 10;
+        // Campos com formatação igual ao PDF individual
+        campos.forEach(function(campo) {
           if (y > 270) { doc.addPage(); y = 20; }
           doc.setFont("helvetica", "bold");
-          doc.setFontSize(9);
-          doc.text(key + ":", margin, y);
-          y += 5;
+          doc.setFontSize(10);
+          doc.text(campo.label + ":", margin, y);
+          y += 6;
           doc.setFont("helvetica", "normal");
           doc.setFontSize(9);
-          var val = String(reg[key] || "(vazio)");
-          var lines = doc.splitTextToSize(val, 170);
-          doc.text(lines, margin + 5, y);
-          y += lines.length * 4.5 + 5;
+          var val = String(reg[campo.key] || "(vazio)");
+          var lines = doc.splitTextToSize(val, pageWidth - margin * 2);
+          doc.text(lines, margin, y);
+          y += lines.length * 5 + 6;
         });
+        // Entregas em tabela
         var entregasRaw = String(reg["Entregas"] || "");
         if (entregasRaw && entregasRaw !== "(vazio)") {
           if (y > 240) { doc.addPage(); y = 20; }
-          y += 4;
           doc.setFont("helvetica", "bold");
-          doc.setFontSize(10);
-          doc.text("Entregas:", margin, y);
+          doc.setFontSize(11);
+          doc.text("Entregas", margin, y);
           y += 8;
           var entregasList = entregasRaw.split("\n");
           var tabelaEntregas = [];
@@ -2100,22 +2126,16 @@ function gerarPDFIndividual() {
               tabelaEntregas.push(["", linha, "", "", ""]);
             }
           });
-          doc.autoTable({
-            startY: y,
-            head: [["#", "Entrega", "Atividades", "Prazo", "Investimento"]],
-            body: tabelaEntregas,
-            margin: { left: margin, right: margin },
-            styles: { fontSize: 8, cellPadding: 3 },
-            headStyles: { fillColor: [26, 115, 232] },
-            columnStyles: {
-              0: { cellWidth: 10 },
-              1: { cellWidth: 55 },
-              2: { cellWidth: 55 },
-              3: { cellWidth: 25 },
-              4: { cellWidth: 30 }
-            }
-          });
-          y = doc.lastAutoTable.finalY + 10;
+          if (tabelaEntregas.length > 0) {
+            doc.autoTable({
+              startY: y,
+              head: [["#", "Entrega", "Atividades", "Prazo", "Investimento"]],
+              body: tabelaEntregas,
+              margin: { left: margin, right: margin },
+              styles: { fontSize: 8 },
+              headStyles: { fillColor: [26, 115, 232] }
+            });
+          }
         }
       });
       var nomeArquivo = tituloRA.replace(/[^a-zA-Z0-9]/g, "-").replace(/-+/g, "-");
