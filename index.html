@@ -540,6 +540,80 @@
     .phase-stepper-info { flex-direction: column; gap: 4px; text-align: center; }
   }
 
+  /* Guia de Preenchimento - floating button + slide panel */
+  .guia-fab {
+    position: fixed; bottom: 20px; left: 20px; z-index: 200;
+    background: var(--gdf-blue); color: #fff;
+    border: none; border-radius: 50px; padding: 12px 20px;
+    font-family: var(--font); font-size: 13px; font-weight: 700;
+    cursor: pointer; box-shadow: 0 4px 16px rgba(21,101,192,0.35);
+    transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+  }
+  .guia-fab:hover { background: var(--gdf-blue-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(21,101,192,0.45); }
+  .guia-fab .guia-fab-icon { font-size: 18px; }
+
+  .guia-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 300;
+    opacity: 0; visibility: hidden; transition: opacity 0.3s;
+  }
+  .guia-overlay.open { opacity: 1; visibility: visible; }
+
+  .guia-panel {
+    position: fixed; top: 0; right: -520px; width: 500px; max-width: 92vw;
+    height: 100vh; background: var(--bg-card); z-index: 301;
+    box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+    transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .guia-panel.open { right: 0; }
+
+  .guia-panel-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+    background: var(--gdf-blue-bg); flex-shrink: 0;
+  }
+  .guia-panel-header h3 { font-size: 16px; font-weight: 800; color: var(--gdf-blue); margin: 0; }
+  .guia-panel-close {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    padding: 6px 12px; font-size: 13px; cursor: pointer; color: var(--text-secondary);
+    font-family: var(--font);
+  }
+  .guia-panel-close:hover { background: var(--bg-deep); }
+
+  .guia-panel-body {
+    flex: 1; overflow-y: auto; padding: 20px;
+    font-size: 13px; line-height: 1.7; color: var(--text-primary);
+  }
+  .guia-panel-body h4 {
+    font-size: 14px; font-weight: 800; color: var(--gdf-blue);
+    margin-top: 20px; margin-bottom: 8px; padding-bottom: 4px;
+    border-bottom: 2px solid var(--gdf-blue-light);
+  }
+  .guia-panel-body h4:first-child { margin-top: 0; }
+  .guia-panel-body p { margin-bottom: 8px; }
+  .guia-panel-body ul { margin: 0 0 12px 18px; }
+  .guia-panel-body li { margin-bottom: 4px; }
+  .guia-panel-body .guia-campo {
+    background: var(--bg-input); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 10px;
+    border-left: 3px solid var(--gdf-blue);
+  }
+  .guia-panel-body .guia-campo strong { color: var(--gdf-blue); }
+  .guia-panel-body .guia-campo .guia-ex {
+    font-size: 12px; color: var(--text-muted); font-style: italic; margin-top: 4px;
+  }
+  .guia-panel-body .guia-dica-box {
+    background: var(--accent-yellow-light); border: 1px solid #fcd34d;
+    border-radius: var(--radius-sm); padding: 10px 14px; margin: 12px 0;
+    font-size: 12px;
+  }
+
+  @media print { .guia-fab, .guia-overlay, .guia-panel { display: none !important; } }
+  @media (max-width: 600px) {
+    .guia-fab { padding: 10px 14px; font-size: 12px; bottom: 14px; left: 14px; }
+    .guia-fab span.guia-fab-text { display: none; }
+  }
+
   /* Inline validation error messages */
   .campo-erro-inline {
     color: var(--accent-red);
@@ -559,6 +633,144 @@
 
 <div class="container" id="app"></div>
 <div class="autosave-indicator" id="autosave-indicator">Salvo automaticamente</div>
+
+<!-- Guia de Preenchimento - Bot\u00e3o flutuante e painel lateral -->
+<button class="guia-fab no-print" id="guia-fab" onclick="toggleGuia()">
+  <span class="guia-fab-icon">&#128214;</span>
+  <span class="guia-fab-text">Guia de Preenchimento</span>
+</button>
+<div class="guia-overlay" id="guia-overlay" onclick="toggleGuia()"></div>
+<div class="guia-panel" id="guia-panel">
+  <div class="guia-panel-header">
+    <h3>&#128214; Guia de Preenchimento</h3>
+    <button class="guia-panel-close" onclick="toggleGuia()">Fechar &times;</button>
+  </div>
+  <div class="guia-panel-body">
+    <p><strong>Guia elaborado pela SEGEST</strong> para orienta&ccedil;&atilde;o no preenchimento do Plano de A&ccedil;&atilde;o do Comit&ecirc; Interno de Governan&ccedil;a (CIG) das Administra&ccedil;&otilde;es Regionais do DF.</p>
+
+    <div class="guia-dica-box">
+      &#128161; <strong>Dica geral:</strong> Preencha cada campo com informa&ccedil;&otilde;es espec&iacute;ficas da sua RA. Evite respostas gen&eacute;ricas. Use os exemplos do formul&aacute;rio como inspira&ccedil;&atilde;o, n&atilde;o como c&oacute;pia.
+    </div>
+
+    <h4>1. Identifica&ccedil;&atilde;o</h4>
+    <div class="guia-campo">
+      <strong>Nome do Respons&aacute;vel:</strong> Nome completo do servidor que est&aacute; preenchendo.
+    </div>
+    <div class="guia-campo">
+      <strong>E-mail Institucional:</strong> Obrigat&oacute;rio usar e-mail do &oacute;rg&atilde;o (ex: nome@df.gov.br). E-mails pessoais (@gmail, @hotmail etc.) n&atilde;o s&atilde;o aceitos para garantir rastreabilidade institucional.
+    </div>
+    <div class="guia-campo">
+      <strong>Regi&atilde;o Administrativa:</strong> Selecione sua RA na lista. Campo obrigat&oacute;rio &mdash; essencial para o registro e acompanhamento do plano.
+    </div>
+    <div class="guia-campo">
+      <strong>Pr&aacute;tica de Governan&ccedil;a:</strong> Selecione a pr&aacute;tica principal que o projeto implementa ou fortalece, conforme a Resolu&ccedil;&atilde;o CGOV N&ordm; 04/2024.
+    </div>
+
+    <h4>2. Nome e Objetivo</h4>
+    <div class="guia-campo">
+      <strong>Nome do Projeto:</strong> Escolha um nome claro e direto. Inclua a sigla da RA.
+      <div class="guia-ex">Ex: &ldquo;Implanta&ccedil;&atilde;o do CIG da RA-IX Ceil&acirc;ndia&rdquo;</div>
+    </div>
+    <div class="guia-campo">
+      <strong>Objetivo:</strong> Descreva o resultado final desejado. Use verbos como: estruturar, implantar, reduzir, melhorar.
+      <div class="guia-ex">Ex: &ldquo;Estruturar o CIG como inst&acirc;ncia deliberativa para qualificar decis&otilde;es da RA.&rdquo;</div>
+    </div>
+
+    <h4>3. Descri&ccedil;&atilde;o e Produto</h4>
+    <div class="guia-campo">
+      <strong>Descri&ccedil;&atilde;o:</strong> Diferente do objetivo (o que quer alcan&ccedil;ar), aqui descreva <em>o que ser&aacute; feito na pr&aacute;tica</em>: escopo, abrang&ecirc;ncia e diretrizes vinculadas.
+    </div>
+    <div class="guia-campo">
+      <strong>Produto Principal:</strong> O resultado concreto &mdash; algo que se possa apontar e dizer: &ldquo;isto foi entregue&rdquo;.
+      <div class="guia-ex">Ex: &ldquo;CIG formalmente institu&iacute;do, com regimento aprovado e reuni&otilde;es em funcionamento.&rdquo;</div>
+    </div>
+
+    <h4>4. Caracter&iacute;sticas</h4>
+    <div class="guia-campo">
+      <strong>Caracter&iacute;sticas do Produto:</strong> Atributos de qualidade. Pense: &ldquo;para funcionar bem, ele precisa ser/ter...&rdquo;
+      <div class="guia-ex">Ex: &ldquo;Reuni&otilde;es mensais com ata no SEI &bull; Composi&ccedil;&atilde;o multissetorial &bull; Pauta estruturada&rdquo;</div>
+    </div>
+
+    <h4>5. Justificativa e Indicadores</h4>
+    <div class="guia-campo">
+      <strong>Justificativa:</strong> Responda: qual problema resolve? Que risco evita? Por que agora? Traga dados se poss&iacute;vel.
+    </div>
+    <div class="guia-campo">
+      <strong>Indicador de Resultado:</strong> Deve conter tr&ecirc;s partes:
+      <ul>
+        <li><strong>Nome:</strong> o que ser&aacute; medido</li>
+        <li><strong>F&oacute;rmula:</strong> como calcular (use &divide; &times; ou descritivo)</li>
+        <li><strong>Meta:</strong> o valor esperado (n&uacute;mero ou percentual)</li>
+      </ul>
+      <div class="guia-ex">Ex: &ldquo;Taxa de reuni&otilde;es realizadas = n&ordm; realizadas &divide; n&ordm; programadas &times; 100. Meta: 100%&rdquo;</div>
+      <div class="guia-dica-box" style="margin-bottom:0">
+        &#9888;&#65039; <strong>Evite</strong> respostas vagas como &ldquo;&Iacute;ndice&rdquo;, &ldquo;Num&eacute;rico &mdash; maior melhor&rdquo; ou apenas &ldquo;Percentual&rdquo;. Essas respostas ser&atilde;o rejeitadas pela valida&ccedil;&atilde;o.
+      </div>
+    </div>
+
+    <h4>6. Partes Interessadas</h4>
+    <div class="guia-campo">
+      <strong>Patroc&iacute;nio e Gest&atilde;o:</strong> Quem apoia e decide (ex: Administrador(a) Regional).
+    </div>
+    <div class="guia-campo">
+      <strong>Equipe Executora:</strong> Quem faz o trabalho (ex: membros do CIG, assessoria jur&iacute;dica).
+    </div>
+    <div class="guia-campo">
+      <strong>P&uacute;blico-alvo:</strong> Quem se beneficia &mdash; diretos e indiretos.
+    </div>
+
+    <h4>7. Entregas Intermedi&aacute;rias</h4>
+    <div class="guia-campo">
+      <strong>Cada entrega deve ter:</strong>
+      <ul>
+        <li><strong>O que ser&aacute; entregue:</strong> resultado parcial concreto</li>
+        <li><strong>Atividades:</strong> passos necess&aacute;rios para chegar l&aacute;</li>
+        <li><strong>Prazo:</strong> estimativa realista</li>
+        <li><strong>Investimento:</strong> custo estimado ou &ldquo;Sem custo direto&rdquo;</li>
+      </ul>
+      <div class="guia-ex">Voc&ecirc; pode cadastrar m&uacute;ltiplas entregas usando o bot&atilde;o &ldquo;+ Adicionar mais uma entrega&rdquo;.</div>
+    </div>
+
+    <h4>8. Premissas, Barreiras e Riscos</h4>
+    <div class="guia-dica-box">
+      &#9888;&#65039; <strong>Aten&ccedil;&atilde;o:</strong> Este &eacute; o campo com mais erros conceituais. Leia com cuidado a diferen&ccedil;a entre os tr&ecirc;s conceitos.
+    </div>
+    <div class="guia-campo">
+      <strong>Premissas</strong> = condi&ccedil;&otilde;es <em>externas</em> que voc&ecirc; assume como verdadeiras para o projeto funcionar.
+      <div class="guia-ex">Ex: &ldquo;Os servidores ter&atilde;o tempo dedicado&rdquo;, &ldquo;O SEI estar&aacute; dispon&iacute;vel&rdquo;</div>
+      <div class="guia-dica-box" style="margin-bottom:0">
+        &#10060; <strong>N&atilde;o confunda com:</strong><br>
+        &bull; Atividades do projeto (&ldquo;Realizar capacita&ccedil;&atilde;o&rdquo;) &rarr; isso &eacute; <em>entrega</em><br>
+        &bull; Problemas atuais (&ldquo;Falta de pessoal&rdquo;) &rarr; isso &eacute; <em>barreira</em><br>
+        &bull; Eventos futuros incertos (&ldquo;Corte or&ccedil;ament&aacute;rio&rdquo;) &rarr; isso &eacute; <em>risco</em>
+      </div>
+    </div>
+    <div class="guia-campo">
+      <strong>Barreiras</strong> = obst&aacute;culos <em>conhecidos e atuais</em> que j&aacute; atrapalham.
+      <div class="guia-ex">Ex: &ldquo;Ac&uacute;mulo de fun&ccedil;&otilde;es dos servidores&rdquo;, &ldquo;Resist&ecirc;ncia cultural a mudan&ccedil;as&rdquo;</div>
+    </div>
+    <div class="guia-campo">
+      <strong>Riscos</strong> = eventos <em>incertos e futuros</em> que podem impactar negativamente.
+      <div class="guia-ex">Ex: &ldquo;Troca de Administrador(a) com descontinuidade&rdquo;, &ldquo;Corte or&ccedil;ament&aacute;rio inesperado&rdquo;</div>
+    </div>
+
+    <h4>D&uacute;vidas frequentes</h4>
+    <div class="guia-campo">
+      <strong>Posso voltar e editar?</strong> Sim! Seus dados s&atilde;o salvos automaticamente. Voc&ecirc; pode navegar livremente entre as etapas.
+    </div>
+    <div class="guia-campo">
+      <strong>Posso salvar e continuar depois?</strong> Sim. O formul&aacute;rio salva no navegador. Ao voltar, clique em &ldquo;Continuar de onde parou&rdquo;.
+    </div>
+    <div class="guia-campo">
+      <strong>Como exportar?</strong> Na tela de revis&atilde;o, use &ldquo;Baixar PDF&rdquo; ou &ldquo;Imprimir&rdquo;. Voc&ecirc; tamb&eacute;m pode exportar como JSON para backup.
+    </div>
+
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);text-align:center;">
+      Guia de Preenchimento &mdash; SEGOV/SEGEST<br>
+      Modelo de Governan&ccedil;a P&uacute;blica do DF &mdash; Resolu&ccedil;&atilde;o CGOV N&ordm; 04/2024
+    </div>
+  </div>
+</div>
 
 <script>
 /* ===================================================
@@ -1277,6 +1489,22 @@ function toggleCanvasInfo() {
   } else {
     el.style.display = 'none';
     if (btn) btn.textContent = 'O que \u00e9 o Plano de A\u00e7\u00e3o do CIG?';
+  }
+}
+
+function toggleGuia() {
+  var panel = document.getElementById('guia-panel');
+  var overlay = document.getElementById('guia-overlay');
+  if (!panel || !overlay) return;
+  var isOpen = panel.classList.contains('open');
+  if (isOpen) {
+    panel.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  } else {
+    panel.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
 }
 
