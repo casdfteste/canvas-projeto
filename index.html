@@ -2304,72 +2304,238 @@ loadFromStorage();
 function gerarPDFIndividual() {
       saveCurrentInputs();
       var doc = new jspdf.jsPDF();
-      var pageWidth = doc.internal.pageSize.getWidth();
-      var margin = 15;
-      var y = 20;
-      doc.setFontSize(16);
+      var pw = doc.internal.pageSize.getWidth();
+      var ph = doc.internal.pageSize.getHeight();
+      var ml = 18; // margem esquerda
+      var mr = 18; // margem direita
+      var cw = pw - ml - mr; // largura do conteudo
+      var y = 0;
+      var pdfColors = {
+        azulGDF: [21, 101, 192],
+        azulEscuro: [13, 71, 161],
+        azulClaro: [227, 242, 253],
+        cinzaClaro: [248, 249, 250],
+        cinzaBorda: [224, 224, 224],
+        verde: [5, 150, 105],
+        verdeClaro: [236, 253, 245],
+        vermelho: [220, 38, 38],
+        laranja: [217, 119, 6],
+        roxo: [124, 58, 237],
+        texto: [30, 30, 30],
+        textoSecundario: [100, 100, 100]
+      };
+
+      // ========== FUNCOES AUXILIARES ==========
+      function checkPage(need) {
+        if (y + need > ph - 25) { addFooter(); doc.addPage(); y = 20; return true; }
+        return false;
+      }
+      function addFooter() {
+        doc.setDrawColor(200, 200, 200);
+        doc.line(ml, ph - 18, pw - mr, ph - 18);
+        doc.setFontSize(7);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(150, 150, 150);
+        doc.text("Plano de Acao do CIG - SEGOV/SEGEST - Modelo de Governanca Publica do DF", pw / 2, ph - 13, { align: "center" });
+        doc.text("Resolucao CGOV N. 04/2024 | Gerado em " + new Date().toLocaleString("pt-BR"), pw / 2, ph - 9, { align: "center" });
+        doc.setTextColor.apply(doc, pdfColors.texto);
+      }
+      function drawSectionHeader(titulo, cor) {
+        checkPage(18);
+        doc.setFillColor.apply(doc, cor);
+        doc.roundedRect(ml, y, cw, 10, 2, 2, 'F');
+        doc.setFontSize(11);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(255, 255, 255);
+        doc.text("  " + titulo, ml + 4, y + 7);
+        doc.setTextColor.apply(doc, pdfColors.texto);
+        y += 14;
+      }
+      function drawField(label, value, options) {
+        options = options || {};
+        var val = (value && value.trim()) ? value.trim() : "(nao preenchido)";
+        var isEmpty = !value || !value.trim();
+        var lines = doc.splitTextToSize(val, cw - 6);
+        var blockH = 8 + lines.length * 4.2 + 4;
+        checkPage(blockH);
+        // Fundo alternado
+        if (options.highlight) {
+          doc.setFillColor.apply(doc, options.highlight);
+          doc.roundedRect(ml, y, cw, blockH, 1.5, 1.5, 'F');
+        }
+        // Borda esquerda colorida
+        if (options.borderColor) {
+          doc.setFillColor.apply(doc, options.borderColor);
+          doc.rect(ml, y, 2.5, blockH, 'F');
+        }
+        // Label
+        doc.setFontSize(8.5);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor.apply(doc, options.labelColor || pdfColors.azulGDF);
+        doc.text(label.toUpperCase(), ml + 6, y + 6);
+        // Valor
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor.apply(doc, isEmpty ? [180, 180, 180] : pdfColors.texto);
+        doc.text(lines, ml + 6, y + 11);
+        doc.setTextColor.apply(doc, pdfColors.texto);
+        y += blockH + 2;
+      }
+      function drawFieldPair(label1, val1, label2, val2, cor) {
+        var halfW = (cw - 4) / 2;
+        var v1 = (val1 && val1.trim()) ? val1.trim() : "(nao preenchido)";
+        var v2 = (val2 && val2.trim()) ? val2.trim() : "(nao preenchido)";
+        var lines1 = doc.splitTextToSize(v1, halfW - 8);
+        var lines2 = doc.splitTextToSize(v2, halfW - 8);
+        var maxLines = Math.max(lines1.length, lines2.length);
+        var blockH = 8 + maxLines * 4.2 + 4;
+        checkPage(blockH);
+        // Caixas lado a lado
+        doc.setFillColor.apply(doc, pdfColors.cinzaClaro);
+        doc.roundedRect(ml, y, halfW, blockH, 1.5, 1.5, 'F');
+        doc.roundedRect(ml + halfW + 4, y, halfW, blockH, 1.5, 1.5, 'F');
+        doc.setFillColor.apply(doc, cor || pdfColors.azulGDF);
+        doc.rect(ml, y, 2.5, blockH, 'F');
+        doc.rect(ml + halfW + 4, y, 2.5, blockH, 'F');
+        // Labels
+        doc.setFontSize(8);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor.apply(doc, cor || pdfColors.azulGDF);
+        doc.text(label1.toUpperCase(), ml + 6, y + 6);
+        doc.text(label2.toUpperCase(), ml + halfW + 8, y + 6);
+        // Valores
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor.apply(doc, (!val1 || !val1.trim()) ? [180,180,180] : pdfColors.texto);
+        doc.text(lines1, ml + 6, y + 11);
+        doc.setTextColor.apply(doc, (!val2 || !val2.trim()) ? [180,180,180] : pdfColors.texto);
+        doc.text(lines2, ml + halfW + 8, y + 11);
+        doc.setTextColor.apply(doc, pdfColors.texto);
+        y += blockH + 2;
+      }
+
+      // ========== CAPA / CABECALHO ==========
+      // Faixa azul superior
+      doc.setFillColor.apply(doc, pdfColors.azulGDF);
+      doc.rect(0, 0, pw, 50, 'F');
+      doc.setFillColor.apply(doc, pdfColors.azulEscuro);
+      doc.rect(0, 47, pw, 3, 'F');
+
+      // Titulo na faixa
+      doc.setFontSize(20);
       doc.setFont("helvetica", "bold");
-      doc.text("Plano de Acao do CIG", pageWidth / 2, y, { align: "center" });
-      y += 10;
+      doc.setTextColor(255, 255, 255);
+      doc.text("Plano de Acao do CIG", pw / 2, 22, { align: "center" });
       doc.setFontSize(10);
       doc.setFont("helvetica", "normal");
-      doc.text("Data: " + new Date().toLocaleString("pt-BR"), pageWidth / 2, y, { align: "center" });
-      y += 15;
-      var campos = [
-        { label: "Responsavel", value: data.responsavel_nome },
-        { label: "Email", value: data.responsavel_email },
-        { label: "Regiao Administrativa", value: data.ra },
-        { label: "Pratica de Governanca", value: data.pratica },
-        { label: "Projeto", value: data.projeto },
-        { label: "Objetivo", value: data.objetivo },
-        { label: "Descricao", value: data.descricao },
-        { label: "Produto Principal", value: data.produto },
-        { label: "Caracteristicas", value: data.caracteristicas },
-        { label: "Justificativa", value: data.justificativa },
-        { label: "Indicador", value: data.indicador },
-        { label: "Patrocinio", value: data.patrocinio },
-        { label: "Equipe", value: data.equipe },
-        { label: "Publico-alvo", value: data.publico },
-        { label: "Premissas", value: data.premissas },
-        { label: "Barreiras", value: data.barreiras },
-        { label: "Riscos", value: data.riscos }
-      ];
-      campos.forEach(function(campo) {
-        if (y > 270) { doc.addPage(); y = 20; }
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(10);
-        doc.text(campo.label + ":", margin, y);
-        y += 6;
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(9);
-        var lines = doc.splitTextToSize(campo.value || "(vazio)", pageWidth - margin * 2);
-        doc.text(lines, margin, y);
-        y += lines.length * 5 + 6;
-      });
+      doc.text("Comite Interno de Governanca - Administracoes Regionais do DF", pw / 2, 30, { align: "center" });
+      doc.setFontSize(8);
+      doc.text("SEGOV/SEGEST - Modelo de Governanca Publica do DF", pw / 2, 38, { align: "center" });
+
+      // Info box abaixo da faixa
+      y = 58;
+      doc.setFillColor.apply(doc, pdfColors.azulClaro);
+      doc.roundedRect(ml, y, cw, 28, 3, 3, 'F');
+      doc.setDrawColor.apply(doc, pdfColors.azulGDF);
+      doc.setLineWidth(0.5);
+      doc.roundedRect(ml, y, cw, 28, 3, 3, 'S');
+      doc.setTextColor.apply(doc, pdfColors.azulEscuro);
+      doc.setFontSize(12);
+      doc.setFont("helvetica", "bold");
+      doc.text(data.ra || "Regiao Administrativa nao informada", pw / 2, y + 10, { align: "center" });
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "normal");
+      doc.text("Pratica: " + (data.pratica || "nao informada"), pw / 2, y + 17, { align: "center" });
+      doc.setFontSize(8);
+      doc.setTextColor.apply(doc, pdfColors.textoSecundario);
+      doc.text("Gerado em " + new Date().toLocaleString("pt-BR") + " | Responsavel: " + (data.responsavel_nome || "nao informado"), pw / 2, y + 23, { align: "center" });
+      doc.setTextColor.apply(doc, pdfColors.texto);
+      y += 36;
+
+      // ========== SECAO 1: IDENTIFICACAO ==========
+      drawSectionHeader("1. Identificacao", pdfColors.azulGDF);
+      drawFieldPair("Responsavel", data.responsavel_nome, "E-mail Institucional", data.responsavel_email, pdfColors.azulGDF);
+      drawFieldPair("Regiao Administrativa", data.ra, "Pratica de Governanca", data.pratica, pdfColors.azulGDF);
+
+      // ========== SECAO 2: PROJETO ==========
+      drawSectionHeader("2. Definicao do Projeto", pdfColors.azulEscuro);
+      drawField("Nome do Projeto", data.projeto, { highlight: pdfColors.cinzaClaro, borderColor: pdfColors.azulGDF });
+      drawField("Objetivo do Projeto", data.objetivo, { highlight: pdfColors.cinzaClaro, borderColor: [5, 150, 105] });
+
+      // ========== SECAO 3: DETALHAMENTO ==========
+      drawSectionHeader("3. Detalhamento", [124, 58, 237]);
+      drawField("Descricao do Projeto", data.descricao, { highlight: pdfColors.cinzaClaro, borderColor: pdfColors.roxo });
+      drawField("Produto Principal", data.produto, { highlight: pdfColors.cinzaClaro, borderColor: [234, 88, 12] });
+      drawField("Caracteristicas do Produto", data.caracteristicas, { highlight: pdfColors.cinzaClaro, borderColor: pdfColors.roxo });
+
+      // ========== SECAO 4: ANALISE ==========
+      drawSectionHeader("4. Justificativa e Indicadores", pdfColors.verde);
+      drawField("Justificativa", data.justificativa, { highlight: pdfColors.verdeClaro, borderColor: pdfColors.verde });
+      drawField("Indicador de Resultado", data.indicador, { highlight: pdfColors.verdeClaro, borderColor: pdfColors.verde, labelColor: pdfColors.verde });
+
+      // ========== SECAO 5: PARTES INTERESSADAS ==========
+      drawSectionHeader("5. Partes Interessadas", [51, 65, 85]);
+      drawField("Patrocinio e Gestao", data.patrocinio, { highlight: pdfColors.cinzaClaro, borderColor: [51, 65, 85] });
+      drawField("Equipe Executora", data.equipe, { highlight: pdfColors.cinzaClaro, borderColor: [51, 65, 85] });
+      drawField("Publico-alvo", data.publico, { highlight: pdfColors.cinzaClaro, borderColor: [51, 65, 85] });
+
+      // ========== SECAO 6: ENTREGAS ==========
+      drawSectionHeader("6. Entregas Intermediarias", pdfColors.verde);
       if (data.entregas && data.entregas.length > 0) {
-        if (y > 240) { doc.addPage(); y = 20; }
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(11);
-        doc.text("Entregas", margin, y);
-        y += 8;
-        var entregasData = data.entregas.map(function(ent, i) {
-          return [String(i + 1), ent.entrega || "", ent.atividades || "", ent.responsavel || "", ent.prazo || "", ent.investimento || ""];
-        });
-        doc.autoTable({
-          startY: y,
-          head: [["#", "Entrega", "Atividades", "Responsavel", "Prazo", "Investimento"]],
-          body: entregasData,
-          margin: { left: margin, right: margin },
-          styles: { fontSize: 8 },
-          headStyles: { fillColor: [26, 115, 232] }
-        });
+        var hasContent = data.entregas.some(function(e) { return e.entrega && e.entrega.trim(); });
+        if (hasContent) {
+          var entregasBody = data.entregas.filter(function(e) { return e.entrega && e.entrega.trim(); }).map(function(ent, i) {
+            return [
+              String(i + 1),
+              ent.entrega || "",
+              ent.atividades || "",
+              ent.responsavel || "",
+              ent.prazo || "",
+              ent.investimento || "Sem custo direto"
+            ];
+          });
+          checkPage(30);
+          doc.autoTable({
+            startY: y,
+            head: [["N.", "Entrega", "Atividades", "Responsavel", "Prazo", "Investimento"]],
+            body: entregasBody,
+            margin: { left: ml, right: mr },
+            styles: { fontSize: 7.5, cellPadding: 3, lineColor: [200, 200, 200], lineWidth: 0.3 },
+            headStyles: { fillColor: pdfColors.verde, textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 8 },
+            alternateRowStyles: { fillColor: [245, 250, 248] },
+            columnStyles: {
+              0: { cellWidth: 10, halign: 'center', fontStyle: 'bold' },
+              1: { cellWidth: 38 },
+              2: { cellWidth: 42 },
+              3: { cellWidth: 28 },
+              4: { cellWidth: 22, halign: 'center' },
+              5: { cellWidth: 28 }
+            }
+          });
+          y = doc.lastAutoTable.finalY + 6;
+        } else {
+          drawField("Entregas", "", { highlight: pdfColors.cinzaClaro, borderColor: pdfColors.verde });
+        }
       }
-      doc.save("plano-de-acao-" + (data.projeto || "canvas") + ".pdf");
+
+      // ========== SECAO 7: PREMISSAS, BARREIRAS E RISCOS ==========
+      drawSectionHeader("7. Premissas, Barreiras e Riscos", pdfColors.laranja);
+      drawField("Premissas", data.premissas, { highlight: pdfColors.cinzaClaro, borderColor: [180, 83, 9] });
+      drawField("Barreiras", data.barreiras, { highlight: [254, 242, 242], borderColor: pdfColors.vermelho, labelColor: pdfColors.vermelho });
+      drawField("Riscos", data.riscos, { highlight: [255, 251, 235], borderColor: pdfColors.laranja, labelColor: pdfColors.laranja });
+
+      // ========== RODAPE FINAL ==========
+      addFooter();
+
+      // Nome do arquivo
+      var nomeArquivo = "Plano-de-Acao-CIG";
+      if (data.ra) nomeArquivo += "-" + data.ra.replace(/[^a-zA-Z0-9]/g, '-').replace(/-+/g, '-');
+      doc.save(nomeArquivo + ".pdf");
     }
 
     function gerarPDFTodos() {
       var btn = document.getElementById("btn-pdf-todos");
-      if (btn) btn.textContent = "Carregando...";
+      if (btn) btn.textContent = "Carregando registros...";
       fetch(GOOGLE_SCRIPT_URL)
         .then(function(r) { return r.json(); })
         .then(function(result) {
@@ -2378,58 +2544,187 @@ function gerarPDFIndividual() {
             return;
           }
           var doc = new jspdf.jsPDF("landscape");
-          var margin = 10;
-          doc.setFontSize(14);
+          var pw = doc.internal.pageSize.getWidth();
+          var ph = doc.internal.pageSize.getHeight();
+          var ml = 12;
+          var mr = 12;
+          var cw = pw - ml - mr;
+          var azulGDF = [21, 101, 192];
+          var azulEscuro = [13, 71, 161];
+
+          function addFooterAdmin(pageNum) {
+            doc.setDrawColor(200, 200, 200);
+            doc.line(ml, ph - 12, pw - mr, ph - 12);
+            doc.setFontSize(7);
+            doc.setFont("helvetica", "normal");
+            doc.setTextColor(150, 150, 150);
+            doc.text("Relatorio Geral - SEGOV/SEGEST | Resolucao CGOV N. 04/2024", ml, ph - 7);
+            doc.text("Pagina " + pageNum, pw - mr, ph - 7, { align: "right" });
+            doc.setTextColor(30, 30, 30);
+          }
+
+          // ===== CAPA =====
+          doc.setFillColor.apply(doc, azulGDF);
+          doc.rect(0, 0, pw, 45, 'F');
+          doc.setFillColor.apply(doc, azulEscuro);
+          doc.rect(0, 42, pw, 3, 'F');
+          doc.setFontSize(22);
           doc.setFont("helvetica", "bold");
-          doc.text("Relatorio Geral - Planos de Acao do CIG", margin, 15);
-          doc.setFontSize(9);
+          doc.setTextColor(255, 255, 255);
+          doc.text("Relatorio Geral - Planos de Acao do CIG", pw / 2, 20, { align: "center" });
+          doc.setFontSize(11);
           doc.setFont("helvetica", "normal");
-          doc.text("Gerado em: " + new Date().toLocaleString("pt-BR") + " | Total: " + result.total + " registros", margin, 22);
-          var headers = [["Data", "Nome", "Email", "RA", "Pratica", "Projeto", "Objetivo"]];
-          var rows = result.registros.map(function(r) {
+          doc.text("Administracoes Regionais do Distrito Federal", pw / 2, 29, { align: "center" });
+          doc.setFontSize(9);
+          doc.text("SEGOV/SEGEST - Modelo de Governanca Publica do DF", pw / 2, 37, { align: "center" });
+          doc.setTextColor(30, 30, 30);
+
+          // Info box
+          var iy = 52;
+          doc.setFillColor(227, 242, 253);
+          doc.roundedRect(ml, iy, cw, 14, 2, 2, 'F');
+          doc.setDrawColor.apply(doc, azulGDF);
+          doc.setLineWidth(0.4);
+          doc.roundedRect(ml, iy, cw, 14, 2, 2, 'S');
+          doc.setFontSize(10);
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor.apply(doc, azulEscuro);
+          doc.text("Total de registros: " + result.total, ml + 8, iy + 9);
+          doc.setFont("helvetica", "normal");
+          doc.setFontSize(9);
+          doc.text("Gerado em: " + new Date().toLocaleString("pt-BR"), pw - mr - 8, iy + 9, { align: "right" });
+          doc.setTextColor(30, 30, 30);
+
+          // Tabela resumo
+          var headers = [["#", "Data", "Responsavel", "E-mail", "RA", "Pratica", "Projeto", "Objetivo"]];
+          var rows = result.registros.map(function(r, idx) {
             return [
+              String(idx + 1),
               r["Data/Hora"] || "",
               r["Nome"] || "",
               r["Email"] || "",
-              (r["Regiao Administrativa"] || "").substring(0, 25),
-              (r["Pratica de Governanca"] || "").substring(0, 30),
-              (r["Projeto"] || "").substring(0, 30),
-              (r["Objetivo"] || "").substring(0, 40)
+              (r["Regiao Administrativa"] || "").substring(0, 22),
+              (r["Pratica de Governanca"] || "").substring(0, 25),
+              (r["Projeto"] || "").substring(0, 28),
+              (r["Objetivo"] || "").substring(0, 35)
             ];
           });
           doc.autoTable({
-            startY: 28,
+            startY: iy + 20,
             head: headers,
             body: rows,
-            margin: { left: margin, right: margin },
-            styles: { fontSize: 7, cellPadding: 2 },
-            headStyles: { fillColor: [26, 115, 232] },
-            alternateRowStyles: { fillColor: [248, 249, 250] }
+            margin: { left: ml, right: mr },
+            styles: { fontSize: 7, cellPadding: 2.5, lineColor: [200, 200, 200], lineWidth: 0.2 },
+            headStyles: { fillColor: azulGDF, textColor: [255, 255, 255], fontStyle: 'bold', fontSize: 7.5 },
+            alternateRowStyles: { fillColor: [248, 249, 250] },
+            columnStyles: {
+              0: { cellWidth: 8, halign: 'center', fontStyle: 'bold' },
+              1: { cellWidth: 25 },
+              2: { cellWidth: 32 },
+              3: { cellWidth: 38 },
+              4: { cellWidth: 30 },
+              5: { cellWidth: 34 }
+            }
           });
-          result.registros.forEach(function(reg) {
+          addFooterAdmin(1);
+
+          // ===== PAGINAS INDIVIDUAIS POR REGISTRO =====
+          var labelMap = [
+            { key: "Nome", label: "Responsavel" },
+            { key: "Email", label: "E-mail Institucional" },
+            { key: "Regiao Administrativa", label: "Regiao Administrativa" },
+            { key: "Pratica de Governanca", label: "Pratica de Governanca" },
+            { key: "Projeto", label: "Nome do Projeto" },
+            { key: "Objetivo", label: "Objetivo do Projeto" },
+            { key: "Descricao", label: "Descricao do Projeto" },
+            { key: "Produto", label: "Produto Principal" },
+            { key: "Caracteristicas", label: "Caracteristicas" },
+            { key: "Justificativa", label: "Justificativa" },
+            { key: "Indicador", label: "Indicador de Resultado" },
+            { key: "Patrocinio", label: "Patrocinio e Gestao" },
+            { key: "Equipe", label: "Equipe Executora" },
+            { key: "Publico-alvo", label: "Publico-alvo" },
+            { key: "Premissas", label: "Premissas" },
+            { key: "Barreiras", label: "Barreiras" },
+            { key: "Riscos", label: "Riscos" }
+          ];
+          var sectionColors = {
+            "Responsavel": azulGDF, "E-mail Institucional": azulGDF,
+            "Regiao Administrativa": azulGDF, "Pratica de Governanca": azulGDF,
+            "Nome do Projeto": azulEscuro, "Objetivo do Projeto": [5, 150, 105],
+            "Descricao do Projeto": [124, 58, 237], "Produto Principal": [234, 88, 12],
+            "Caracteristicas": [124, 58, 237],
+            "Justificativa": [5, 150, 105], "Indicador de Resultado": [5, 150, 105],
+            "Patrocinio e Gestao": [51, 65, 85], "Equipe Executora": [51, 65, 85], "Publico-alvo": [51, 65, 85],
+            "Premissas": [180, 83, 9], "Barreiras": [220, 38, 38], "Riscos": [217, 119, 6]
+          };
+
+          result.registros.forEach(function(reg, idx) {
             doc.addPage("portrait");
-            var y = 20;
+            var ppw = doc.internal.pageSize.getWidth();
+            var pph = doc.internal.pageSize.getHeight();
+            var pml = 18;
+            var pcw = ppw - pml * 2;
+            var py = 0;
+
+            // Cabecalho azul
+            doc.setFillColor.apply(doc, azulGDF);
+            doc.rect(0, 0, ppw, 38, 'F');
+            doc.setFillColor.apply(doc, azulEscuro);
+            doc.rect(0, 35, ppw, 3, 'F');
             doc.setFontSize(14);
             doc.setFont("helvetica", "bold");
-            doc.text("Plano de Acao: " + (reg["Projeto"] || ""), margin, y);
-            y += 10;
-            doc.setFontSize(9);
+            doc.setTextColor(255, 255, 255);
+            doc.text("Plano de Acao #" + (idx + 1), ppw / 2, 15, { align: "center" });
+            doc.setFontSize(11);
+            doc.text(reg["Projeto"] || "Sem nome", ppw / 2, 24, { align: "center" });
+            doc.setFontSize(8);
             doc.setFont("helvetica", "normal");
-            Object.keys(reg).forEach(function(key) {
-              if (y > 270) { doc.addPage(); y = 20; }
+            doc.text((reg["Regiao Administrativa"] || "") + " | " + (reg["Data/Hora"] || ""), ppw / 2, 32, { align: "center" });
+            doc.setTextColor(30, 30, 30);
+            py = 46;
+
+            labelMap.forEach(function(item) {
+              var val = reg[item.key] || "";
+              var valStr = val && String(val).trim() ? String(val).trim() : "(nao preenchido)";
+              var isEmpty = !val || !String(val).trim();
+              var lines = doc.splitTextToSize(valStr, pcw - 8);
+              var blockH = 8 + lines.length * 4.2 + 3;
+              if (py + blockH > pph - 20) { doc.addPage(); py = 20; }
+              // Fundo
+              doc.setFillColor(248, 249, 250);
+              doc.roundedRect(pml, py, pcw, blockH, 1.5, 1.5, 'F');
+              // Borda colorida
+              var bc = sectionColors[item.label] || azulGDF;
+              doc.setFillColor.apply(doc, bc);
+              doc.rect(pml, py, 2.5, blockH, 'F');
+              // Label
+              doc.setFontSize(8);
               doc.setFont("helvetica", "bold");
-              doc.text(key + ":", margin, y);
-              y += 5;
+              doc.setTextColor.apply(doc, bc);
+              doc.text(item.label.toUpperCase(), pml + 6, py + 6);
+              // Valor
+              doc.setFontSize(9);
               doc.setFont("helvetica", "normal");
-              var val = String(reg[key] || "(vazio)");
-              var lines = doc.splitTextToSize(val, 180);
-              doc.text(lines, margin, y);
-              y += lines.length * 4.5 + 5;
+              doc.setTextColor.apply(doc, isEmpty ? [180, 180, 180] : [30, 30, 30]);
+              doc.text(lines, pml + 6, py + 11);
+              doc.setTextColor(30, 30, 30);
+              py += blockH + 2;
             });
+
+            // Rodape da pagina individual
+            doc.setDrawColor(200, 200, 200);
+            doc.line(pml, pph - 12, ppw - pml, pph - 12);
+            doc.setFontSize(7);
+            doc.setTextColor(150, 150, 150);
+            doc.text("SEGOV/SEGEST | Resolucao CGOV N. 04/2024", pml, pph - 7);
+            doc.text("Registro " + (idx + 1) + " de " + result.total, ppw - pml, pph - 7, { align: "right" });
+            doc.setTextColor(30, 30, 30);
           });
-          doc.save("relatorio-geral-planos-de-acao.pdf");
+
+          doc.save("Relatorio-Geral-Planos-de-Acao-CIG.pdf");
         })
-        .catch(function(err) { alert("Erro: " + err); })
+        .catch(function(err) { alert("Erro ao gerar relatorio: " + err); })
         .finally(function() {
           if (btn) btn.textContent = "\uD83D\uDCCA PDF de Todos os Registros";
         });
