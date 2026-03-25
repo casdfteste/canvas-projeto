@@ -930,7 +930,15 @@ var FIELD_DEFS = {
     placeholder: "seu.email@df.gov.br",
     icon: "\uD83D\uDCE7", color: "#1565C0", inputType: "email",
     exemplos: []
-  },
+  }
+  cargo: {
+    field: "cargo", label: "Cargo/Função",
+    question: "Qual é o seu cargo ou função?",
+    dica: "Informe seu cargo ou função na Administração Regional.",
+    placeholder: "Ex: Chefe da Unidade de Governança...",
+    icon: "🎯", color: "#1565C0", inputType: "input",
+    exemplos: []
+  },,
   ra: {
     field: "ra", label: "Regi\u00e3o Administrativa",
     question: "Qual \u00e9 a sua Regi\u00e3o Administrativa?",
@@ -1072,7 +1080,7 @@ var STEPS = [
     id: "identificacao", type: "group", label: "Identifica\u00e7\u00e3o",
     icon: "\uD83D\uDCCD", question: "Identifique sua RA e a pr\u00e1tica de governan\u00e7a",
     dica: "Selecione os dados b\u00e1sicos para come\u00e7ar o plano.",
-    fields: ["responsavel_nome", "responsavel_email", "ra", "pratica"]
+    fields: ["responsavel_nome", "responsavel_email", "cargo", "ra", "pratica"]
   },
   {
     id: "nome-objetivo", type: "group", label: "Nome e Objetivo",
@@ -1205,7 +1213,7 @@ function getFirstStepOfPhase(phaseIdx) {
 /* ===================================================
    CAMPOS OBRIGATORIOS
    =================================================== */
-var REQUIRED_FIELDS = ['responsavel_nome', 'responsavel_email', 'ra', 'pratica', 'projeto', 'objetivo', 'descricao', 'produto', 'caracteristicas', 'justificativa', 'indicador', 'partes', 'entregas', 'premissas', 'barreiras', 'riscos'];
+var REQUIRED_FIELDS = ['responsavel_nome', 'responsavel_email', 'cargo', 'ra', 'pratica', 'projeto', 'objetivo', 'descricao', 'produto', 'caracteristicas', 'justificativa', 'indicador', 'partes', 'entregas', 'premissas', 'barreiras', 'riscos'];
 
 function isRequired(fieldOrId) {
   return REQUIRED_FIELDS.indexOf(fieldOrId) >= 0;
@@ -2308,20 +2316,21 @@ function gerarPDFIndividual() {
       doc.text("Data: " + new Date().toLocaleString("pt-BR"), pageWidth / 2, y, { align: "center" });
       y += 15;
       var campos = [
-        { label: "Responsavel", value: data.responsavel_nome },
-        { label: "Email", value: data.responsavel_email },
-        { label: "Regiao Administrativa", value: data.ra },
-        { label: "Pratica de Governanca", value: data.pratica },
+        { label: "Responsável", value: data.responsavel_nome },
+        { label: "E-mail Institucional", value: data.responsavel_email },
+        { label: "Cargo/Função", value: data.cargo },
+        { label: "Região Administrativa", value: data.ra },
+        { label: "Prática de Governança", value: data.pratica },
         { label: "Projeto", value: data.projeto },
         { label: "Objetivo", value: data.objetivo },
-        { label: "Descricao", value: data.descricao },
+        { label: "Descrição", value: data.descricao },
         { label: "Produto Principal", value: data.produto },
-        { label: "Caracteristicas", value: data.caracteristicas },
+        { label: "Características", value: data.caracteristicas },
         { label: "Justificativa", value: data.justificativa },
         { label: "Indicador", value: data.indicador },
-        { label: "Patrocinio", value: data.patrocinio },
+        { label: "Patrocínio/Gestão", value: data.patrocinio },
         { label: "Equipe", value: data.equipe },
-        { label: "Publico-alvo", value: data.publico },
+        { label: "Público-alvo", value: data.publico },
         { label: "Premissas", value: data.premissas },
         { label: "Barreiras", value: data.barreiras },
         { label: "Riscos", value: data.riscos }
