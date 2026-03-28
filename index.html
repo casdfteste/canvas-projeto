@@ -1779,7 +1779,7 @@ function submitToSEGOV() {
     submittedAt: new Date().toISOString(),
     userAgent: navigator.userAgent,
     processo_sei: data.ra && PROCESSOS_SEI[data.ra] ? PROCESSOS_SEI[data.ra] : '',
-    numero_plano: (localStorage.getItem('cig_plano_numero_enviado') || localStorage.getItem('cig_plano_numero') || ''),
+    numero_plano: (localStorage.getItem('cig_plano_numero_enviado') || ''),
     notificarEmail: NOTIFICATION_EMAIL
   });
 
@@ -1795,7 +1795,7 @@ function submitToSEGOV() {
   .then(function() {
     submitting = false;
     showSuccess = true;
-    try { var ne=localStorage.getItem('cig_plano_numero')||''; localStorage.setItem('cig_plano_numero_enviado',ne); localStorage.setItem('cig_dados_plano',JSON.stringify(data)); } catch(e){}
+    try { localStorage.removeItem('cig_plano_numero_enviado'); localStorage.removeItem('cig_dados_plano'); } catch(e){}
     markAsSent();
     render();
   })
