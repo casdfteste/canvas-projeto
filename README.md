@@ -14,9 +14,8 @@ Assistente passo a passo que conduz os servidores dos Comitês Internos de Gover
 4. Em **Branch**, selecione `main` e pasta `/ (root)`
 5. Clique em **Save**
 6. Aguarde alguns minutos — o site estará disponível em:
-
 ```
-https://casdfteste.github.io/canvas-projeto/
+https://segest-df.github.io/canvas-projeto/
 ```
 
 ## 📬 Como enviar para as RAs
@@ -24,18 +23,18 @@ https://casdfteste.github.io/canvas-projeto/
 Inclua o link no ofício enviado pelo SEI:
 
 > Para preenchimento do Canvas de Projeto, acesse:
-> **https://casdfteste.github.io/canvas-projeto/**
+> **https://segest-df.github.io/canvas-projeto/**
 
 ## 💡 Funcionalidades
 
-- ✅ Passo a passo guiado (uma pergunta por vez)
-- ✅ Exemplos inspiradores de diferentes tipos de projeto
-- ✅ Barra de progresso visual
-- ✅ Salvar progresso em arquivo JSON (para continuar depois)
-- ✅ Importar arquivo salvo anteriormente
-- ✅ Imprimir / Exportar PDF para anexar no SEI
-- ✅ Funciona em qualquer navegador (Chrome, Edge, Firefox)
-- ✅ Responsivo (funciona em celular e tablet)
+* ✅ Passo a passo guiado (uma pergunta por vez)
+* ✅ Exemplos inspiradores de diferentes tipos de projeto
+* ✅ Barra de progresso visual
+* ✅ Salvar progresso em arquivo JSON (para continuar depois)
+* ✅ Importar arquivo salvo anteriormente
+* ✅ Imprimir / Exportar PDF para anexar no SEI
+* ✅ Funciona em qualquer navegador (Chrome, Edge, Firefox)
+* ✅ Responsivo (funciona em celular e tablet)
 
 ## 📄 Licença
 
