@@ -1174,6 +1174,181 @@
     .agenda-freq-box, .reuniao-grid, .agenda-resumo { grid-template-columns: 1fr; }
   }
 
+  /* [REV #6] Bússola Estratégica — alinhamento ao PEI */
+  .bussola-hero {
+    background: linear-gradient(135deg, #DC2626 0%, #7C2D12 100%);
+    color: #fff;
+    padding: 18px 20px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .bussola-hero-icon { font-size: 44px; }
+  .bussola-hero h3 { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+  .bussola-hero p { font-size: 13px; opacity: 0.95; line-height: 1.5; }
+
+  .bussola-ra-info {
+    background: #FEF3C7;
+    border-left: 4px solid #F59E0B;
+    padding: 12px 14px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #78350F;
+  }
+  .bussola-ra-info strong { display: block; margin-bottom: 4px; color: #92400E; }
+
+  .bussola-pei-missao {
+    background: #F0F9FF;
+    border: 1px solid #BAE6FD;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    font-size: 12px;
+  }
+  .bussola-pei-missao h4 {
+    font-size: 11px; font-weight: 700; color: #0369A1;
+    text-transform: uppercase; margin-bottom: 4px;
+  }
+  .bussola-pei-missao p { color: #0C4A6E; line-height: 1.5; font-style: italic; }
+
+  .bussola-perspectiva {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px;
+    margin-bottom: 14px;
+    border: 2px solid #E5E7EB;
+  }
+  .bussola-perspectiva-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 2px dashed #E5E7EB;
+  }
+  .bussola-perspectiva-icon { font-size: 28px; }
+  .bussola-perspectiva-nome { font-size: 16px; font-weight: 700; }
+  .bussola-perspectiva-desc { font-size: 12px; color: #6B7280; font-style: italic; margin-top: 2px; }
+
+  .bussola-obj-card {
+    border: 2px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fff;
+  }
+  .bussola-obj-card:hover { border-color: #9CA3AF; background: #F9FAFB; }
+  .bussola-obj-card.selecionado {
+    background: linear-gradient(135deg, #ECFCCB 0%, #D9F99D 100%);
+    border-color: #65A30D;
+    box-shadow: 0 2px 8px rgba(101, 163, 13, 0.15);
+  }
+
+  .bussola-obj-topo {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .bussola-obj-check {
+    width: 22px; height: 22px;
+    border: 2px solid #9CA3AF;
+    border-radius: 5px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700;
+    background: #fff;
+    transition: all 0.2s;
+  }
+  .bussola-obj-card.selecionado .bussola-obj-check {
+    background: #65A30D; border-color: #65A30D; color: #fff;
+  }
+  .bussola-obj-corpo { flex: 1; }
+  .bussola-obj-titulo {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 700; color: #1F2937;
+    margin-bottom: 4px;
+  }
+  .bussola-obj-titulo-icon { font-size: 18px; }
+  .bussola-obj-explicacao { font-size: 12px; color: #4B5563; line-height: 1.5; }
+
+  .bussola-obj-expandido {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #86EFAC;
+  }
+  .bussola-obj-exemplo {
+    font-size: 11px;
+    color: #047857;
+    background: rgba(255,255,255,0.6);
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .bussola-obj-exemplo strong { color: #065F46; }
+  .bussola-obj-indicadores {
+    font-size: 11px; color: #4B5563; margin-bottom: 8px;
+  }
+  .bussola-obj-indicadores strong { color: #374151; }
+
+  .bussola-obj-justif label {
+    display: block; font-size: 12px; font-weight: 600;
+    color: #065F46; margin-bottom: 4px;
+  }
+  .bussola-obj-justif textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #86EFAC;
+    border-radius: 6px;
+    font-size: 12px;
+    min-height: 50px;
+    background: rgba(255,255,255,0.8);
+    resize: vertical;
+  }
+  .bussola-obj-justif textarea::placeholder {
+    color: #9CA3AF; font-style: italic;
+  }
+
+  .bussola-resumo {
+    background: #F0FDF4;
+    border: 2px solid #86EFAC;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 16px;
+    text-align: center;
+  }
+  .bussola-resumo-num {
+    font-size: 32px; font-weight: 800; color: #047857;
+    line-height: 1;
+  }
+  .bussola-resumo-texto {
+    font-size: 13px; color: #065F46; margin-top: 4px;
+  }
+
+  .bussola-alerta {
+    background: #FEF2F2;
+    border: 1px solid #FCA5A5;
+    border-radius: 8px;
+    padding: 12px;
+    color: #991B1B;
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .bussola-sem-pei {
+    background: #FEF3C7;
+    border: 2px dashed #F59E0B;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: #78350F;
+  }
+  .bussola-sem-pei-icon { font-size: 40px; margin-bottom: 10px; }
+
 </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
@@ -1184,7 +1359,7 @@
 <div class="revolucao-banner no-print">
   <div class="rev-title">
     <span class="tag">✨ REVOLUÇÃO</span>
-    Versão protótipo com 5 evoluções
+    Versão protótipo com 6 evoluções
   </div>
   <div class="rev-badges">
     <span class="rev-badge"><span class="num">1</span>📰 Modo História</span>
@@ -1192,6 +1367,7 @@
     <span class="rev-badge"><span class="num">3</span>📱 QR Código Cidadão</span>
     <span class="rev-badge"><span class="num">4</span>📚 Biblioteca de Planos</span>
     <span class="rev-badge"><span class="num">5</span>📅 Agenda Viva do CIG</span>
+    <span class="rev-badge"><span class="num">6</span>🧭 Bússola Estratégica</span>
   </div>
 </div>
 
@@ -1682,6 +1858,103 @@ function calcularNivelRisco(prob, imp) {
   return "Baixo";
 }
 
+/* ============================================================
+   [REV #6] BÚSSOLA ESTRATÉGICA — PEIs por RA (modelo BSC)
+   ============================================================
+   Estrutura BSC é comum; objetivos variam por RA.
+   PILOTO: Gama (RA-II) já estruturado.
+   Outras RAs serão adicionadas conforme seus PEIs forem entregues.
+   =========================================================== */
+var PERSPECTIVAS_BSC = [
+  { id: "contribuicao", nome: "Contribuição para a Sociedade", cor: "#F59E0B", icone: "🌟",
+    descricao: "O impacto final que a RA quer gerar para o cidadão." },
+  { id: "resultados", nome: "Resultados Institucionais", cor: "#0EA5E9", icone: "🎯",
+    descricao: "Resultados concretos que a RA precisa entregar." },
+  { id: "processos", nome: "Processos Internos", cor: "#8B5CF6", icone: "⚙️",
+    descricao: "Como a RA trabalha por dentro para entregar bem." },
+  { id: "pessoas", nome: "Pessoas, Inovação e Tecnologia", cor: "#10B981", icone: "💡",
+    descricao: "A base: servidores capacitados, inovação e tecnologia." }
+];
+
+var PEI_POR_RA = {
+  "Gama": {
+    ra_codigo: "RA-II",
+    missao: "Representar o Governo do Distrito Federal por meio da implementação de políticas públicas eficientes, buscando a proximidade e gestão participativa da sociedade, para melhoria da qualidade de vida do cidadão gamense",
+    visao: "Até 2027, ser referência em alavancagem de serviços públicos de zeladoria, execução de projetos e reconhecimento comunitário",
+    valores: ["Transparência", "Ética", "Respeito ao Cidadão", "Espírito de equipe", "Criatividade", "Proatividade"],
+    horizonte: "2024-2027",
+    objetivos: [
+      { id: "OBJ-GAMA-01", perspectiva: "contribuicao", icone: "❤️",
+        titulo: "Melhorar a qualidade de vida do cidadão gamense",
+        explicacao: "É a razão de ser da RA. Tudo mais existe para servir a esse propósito.",
+        indicadores: ["Elogios registrados em ouvidoria", "Reclamações totais registradas em ouvidoria"],
+        exemplo_plano_apoia: "Qualquer plano que melhore a experiência do cidadão (Ouvidoria, Zeladoria, Atendimento)." },
+
+      { id: "OBJ-GAMA-02", perspectiva: "resultados", icone: "🗣️",
+        titulo: "Consolidar a participação popular",
+        explicacao: "Criar canais e rotinas para que o cidadão opine e acompanhe.",
+        indicadores: ["Reclamações de pedidos da Administração Regional Digital 24h não atendidos", "Demandas da Administração Regional Digital 24h atendidas"],
+        exemplo_plano_apoia: "Ouvidoria Digital, Conselhos locais, Audiências públicas, Orçamento participativo." },
+
+      { id: "OBJ-GAMA-03", perspectiva: "resultados", icone: "📈",
+        titulo: "Estimular o desenvolvimento socioeconômico",
+        explicacao: "Apoiar a economia local, comércio, empreendedorismo e revitalização.",
+        indicadores: ["Ações de desenvolvimento realizadas", "Espaços públicos revitalizados", "Reuniões com associações civis realizadas"],
+        exemplo_plano_apoia: "Revitalização de áreas comerciais, parcerias com associações, incentivo a empreendedores." },
+
+      { id: "OBJ-GAMA-04", perspectiva: "resultados", icone: "🤝",
+        titulo: "Promover a integração social",
+        explicacao: "Atividades culturais, esportivas e comunitárias que aproximem as pessoas.",
+        indicadores: ["Atividades socioculturais realizadas e/ou apoiadas", "Pessoas participantes em eventos e atividades socioculturais"],
+        exemplo_plano_apoia: "Eventos culturais, festivais, programas esportivos comunitários." },
+
+      { id: "OBJ-GAMA-05", perspectiva: "processos", icone: "🔄",
+        titulo: "Otimizar os processos internos críticos",
+        explicacao: "Mapear e melhorar os processos-chave da RA para ganhar eficiência.",
+        indicadores: ["Processos mapeados"],
+        exemplo_plano_apoia: "Mapeamento de processos, redução de etapas burocráticas, digitalização." },
+
+      { id: "OBJ-GAMA-06", perspectiva: "processos", icone: "📋",
+        titulo: "Aprimorar o planejamento e a gestão",
+        explicacao: "Reuniões regulares, monitoramento e capacitação em planejamento.",
+        indicadores: ["Servidores instruídos sobre o planejamento estratégico", "Reuniões de gestão realizadas"],
+        exemplo_plano_apoia: "Estruturação do CIG, capacitações em governança, rotinas de reunião." },
+
+      { id: "OBJ-GAMA-07", perspectiva: "pessoas", icone: "👥",
+        titulo: "Qualificar a força de trabalho",
+        explicacao: "Capacitar e alocar corretamente os servidores.",
+        indicadores: ["Servidores capacitados", "Servidores lotados por setor"],
+        exemplo_plano_apoia: "Programas de capacitação, redistribuição de equipes, plano de carreira local." },
+
+      { id: "OBJ-GAMA-08", perspectiva: "pessoas", icone: "💡",
+        titulo: "Incentivar a prática de ações inovadoras",
+        explicacao: "Estimular ideias novas e disseminar boas práticas.",
+        indicadores: ["Práticas implementadas"],
+        exemplo_plano_apoia: "Laboratório de inovação, banco de boas práticas, desafios internos." },
+
+      { id: "OBJ-GAMA-09", perspectiva: "pessoas", icone: "🖥️",
+        titulo: "Implementar a gestão de tecnologia",
+        explicacao: "Equipamentos, softwares e PDTI para modernizar a RA.",
+        indicadores: ["Equipamentos adquiridos", "Softwares adquiridos", "PDTI Implementado"],
+        exemplo_plano_apoia: "PDTI, aquisição de equipamentos, sistemas de gestão." }
+    ]
+  }
+  // As demais 34 RAs serão adicionadas aqui conforme seus PEIs forem cadastrados
+};
+
+function getPEIdaRA(nomeRA) {
+  if (!nomeRA) return null;
+  // Normaliza: remove acentos, maiúsculas, trim
+  var ra = nomeRA.trim();
+  if (PEI_POR_RA[ra]) return PEI_POR_RA[ra];
+  // Tentar match case-insensitive
+  var keys = Object.keys(PEI_POR_RA);
+  for (var i = 0; i < keys.length; i++) {
+    if (keys[i].toLowerCase() === ra.toLowerCase()) return PEI_POR_RA[keys[i]];
+  }
+  return null;
+}
+
 var STEPS = [
   { id: "welcome", type: "welcome" },
   {
@@ -1703,6 +1976,14 @@ var STEPS = [
     icon: "\uD83C\uDFDB\uFE0F", question: "Em quais pilares da governan\u00e7a p\u00fablica seu projeto atua?",
     dica: "Resolu\u00e7\u00e3o CGov n\u00ba 04/2024 \u2014 marque os pilares aplic\u00e1veis (m\u00ednimo 1) e selecione o pilar prim\u00e1rio.",
     contexto: "Alinhe seu projeto ao Modelo de Governan\u00e7a P\u00fablica do DF."
+  },
+  {
+    // [REV #6] B\u00fassola Estrat\u00e9gica \u2014 alinhamento ao PEI da RA
+    id: "bussola", type: "bussola", label: "B\u00fassola Estrat\u00e9gica",
+    icon: "\uD83E\uDDED", question: "Seu plano apoia quais objetivos do PEI da sua RA?",
+    contexto: "Cada RA tem seu Plano Estrat\u00e9gico Institucional (PEI). Agora voc\u00ea vai mostrar como seu plano se conecta \u00e0 estrat\u00e9gia da RA.",
+    dica: "N\u00e3o precisa ser perfeito! Marque todos os objetivos do PEI que o seu plano apoia. Se quiser, escreva em 1 frase como apoia.",
+    ajuda: "O PEI \u00e9 a b\u00fassola da RA para os pr\u00f3ximos anos. Quando um plano do CIG apoia claramente objetivos do PEI, ele deixa de ser isolado e vira parte da estrat\u00e9gia. A SEGEST precisa ver essa conex\u00e3o para dar uma devolutiva bem fundamentada."
   },
   {
     id: "detalhamento", type: "group", label: "Descri\u00e7\u00e3o e Produto",
@@ -1771,6 +2052,7 @@ var STEPS = [
    =================================================== */
 var PHASES = [
   { name: "Identifica\u00e7\u00e3o", steps: ["identificacao", "nome-objetivo", "pilares"] },
+  { name: "B\u00fassola Estrat\u00e9gica", steps: ["bussola"] },
   { name: "Detalhamento", steps: ["detalhamento", "caracteristicas"] },
   { name: "An\u00e1lise", steps: ["analise"] },
   { name: "Pessoas e Entregas", steps: ["partes", "entregas"] },
@@ -1788,6 +2070,7 @@ var REVIEW_ITEMS = [
   { id: "pratica", field: "pratica", label: "Pr\u00e1tica de Governan\u00e7a", icon: "\uD83C\uDFDB\uFE0F", phase: "Identifica\u00e7\u00e3o" },
   { id: "projeto", field: "projeto", label: "Nome do Projeto", icon: "\uD83C\uDFAF", phase: "Identifica\u00e7\u00e3o" },
   { id: "objetivo", field: "objetivo", label: "Objetivo", icon: "\uD83C\uDFC6", phase: "Identifica\u00e7\u00e3o" },
+  { id: "bussola", type: "bussola", label: "Alinhamento ao PEI", icon: "\uD83E\uDDED", phase: "B\u00fassola Estrat\u00e9gica" },
   { id: "descricao", field: "descricao", label: "Descri\u00e7\u00e3o", icon: "\uD83D\uDCCB", phase: "Detalhamento" },
   { id: "produto", field: "produto", label: "Produto Principal", icon: "\uD83D\uDCE6", phase: "Detalhamento" },
   { id: "caracteristicas", field: "caracteristicas", label: "Caracter\u00edsticas", icon: "\u2B50", phase: "Detalhamento" },
@@ -1824,6 +2107,7 @@ function getStepIndexForField(fieldId) {
     if (s.type === 'partes' && ['patrocinio', 'equipe', 'publico', 'partes'].indexOf(fieldId) >= 0) return i;
     if (s.type === 'entregas' && fieldId === 'entregas') return i;
     if (s.type === 'agenda' && fieldId === 'agenda') return i;
+    if (s.type === 'bussola' && fieldId === 'bussola') return i;
   }
   return 1;
 }
@@ -2338,7 +2622,10 @@ var data = {
   // [REV #5] Agenda Viva do CIG — gest\u00e3o completa de reuni\u00f5es (Res. CGov 03/2021)
   agenda_frequencia: "",   // "mensal" | "bimestral" | "trimestral" | "outra"
   agenda_observacoes: "",
-  reunioes: []
+  reunioes: [],
+  // [REV #6] B\u00fassola Estrat\u00e9gica — alinhamento ao PEI da RA
+  pei_objetivos_apoiados: [], // array de {id, justificativa}
+  pei_observacao: ""
   // cada reuni\u00e3o: { data, horario, duracao, local, plataforma, pauta, participantes,
   //   entregas_vinculadas: [idx], ata_link, ata_sei, status: "agendada"|"realizada"|"cancelada",
   //   presentes, ausentes, quorum }
@@ -2775,7 +3062,9 @@ function clearAllData() {
     ],
     agenda_frequencia: "",
     agenda_observacoes: "",
-    reunioes: []
+    reunioes: [],
+    pei_objetivos_apoiados: [],
+    pei_observacao: ""
   };
   entregasExpandidas = {};
   currentStep = 0;
@@ -3393,6 +3682,203 @@ function renderAgenda(step) {
     statsHTML + freqBoxHTML + reunioesHTML + addBtnHTML;
 }
 
+/* ============================================================
+   [REV #6] BÚSSOLA ESTRATÉGICA — alinhamento ao PEI da RA
+   ============================================================ */
+
+function isBussolaObjSelecionado(objId) {
+  if (!data.pei_objetivos_apoiados) return false;
+  return data.pei_objetivos_apoiados.some(function(o) { return o.id === objId; });
+}
+
+function getBussolaObjJustificativa(objId) {
+  if (!data.pei_objetivos_apoiados) return '';
+  var found = data.pei_objetivos_apoiados.find(function(o) { return o.id === objId; });
+  return found ? (found.justificativa || '') : '';
+}
+
+function toggleBussolaObj(objId) {
+  if (!data.pei_objetivos_apoiados) data.pei_objetivos_apoiados = [];
+  var pos = -1;
+  for (var i = 0; i < data.pei_objetivos_apoiados.length; i++) {
+    if (data.pei_objetivos_apoiados[i].id === objId) { pos = i; break; }
+  }
+  if (pos >= 0) {
+    data.pei_objetivos_apoiados.splice(pos, 1);
+  } else {
+    data.pei_objetivos_apoiados.push({ id: objId, justificativa: '' });
+  }
+  saveToStorage();
+  render();
+}
+
+function updateBussolaJustificativa(objId, texto) {
+  if (!data.pei_objetivos_apoiados) data.pei_objetivos_apoiados = [];
+  var found = data.pei_objetivos_apoiados.find(function(o) { return o.id === objId; });
+  if (found) found.justificativa = texto;
+  saveToStorage();
+}
+
+function renderBussola(step) {
+  var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
+  var ajudaBtnHTML = step.ajuda ? ' <button class="ajuda-btn" onclick="toggleAjuda(this)">Saiba mais</button>' : '';
+  var ajudaBlockHTML = step.ajuda ? '<div class="ajuda-content" style="display:none">' + esc(step.ajuda) + '</div>' : '';
+
+  // Hero
+  var heroHTML =
+    '<div class="bussola-hero">' +
+      '<div class="bussola-hero-icon">🧭</div>' +
+      '<div>' +
+        '<h3>Bússola Estratégica</h3>' +
+        '<p>Conecte seu plano à estratégia da RA. Esta é a diferença entre uma ação isolada e uma ação que serve ao plano estratégico institucional (PEI).</p>' +
+      '</div>' +
+    '</div>';
+
+  // Verifica se há RA selecionada
+  if (!data.ra || !data.ra.trim()) {
+    return contextoHTML + heroHTML +
+      '<div class="bussola-alerta">' +
+        '⚠️  Você precisa primeiro selecionar sua Região Administrativa na etapa de Identificação.' +
+      '</div>';
+  }
+
+  var pei = getPEIdaRA(data.ra);
+
+  // Se PEI ainda não cadastrado para esta RA
+  if (!pei) {
+    return contextoHTML + heroHTML +
+      '<div class="bussola-sem-pei">' +
+        '<div class="bussola-sem-pei-icon">📘</div>' +
+        '<div style="font-weight:700;margin-bottom:6px;font-size:15px">' +
+          'PEI da RA ' + esc(data.ra) + ' ainda não cadastrado no sistema' +
+        '</div>' +
+        '<div style="font-size:13px;line-height:1.5">' +
+          'A SEGEST está cadastrando os Planos Estratégicos Institucionais das 35 RAs progressivamente. ' +
+          'A RA piloto (Gama) já está no sistema como referência. ' +
+          'Por enquanto, você pode avançar para a próxima etapa \u2014 no futuro, aqui aparecerão os objetivos do PEI da sua RA para você marcar.' +
+        '</div>' +
+        '<div style="margin-top:14px;font-size:12px;background:#fff;padding:10px;border-radius:6px;color:#78350F">' +
+          '💡 Para acelerar: envie o PEI da sua RA (PDF) para a SEGEST pelo e-mail oficial.' +
+        '</div>' +
+      '</div>';
+  }
+
+  // Info da RA
+  var infoHTML =
+    '<div class="bussola-ra-info">' +
+      '<strong>📍 RA ' + esc(data.ra) + ' ' + (pei.ra_codigo ? '(' + esc(pei.ra_codigo) + ')' : '') + ' — PEI ' + esc(pei.horizonte || '') + '</strong>' +
+      'Você está vendo os objetivos estratégicos do PEI publicado da sua RA.' +
+    '</div>';
+
+  var missaoHTML =
+    '<div class="bussola-pei-missao">' +
+      '<h4>🎯 Missão da RA</h4>' +
+      '<p>"' + esc(pei.missao) + '"</p>' +
+    '</div>';
+
+  // Agrupar objetivos por perspectiva
+  var objsPorPerspectiva = {};
+  pei.objetivos.forEach(function(obj) {
+    if (!objsPorPerspectiva[obj.perspectiva]) objsPorPerspectiva[obj.perspectiva] = [];
+    objsPorPerspectiva[obj.perspectiva].push(obj);
+  });
+
+  var perspectivasHTML = '';
+  PERSPECTIVAS_BSC.forEach(function(persp) {
+    var objs = objsPorPerspectiva[persp.id] || [];
+    if (objs.length === 0) return;
+
+    var objCardsHTML = '';
+    objs.forEach(function(obj) {
+      var selecionado = isBussolaObjSelecionado(obj.id);
+      var justif = getBussolaObjJustificativa(obj.id);
+
+      var expandidoHTML = '';
+      if (selecionado) {
+        var indicadoresTxt = (obj.indicadores || []).join(' · ');
+        expandidoHTML =
+          '<div class="bussola-obj-expandido">' +
+            (obj.exemplo_plano_apoia ?
+              '<div class="bussola-obj-exemplo">' +
+                '<strong>💡 Exemplo:</strong> ' + esc(obj.exemplo_plano_apoia) +
+              '</div>' : '') +
+            (indicadoresTxt ?
+              '<div class="bussola-obj-indicadores">' +
+                '<strong>📊 Indicadores do PEI:</strong> ' + esc(indicadoresTxt) +
+              '</div>' : '') +
+            '<div class="bussola-obj-justif">' +
+              '<label>✍️ Como seu plano apoia este objetivo? (opcional, mas ajuda muito!)</label>' +
+              '<textarea id="bussola-just-' + esc(obj.id) + '" ' +
+                'oninput="updateBussolaJustificativa(\'' + esc(obj.id) + '\', this.value)" ' +
+                'placeholder="Ex: Meu plano cria canais de ouvidoria digital que consolidam a participação popular, coletando demandas do cidadão 24h.">' +
+                esc(justif) +
+              '</textarea>' +
+            '</div>' +
+          '</div>';
+      }
+
+      objCardsHTML +=
+        '<div class="bussola-obj-card' + (selecionado ? ' selecionado' : '') + '" ' +
+          'onclick="if(event.target.tagName !== \'TEXTAREA\') toggleBussolaObj(\'' + esc(obj.id) + '\')">' +
+          '<div class="bussola-obj-topo">' +
+            '<div class="bussola-obj-check">' + (selecionado ? '✓' : '') + '</div>' +
+            '<div class="bussola-obj-corpo">' +
+              '<div class="bussola-obj-titulo">' +
+                '<span class="bussola-obj-titulo-icon">' + obj.icone + '</span>' +
+                '<span>' + esc(obj.titulo) + '</span>' +
+              '</div>' +
+              '<div class="bussola-obj-explicacao">' + esc(obj.explicacao) + '</div>' +
+            '</div>' +
+          '</div>' +
+          expandidoHTML +
+        '</div>';
+    });
+
+    perspectivasHTML +=
+      '<div class="bussola-perspectiva" style="border-left: 6px solid ' + persp.cor + '">' +
+        '<div class="bussola-perspectiva-header">' +
+          '<div class="bussola-perspectiva-icon">' + persp.icone + '</div>' +
+          '<div>' +
+            '<div class="bussola-perspectiva-nome" style="color:' + persp.cor + '">' + esc(persp.nome) + '</div>' +
+            '<div class="bussola-perspectiva-desc">' + esc(persp.descricao) + '</div>' +
+          '</div>' +
+        '</div>' +
+        objCardsHTML +
+      '</div>';
+  });
+
+  // Resumo
+  var totalSelecionados = (data.pei_objetivos_apoiados || []).length;
+  var totalObjetivos = pei.objetivos.length;
+
+  var resumoHTML;
+  if (totalSelecionados === 0) {
+    resumoHTML = '<div class="bussola-resumo" style="background:#FEF3C7;border-color:#FCD34D">' +
+      '<div class="bussola-resumo-num" style="color:#D97706">0</div>' +
+      '<div class="bussola-resumo-texto" style="color:#92400E">' +
+        '🤔 Nenhum objetivo marcado ainda. Marque pelo menos 1 que seu plano apoia.' +
+      '</div>' +
+    '</div>';
+  } else {
+    resumoHTML = '<div class="bussola-resumo">' +
+      '<div class="bussola-resumo-num">' + totalSelecionados + ' de ' + totalObjetivos + '</div>' +
+      '<div class="bussola-resumo-texto">' +
+        '✅ Objetivo' + (totalSelecionados > 1 ? 's' : '') + ' do PEI que seu plano apoia. ' +
+        'A devolutiva da SEGEST vai destacar essas conexões.' +
+      '</div>' +
+    '</div>';
+  }
+
+  var dicaHTML = step.dica ? '<div class="dica-box">💡 ' + esc(step.dica) + ajudaBtnHTML + '</div>' + ajudaBlockHTML : '';
+
+  return contextoHTML + heroHTML + infoHTML + missaoHTML + dicaHTML +
+    '<div style="display:flex;align-items:center;gap:8px;margin:14px 0 12px">' +
+      '<span class="step-icon">' + step.icon + '</span>' +
+      '<h2 class="step-question" style="margin:0">' + esc(step.question) + '</h2>' +
+    '</div>' +
+    perspectivasHTML + resumoHTML;
+}
+
 /* Render a group step (multiple fields per screen) */
 function renderGroup(step) {
   var contextoHTML = step.contexto ? '<div class="step-contexto">' + esc(step.contexto) + '</div>' : '';
@@ -3679,6 +4165,16 @@ function renderReview() {
       var freqPart = freqLabel ? 'Frequência: ' + freqLabel + '. ' : '';
       return freqPart + data.reunioes.length + ' reunião(ões) cadastrada(s).';
     }
+    if (item.type === 'bussola') {
+      if (!data.pei_objetivos_apoiados || !data.pei_objetivos_apoiados.length) return '';
+      var pei = getPEIdaRA(data.ra);
+      if (!pei) return data.pei_objetivos_apoiados.length + ' objetivo(s) marcado(s).';
+      var titulos = data.pei_objetivos_apoiados.map(function(sel) {
+        var o = pei.objetivos.find(function(x) { return x.id === sel.id; });
+        return o ? o.titulo : sel.id;
+      });
+      return data.pei_objetivos_apoiados.length + ' de ' + pei.objetivos.length + ' objetivos do PEI: ' + titulos.join('; ');
+    }
     return '';
   }
 
@@ -3851,6 +4347,7 @@ function render() {
   else if (step.type === 'partes') contentHTML = renderPartes(step);
   else if (step.type === 'entregas') contentHTML = renderEntregas(step);
   else if (step.type === 'agenda') contentHTML = renderAgenda(step);
+  else if (step.type === 'bussola') contentHTML = renderBussola(step);
   else if (step.type === 'group') contentHTML = renderGroup(step);
   else if (step.type === 'single') contentHTML = renderSingleStep(step);
 
